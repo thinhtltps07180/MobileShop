@@ -28,12 +28,21 @@ public class AdminController {
 		return "OK";
 	}
 	
+	@GetMapping("/admin/index")
+	public String index() {
+		return "admin/index";
+	}
 	
-	@GetMapping("/admin/userList")
+	@GetMapping("/admin/register")
+	public String register() {
+		return "admin/register";
+	}
+	
+	@GetMapping("/admin/users")
 	public String adminList(Model model) {
 		List<User> list = dao.findAll();
 		model.addAttribute("listUsers", list);
-		return "admin/userList";
+		return "admin/users";
 	}
 	
 }

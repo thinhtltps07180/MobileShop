@@ -27,11 +27,6 @@ public class User {
 	Role roles;
 	
 
-
-	
-
-
-
 	public String getId() {
 		return id;
 	}

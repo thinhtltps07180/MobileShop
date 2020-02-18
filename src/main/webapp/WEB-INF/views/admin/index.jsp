@@ -1,30 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Purple Admin</title>
+<html>
+<head>
+<meta charset="UTF-8">
     <!-- plugins:css -->
-    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
-    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="/static/admin/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="/static/admin/assets/vendors/css/vendor.bundle.base.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- Layout styles -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/static/admin/assets/css/style.css">
     <!-- End layout styles -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" />
-  </head>
-  <body>
-    <div class="container-scroller">
+    <link rel="shortcut icon" href="/static/admin//static/admin/assets/images/favicon.png" />
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container-scroller">
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-          <a class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo" href="index.html"><img src="/static/admin/assets/images/logo.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="/static/admin/assets/images/logo-mini.svg" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -44,7 +45,7 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="assets/images/faces/face1.jpg" alt="image">
+                  <img src="/static/admin/assets/images/faces/face1.jpg" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
@@ -74,7 +75,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face4.jpg" alt="image" class="profile-pic">
+                    <img src="/static/admin/assets/images/faces/face4.jpg" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Mark send you a message</h6>
@@ -84,7 +85,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face2.jpg" alt="image" class="profile-pic">
+                    <img src="/static/admin/assets/images/faces/face2.jpg" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Cregh send you a message</h6>
@@ -94,7 +95,7 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                    <img src="assets/images/faces/face3.jpg" alt="image" class="profile-pic">
+                    <img src="/static/admin/assets/images/faces/face3.jpg" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
                     <h6 class="preview-subject ellipsis mb-1 font-weight-normal">Profile picture updated</h6>
@@ -176,7 +177,7 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="assets/images/faces/face1.jpg" alt="profile">
+                  <img src="/static/admin/assets/images/faces/face1.jpg" alt="profile">
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
@@ -191,25 +192,6 @@
               <a class="nav-link" href="index.html">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Basic UI Elements</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
-              </a>
-              <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/icons/mdi.html">
-                <span class="menu-title">Icons</span>
-                <i class="mdi mdi-contacts menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
@@ -232,7 +214,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Sample Pages</span>
+                <span class="menu-title"> Pages</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>
@@ -268,16 +250,6 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-            <div class="row" id="proBanner">
-              <div class="col-12">
-                <span class="d-flex align-items-center purchase-popup">
-                  <p>Like what you see? Check out our premium version for more.</p>
-                  <a href="https://github.com/BootstrapDash/PurpleAdmin-Free-Admin-Template" target="_blank" class="btn ml-auto download-button">Download Free Version</a>
-                  <a href="https://www.bootstrapdash.com/product/purple-bootstrap-4-admin-template/" target="_blank" class="btn purchase-button">Upgrade To Pro</a>
-                  <i class="mdi mdi-close" id="bannerClose"></i>
-                </span>
-              </div>
-            </div>
             <div class="page-header">
               <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white mr-2">
@@ -295,7 +267,7 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-danger card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <img src="/static/admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">$ 15,0000</h2>
@@ -306,7 +278,7 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-info card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <img src="/static/admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">45,6334</h2>
@@ -317,33 +289,11 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card bg-gradient-success card-img-holder text-white">
                   <div class="card-body">
-                    <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                    <img src="/static/admin/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
                     <h4 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
                     </h4>
                     <h2 class="mb-5">95,5741</h2>
                     <h6 class="card-text">Increased by 5%</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="clearfix">
-                      <h4 class="card-title float-left">Visit And Sales Statistics</h4>
-                      <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
-                    </div>
-                    <canvas id="visit-sale-chart" class="mt-4"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Traffic Sources</h4>
-                    <canvas id="traffic-chart"></canvas>
-                    <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
                   </div>
                 </div>
               </div>
@@ -367,7 +317,7 @@
                         <tbody>
                           <tr>
                             <td>
-                              <img src="assets/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey </td>
+                              <img src="/static/admin/assets/images/faces/face1.jpg" class="mr-2" alt="image"> David Grey </td>
                             <td> Fund is not recieved </td>
                             <td>
                               <label class="badge badge-gradient-success">DONE</label>
@@ -377,7 +327,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img src="assets/images/faces/face2.jpg" class="mr-2" alt="image"> Stella Johnson </td>
+                              <img src="/static/admin/assets/images/faces/face2.jpg" class="mr-2" alt="image"> Stella Johnson </td>
                             <td> High loading time </td>
                             <td>
                               <label class="badge badge-gradient-warning">PROGRESS</label>
@@ -387,7 +337,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img src="assets/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Michel </td>
+                              <img src="/static/admin/assets/images/faces/face3.jpg" class="mr-2" alt="image"> Marina Michel </td>
                             <td> Website down for one week </td>
                             <td>
                               <label class="badge badge-gradient-info">ON HOLD</label>
@@ -397,7 +347,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <img src="assets/images/faces/face4.jpg" class="mr-2" alt="image"> John Doe </td>
+                              <img src="/static/admin/assets/images/faces/face4.jpg" class="mr-2" alt="image"> John Doe </td>
                             <td> Loosing control on server </td>
                             <td>
                               <label class="badge badge-gradient-danger">REJECTED</label>
@@ -429,16 +379,16 @@
                     </div>
                     <div class="row mt-3">
                       <div class="col-6 pr-1">
-                        <img src="assets/images/dashboard/img_1.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                        <img src="assets/images/dashboard/img_4.jpg" class="mw-100 w-100 rounded" alt="image">
+                        <img src="/static/admin/assets/images/dashboard/img_1.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
+                        <img src="/static/admin/assets/images/dashboard/img_4.jpg" class="mw-100 w-100 rounded" alt="image">
                       </div>
                       <div class="col-6 pl-1">
-                        <img src="assets/images/dashboard/img_2.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
-                        <img src="assets/images/dashboard/img_3.jpg" class="mw-100 w-100 rounded" alt="image">
+                        <img src="/static/admin/assets/images/dashboard/img_2.jpg" class="mb-2 mw-100 w-100 rounded" alt="image">
+                        <img src="/static/admin/assets/images/dashboard/img_3.jpg" class="mw-100 w-100 rounded" alt="image">
                       </div>
                     </div>
                     <div class="d-flex mt-5 align-items-top">
-                      <img src="assets/images/faces/face3.jpg" class="img-sm rounded-circle mr-3" alt="image">
+                      <img src="/static/admin/assets/images/faces/face3.jpg" class="img-sm rounded-circle mr-3" alt="image">
                       <div class="mb-0 flex-grow">
                         <h5 class="mr-2 mb-2">School Website - Authentication Module.</h5>
                         <p class="mb-0 font-weight-light">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
@@ -608,19 +558,19 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
-    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="/static/admin/assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="assets/vendors/chart.js/Chart.min.js"></script>
+    <script src="/static/admin/assets/vendors/chart.js/Chart.min.js"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="assets/js/off-canvas.js"></script>
-    <script src="assets/js/hoverable-collapse.js"></script>
-    <script src="assets/js/misc.js"></script>
+    <script src="/static/admin/assets/js/off-canvas.js"></script>
+    <script src="/static/admin/assets/js/hoverable-collapse.js"></script>
+    <script src="/static/admin/assets/js/misc.js"></script>
     <!-- endinject -->
     <!-- Custom js for this page -->
-    <script src="assets/js/dashboard.js"></script>
-    <script src="assets/js/todolist.js"></script>
+    <script src="/static/admin/assets/js/dashboard.js"></script>
+    <script src="/static/admin/assets/js/todolist.js"></script>
     <!-- End custom js for this page -->
-  </body>
+</body>
 </html>
