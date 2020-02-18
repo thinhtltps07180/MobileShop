@@ -58,13 +58,14 @@ public class AdminController {
 		return "admin/users";
 	}
 	
-	@GetMapping("/home/register")
-	public String register(Model model) {
-		model.addAttribute("form", new User());
-		return "home/register";
+	@GetMapping("/admin/login")
+	public String login() {
+		return "admin/login";
 	}
+	
 
-	@PostMapping("/home/register")
+
+	@PostMapping("/admin/register")
 	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
 		if (file.isEmpty()) {
@@ -100,7 +101,7 @@ public class AdminController {
 		}
 
 //		model.addAttribute("form" , user);
-		return "home/login";
+		return "admin/login";
 	}
 	
 }
