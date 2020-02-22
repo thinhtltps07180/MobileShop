@@ -35,7 +35,7 @@
 
 <link rel="stylesheet" href="/static/user/css/style.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shop Gấu</title>
 </head>
 <body>
 
