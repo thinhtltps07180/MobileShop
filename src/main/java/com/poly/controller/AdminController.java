@@ -58,9 +58,43 @@ public class AdminController {
 		return "admin/users";
 	}
 	
+	
 	@GetMapping("/admin/login")
 	public String login() {
 		return "admin/login";
+	}
+
+//	@RequestMapping("/home/logout")
+//	public String logout() {
+//		session.removeAttribute("user");
+//		return "redirect:/home/index";
+//	}
+
+	@PostMapping("/admin/login")
+	public String login(Model model, @RequestParam("id") String id, @RequestParam("password") String pw) {
+		User user = dao.findById(id);
+		if (user == null) {
+			model.addAttribute("message", "Invalid username!");
+			return "admin/login";
+			
+		} else if (!pw.equals(user.getPassword())) {
+			model.addAttribute("message", "Invalid password!");
+			return "admin/login";
+		} else {
+//			session.setAttribute("user", user);
+
+//			if (user.getRoles().getName().equals("admin")) {
+//				return "redirect:/admin/userList";
+//			} else if (user.getRoles().getName().equals("user")) {
+//				return "redirect:/home/index";
+//			} else if (user.getRoles().getName().equals("client")) {
+//				return "redirect:/client/home";
+//			} else if (user.getRoles().getName().equals("journalist")) {
+//				return "redirect:/journalist/home";
+//			}
+			model.addAttribute("message", "Login successfully!");	
+		}
+		return "admin/index";
 	}
 	
 
