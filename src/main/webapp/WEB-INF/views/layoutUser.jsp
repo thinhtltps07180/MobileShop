@@ -6,21 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet"
-	href="/static/admin/assets/vendors/mdi/css/materialdesignicons.min.css">
-<link rel="stylesheet"
-	href="/static/admin/assets/vendors/css/vendor.bundle.base.css">
-<!-- endinject -->
-<!-- Plugin css for this page -->
-<!-- End plugin css for this page -->
-<!-- inject:css -->
-<!-- endinject -->
-<!-- Layout styles -->
-<link rel="stylesheet" href="/static/admin/assets/css/style.css">
-<!-- End layout styles -->
-<link rel="shortcut icon" href="/static/admin/assets/images/favicon.png" />
-
-<link rel="icon" href="/static/user/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
 	href="/static/user/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/static/user/vendors/fontawesome/css/all.min.css">
@@ -32,7 +17,6 @@
 	href="/static/user/vendors/owl-carousel/owl.theme.default.min.css">
 <link rel="stylesheet"
 	href="/static/user/vendors/owl-carousel/owl.carousel.min.css">
-
 <link rel="stylesheet" href="/static/user/css/style.css">
 <meta charset="UTF-8">
 <title>Shop Gấu</title>
@@ -55,19 +39,5 @@
 <script src="/static/user/vendors/jquery.ajaxchimp.min.js"></script>
 <script src="/static/user/vendors/mail-script.js"></script>
 <script src="/static/user/js/main.js"></script>
-<!-- End custom js for this page -->
-<script src="/static/admin/assets/vendors/js/vendor.bundle.base.js"></script>
-<!-- endinject -->
-<!-- Plugin js for this page -->
-<script src="/static/admin/assets/vendors/chart.js/Chart.min.js"></script>
-<!-- End plugin js for this page -->
-<!-- inject:js -->
-<script src="/static/admin/assets/js/off-canvas.js"></script>
-<script src="/static/admin/assets/js/hoverable-collapse.js"></script>
-<script src="/static/admin/assets/js/misc.js"></script>
-<!-- endinject -->
-<!-- Custom js for this page -->
-<script src="/static/admin/assets/js/dashboard.js"></script>
-<script src="/static/admin/assets/js/todolist.js"></script>
-<!-- End custom js for this page -->
+
 </html>
