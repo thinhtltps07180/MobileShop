@@ -29,7 +29,6 @@
 			<jsp:include page="layout/navadmin.jsp" />
 			<tiles:insertAttribute name="body" />
 		</div>
-
 	</div>
 </body>
 

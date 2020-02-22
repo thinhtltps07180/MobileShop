@@ -9,6 +9,9 @@
 	<definition name="admin/*" template="/WEB-INF/views/layout.jsp">
 		<put-attribute name="body" value="/WEB-INF/views/admin/{1}.jsp" />
 	</definition>
+		<definition name="user/*" template="/WEB-INF/views/layoutUser.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/user/{1}.jsp" />
+	</definition>
 
 	
 
