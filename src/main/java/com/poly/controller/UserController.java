@@ -21,4 +21,48 @@ public class UserController {
 		return "user/category";
 	}
 	
+	@GetMapping("/user/cart")
+	public String cart() {
+		return "user/cart";
+	}
+	
+	@GetMapping("/user/checkout")
+	public String checkout() {
+		return "user/checkout";
+	}
+	
+	@GetMapping("/user/singleblog")
+	public String singleblog() {
+		return "user/singleblog";
+	}
+	
+	@GetMapping("/user/singleproduct")
+	public String singleproduct() {
+		return "user/singleproduct";
+	}
+	
+	@GetMapping("/user/trackingorder")
+	public String trackingorder() {
+		return "user/trackingorder";
+	}
+	
+	@GetMapping("/user/confirmation")
+	public String confirmation() {
+		return "user/confirmation";
+	}
+	
+	@GetMapping("/user/blog")
+	public String blog() {
+		return "user/blog";
+	}
+	
+	@GetMapping("/user/login")
+	public String login() {
+		return "user/login";
+	}
+	
+	@GetMapping("/user/register")
+	public String registerg() {
+		return "user/register";
+	}
 }
