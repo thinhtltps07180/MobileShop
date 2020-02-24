@@ -1,5 +1,28 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<style>
+span[id*=errors] {
+	color: red;
+	font-style: italic;
+	background-image: url("/static/images/anifire.gif");
+	background-repeat: no-repeat;
+	padding-left: 25px;
+}
+</style>
+<script>
+	var openFile = function(field) {
+		var reader = new FileReader();
+		reader.onload = function() {
+			console.log(reader.result);
+			var img = new Image(150, 150);
+			img.onload = function() {
+				document.getElementById("anh").appendChild(img);
+			}
+			img.src = reader.result;
+		};
+		reader.readAsDataURL(field.files[0]);
+	};
+</script>
 
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
@@ -36,41 +59,41 @@
 			<div class="col-lg-6">
 				<div class="login_form_inner register_form_inner">
 					<h3>Create an account</h3>
-					
-					<form class="row login_form" action="#/" id="register_form">
+					<h3>${message }</h3>
+					<form:form enctype="multipart/form-data" action="/user/register"
+						modelAttribute="form" class="row login_form" id="register_form">
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="name" name="name"
-								placeholder="Username" onfocus="this.placeholder = ''"
+							<input type="text" path="id" class="form-control" id="name"
+								name="id" placeholder="Username" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Username'">
+							<form:errors path="id" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="email" name="email"
-								placeholder="Email Address" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Email Address'">
-						</div>
-						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="password"
-								name="password" placeholder="Password"
+							<input path="password" type="password" class="form-control"
+								id="password" name="password" placeholder="Password"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Password'">
+							<form:errors path="password" />
 						</div>
 						<div class="col-md-12 form-group">
-							<div class="form-group">
-								<label>File upload</label> <input type="file" name="img[]"
-									class="file-upload-default">
-							</div>
+							<input path="email" type="email" class="form-control" id="email"
+								name="email" placeholder="Email" onfocus="this.placeholder = ''"
+								onblur="this.placeholder = 'Email'">
+							<form:errors path="email" />
 						</div>
 						<div class="col-md-12 form-group">
 							<input type="file" class="form-input" name="up_photo"
 								onchange="openFile(this)" class="form-control"
 								placeholder="Photo">
 							<form:hidden path="photo" />
+							<div id="anh"></div>
 						</div>
+
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
 								class="button button-register w-100">Register</button>
 						</div>
-					</form>
+					</form:form>
 				</div>
 			</div>
 		</div>

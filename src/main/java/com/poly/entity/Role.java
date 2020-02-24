@@ -14,7 +14,7 @@ public class Role {
 	Integer id;
 	String name;
 
-	@OneToMany(mappedBy="roles")
+	@OneToMany(mappedBy="role")
 	List<User> users;
 
 	public Integer getId() {
