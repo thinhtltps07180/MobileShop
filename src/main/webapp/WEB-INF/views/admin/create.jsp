@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!-- partial -->
 <style>
 span[id*=errors] {
@@ -45,25 +45,31 @@ span[id*=errors] {
 						<h4 class="card-title">Basic form elements</h4>
 						<p class="card-description">Basic form elements</p>
 						<h3>${message }</h3>
-						
+
 						<form:form enctype="multipart/form-data" action="/admin/create"
 							modelAttribute="form" class="forms-sample">
 							<div class="form-group">
-								<label for="exampleInputName1">Product name</label> <input
-									path="name" type="text" class="form-control"
-									id="exampleInputName1" placeholder="Name">
+								<label for="exampleInputName1"></label>
+								<form:input path="id" type="hidden" class="form-control"
+									id="exampleInputName1" placeholder="Name" />
 								<form:errors path="name" />
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword4">UnitPrice</label> <input
-									path="unitPrice" type="text" class="form-control"
-									id="UnitPrice" placeholder="UnitPrice">
+								<label for="exampleInputName1">Product name</label>
+								<form:input path="name" type="text" class="form-control"
+									id="exampleInputName1" placeholder="Name" />
+								<form:errors path="name" />
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword4">UnitPrice</label>
+								<form:input path="unitPrice" type="text" class="form-control"
+									id="UnitPrice" placeholder="UnitPrice" />
 								<form:errors path="unitPrice" />
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword4">quantity</label> <input
-									path="quantity" type="text" class="form-control" id="quantity"
-									placeholder="quantity">
+								<label for="exampleInputName2">Product name</label>
+								<form:input path="quantity" type="text" class="form-control"
+									id="exampleInputName2" placeholder="quantity" />
 								<form:errors path="quantity" />
 							</div>
 

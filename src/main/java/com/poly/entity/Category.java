@@ -18,8 +18,7 @@ public class Category {
 	
 	Integer id;
 	String name;
-	
-	
+
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
 	List<Product> products;
 

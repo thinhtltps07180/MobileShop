@@ -57,7 +57,6 @@ public class AdminController {
 	public String query() {
 		return "OK";
 	}
-
 	@GetMapping("/admin/index")
 	public String index() {
 		return "admin/index";
@@ -115,8 +114,7 @@ public class AdminController {
 			}
 		}
 
-//		model.addAttribute("form" , user);
-		return "admin/products";
+		return "redirect:/admin/products";
 	}
 
 }
