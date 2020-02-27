@@ -31,6 +31,7 @@
 									<th>Quantity</th>
 									<th>Category</th>
 									<th></th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -42,7 +43,8 @@
 										<td>${p.unitPrice}</td>
 										<td>${p.quantity}</td>
 										<td>${p.category.name}</td>
-										<td><a href="/admin/edit/${u.id}">Edit</a></td>
+										<td><a href="/admin/edit/${p.id}">Edit</a></td>
+										<td><a href="/admin/delete/${p.id}">Delete</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
