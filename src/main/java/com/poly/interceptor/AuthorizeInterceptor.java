@@ -27,7 +27,7 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
 		} else {
 			String url = request.getRequestURI();
 			if (url.startsWith("/admin")) {
-				if (user.getRoles().getName().equals("admin")) {
+				if (user.getRole().getName().equals("admin")) {
 					return true;
 				} else {
 					response.sendRedirect("/error");

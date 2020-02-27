@@ -25,22 +25,26 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>Photo</th>
-									<th>User</th>
-									<th>Email</th>
-									<th>Role</th>
+									<th></th>
+									<th>Product Name</th>
+									<th>UnitPrice</th>
+									<th>Quantity</th>
+									<th>Category</th>
+									<th></th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="u" items="${listUsers}">
-									<tr>
-										<td class="py-1"><img
-											src="/static/user/photo/${u.photo}" alt="image" /></td>
-										<td>${u.id}</td>
-										<td>${u.email}</td>
-										<td>${u.role.name}</td>
-										<td><a href="/admin/edit/${u.id}">Edit</a></td>
+								<c:forEach var="p" items="${productList}">
+									<tr>							
+										<td class="py-1"><img src="/static/admin/product/${p.image}"
+											alt="image" /></td>
+										<td>${p.name}</td>
+										<td>${p.unitPrice}</td>
+										<td>${p.quantity}</td>
+										<td>${p.category.name}</td>
+										<td><a href="/admin/edit/${p.id}">Edit</a></td>
+										<td><a href="/admin/delete/${p.id}">Delete</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -1,30 +1,40 @@
 package com.poly.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name = "Users")
 public class User {
 	@Id
-//	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
-//	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
+	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
+	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
 	String id;
-//	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
-//	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
+	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
+	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
 	String password;
 	String photo;
-//	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
-//	@Email (message = "Định dạng email không đúng")
+	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
+	@Email (message = "Định dạng email không đúng")
 	String email;
 //	Integer roleId;
 
 	@ManyToOne
 	@JoinColumn(name = "roleId")
-	Role roles;
+	Role role;
+	
+	@OneToMany(mappedBy="user" )
+	List<Order> orders;
 	
 
 	public String getId() {
@@ -59,12 +69,21 @@ public class User {
 		this.email = email;
 	}
 
-	public Role getRoles() {
-		return roles;
+
+	public List<Order> getOrders() {
+		return orders;
 	}
 
-	public void setRoles(Role roles) {
-		this.roles = roles;
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 

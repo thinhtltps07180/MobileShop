@@ -1,17 +1,24 @@
 package com.poly.controller;
 
+import java.io.File;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
+import com.poly.entity.Role;
 import com.poly.entity.User;
 
 @Controller
@@ -95,9 +102,9 @@ public class UserController {
 		} else {
 			session.setAttribute("user", user);
 
-			if (user.getRoles().getName().equals("admin")) {
+			if (user.getRole().getName().equals("admin")) {
 				return "redirect:/admin/index";
-			} else if (user.getRoles().getName().equals("user")) {
+			} else if (user.getRole().getName().equals("user")) {
 				return "redirect:/user/index";
 			}
 			model.addAttribute("message", "Login successfully!");
@@ -106,7 +113,40 @@ public class UserController {
 	}
 
 	@GetMapping("/user/register")
-	public String registerg() {
+	public String register(Model model) {
+		model.addAttribute("form", new User());
 		return "user/register";
+	}
+	
+	@PostMapping("/user/register")
+	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "user/register";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(2);
+				user.setRole(role);
+				dao.create(user);
+			} catch (Exception e) {
+				return "redirect:/user/register";		
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "user/login";
 	}
 }
