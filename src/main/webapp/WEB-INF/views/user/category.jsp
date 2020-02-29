@@ -1,6 +1,12 @@
 
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<style>
+img#cartImg {
+    height: 255px;
+    width: 271.48px;
+}
+</style>
 <!-- ================ start banner area ================= -->
 <section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -153,7 +159,7 @@
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
-											src="/static/admin/product/${p.image}" alt="">
+											id ="cartImg"src="/static/admin/product/${p.image}" alt="">
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
