@@ -1,6 +1,7 @@
 package com.poly.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poly.dao.OrderDetailDAO;
+import com.poly.dao.ProductDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
+import com.poly.entity.Product;
 import com.poly.entity.Role;
 import com.poly.entity.User;
 
@@ -32,6 +36,12 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
+	
+	@Autowired
+	ProductDAO productDao;
+	
+	@Autowired
+	OrderDetailDAO orderDetailDao;
 
 	@Autowired
 	RoleDAO roleDAO;
@@ -45,11 +55,14 @@ public class UserController {
 	public String contact() {
 		return "user/contact";
 	}
-
+	
 	@GetMapping("/user/category")
-	public String category() {
+	public String category(Model model) {
+		List<Product> list = productDao.findAll();
+		model.addAttribute("productList", list);
 		return "user/category";
 	}
+
 
 	@GetMapping("/user/cart")
 	public String cart() {
