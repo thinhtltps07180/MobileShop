@@ -22,36 +22,36 @@
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="category.html">Shop Category</a></li>
+									href="category">Shop Category</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="single-product.html">Product Details</a></li>
+									href="singleproduct">Product Details</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="checkout.html">Product Checkout</a></li>
+									href="checkout">Product Checkout</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="confirmation.html">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="cart.html">Shopping
+									href="confirmation">Confirmation</a></li>
+								<li class="nav-item"><a class="nav-link" href="cart">Shopping
 										Cart</a></li>
-								<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+								<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
 							</ul></li>
 						<li class="nav-item submenu dropdown"><a href="#"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+								<li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="single-blog.html">Blog Details</a></li>
+									href="singleblog">Blog Details</a></li>
 							</ul></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact.html">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="contact">About</a></li>
 						<li class="nav-item submenu dropdown"><a href="#"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+								<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="register.html">Register</a></li>
+									href="register">Register</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="tracking-order.html">Tracking</a></li>
+									href="trackingorder">Tracking</a></li>
 							</ul></li>
 					</ul>
 
@@ -59,8 +59,12 @@
 						<li class="nav-item"><button>
 								<i class="ti-search"></i>
 							</button></li>
-						<li class="nav-item"><button>
-								<i class="ti-shopping-cart"></i><span class="nav-shop__circle">3</span>
+						<li class="nav-item">
+						<button>
+						<a class="nav-link" href="cart"></a>
+								<i class="ti-shopping-cart"></i>
+								
+								<span class="nav-shop__circle">3</span>
 							</button></li>
 						<li class="nav-item"><a class="button button-header" href="#">Buy
 								Now</a></li>		
