@@ -1,5 +1,6 @@
 package com.poly.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.NumberFormat;
+
 @Entity
 @Table(name="Products")
 public class Product {
@@ -18,8 +21,11 @@ public class Product {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
 	String name;
+	@NumberFormat(pattern = "#,###,###,###.##")
 	Double unitPrice;
 	Integer quantity;
+	String description;
+	Date createDate;
 	String image;
 	
 	@ManyToOne
@@ -86,6 +92,24 @@ public class Product {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 

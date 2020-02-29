@@ -110,6 +110,7 @@ public class AdminController {
 				Category category = new Category();
 				category.setId(product.getCategory().getId());
 				product.setCategory(category);
+				product.setCreateDate(new Date());
 				productDao.create(product);
 
 			} catch (Exception e) {

@@ -1,6 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- partial -->
 <style>
 span[id*=errors] {
@@ -62,7 +65,7 @@ span[id*=errors] {
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword4">UnitPrice</label>
-								<form:input path="unitPrice" type="text" class="form-control"
+								<form:input path="unitPrice" type="number"  class="form-control"
 									id="UnitPrice" placeholder="UnitPrice" />
 								<form:errors path="unitPrice" />
 							</div>
@@ -81,6 +84,12 @@ span[id*=errors] {
 								</form:select>
 
 								<form:errors path="category.id" />
+							</div>
+
+							<div class="form-group area">
+								<form:textarea path="description" style=" height: 200px;"
+									id="description" />
+								<form:errors path="description" />
 							</div>
 
 							<div class="form-group">
@@ -119,3 +128,11 @@ span[id*=errors] {
 			<!-- partial -->
 		</div>
 		<!-- main-panel ends -->
+
+
+		<script type="text/javascript">
+			var editor = '';
+			$(document).ready(function() {
+				editor = CKEDITOR.replace('description');
+			});
+		</script>
