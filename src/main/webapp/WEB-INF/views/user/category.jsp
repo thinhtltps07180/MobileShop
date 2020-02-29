@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <style>
 img#cartImg {
-    height: 255px;
-    width: 271.48px;
+	height: 255px;
+	width: 271.48px;
 }
 </style>
 <!-- ================ start banner area ================= -->
@@ -158,26 +158,26 @@ img#cartImg {
 							<div class="col-md-6 col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
-										<img class="card-img"
-											id ="cartImg"src="/static/admin/product/${p.image}" alt="">
-										<ul class="card-product__imgOverlay">
-											<li><button>
-													<i class="ti-search"></i>
-												</button></li>
-											<li><button>
-													<i class="ti-shopping-cart"></i>
-												</button></li>
-											<li><button>
-													<i class="ti-heart"></i>
-												</button></li>
-										</ul>
+										<a href="/user/singleproduct/${p.id}"> <img class="card-img" id="cartImg"
+											src="/static/admin/product/${p.image}" alt="">
+											<ul class="card-product__imgOverlay">
+												<li><button>
+														<i class="ti-search"></i>
+													</button></li>
+												<li><button>
+														<i class="ti-shopping-cart"></i>
+													</button></li>
+												<li><button>
+														<i class="ti-heart"></i>
+													</button></li>
+											</ul></a>
 									</div>
 									<div class="card-body">
-										<p>Accessories</p>
+										<p>${p.category.name}</p>
 										<h4 class="card-product__title">
-											<a href="#">Quartz Belt Watch</a>
+											<a href="#">${p.name}</a>
 										</h4>
-										<p class="card-product__price">$150.00</p>
+										<p class="card-product__price">${p.unitPrice}</p>
 									</div>
 								</div>
 							</div>

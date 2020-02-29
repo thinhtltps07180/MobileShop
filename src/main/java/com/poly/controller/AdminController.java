@@ -1,6 +1,7 @@
 package com.poly.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -109,6 +110,7 @@ public class AdminController {
 				Category category = new Category();
 				category.setId(product.getCategory().getId());
 				product.setCategory(category);
+				product.setCreateDate(new Date());
 				productDao.create(product);
 
 			} catch (Exception e) {
