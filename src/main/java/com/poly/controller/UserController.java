@@ -13,14 +13,17 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
+import com.poly.entity.Category;
 import com.poly.entity.Product;
 import com.poly.entity.Role;
 import com.poly.entity.User;
@@ -36,6 +39,9 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
+	
+	@Autowired
+	CategoryDAO  categoryDao;
 	
 	@Autowired
 	ProductDAO productDao;
@@ -79,8 +85,12 @@ public class UserController {
 		return "user/singleblog";
 	}
 
-	@GetMapping("/user/singleproduct")
-	public String singleproduct() {
+	@GetMapping("/user/singleproduct/{id}")
+	public String singleproduct(Model model , @PathVariable("id") Integer id) {
+		Product p = productDao.findById(id);
+		List<Category> list = categoryDao.findAll();
+		model.addAttribute("listCategory", list);
+		model.addAttribute("detail", p);
 		return "user/singleproduct";
 	}
 
