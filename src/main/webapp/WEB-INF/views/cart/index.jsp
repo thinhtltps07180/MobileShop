@@ -38,7 +38,7 @@ div#buttons {
 					<td><input name="${p.id}" value="${p.quantity}" type="number"
 						min="1"></td>
 					<td>${p.unitPrice*p.quantity}</td>
-					<td><a class="btn btn-primary" href="/client/remove/${p.id}">Remove</a></td>
+					<td><a class="btn btn-primary" href="/cart/remove/${p.id}">Remove</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
