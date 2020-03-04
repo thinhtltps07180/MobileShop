@@ -154,6 +154,7 @@ public class AdminController {
 				Category category = new Category();
 				category.setId(product.getCategory().getId());
 				product.setCategory(category);
+				product.setCreateDate(new Date());
 				productDao.update(product);
 				model.addAttribute("message", "Update thành công!");
 			} catch (Exception e) {

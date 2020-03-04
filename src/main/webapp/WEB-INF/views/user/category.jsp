@@ -1,10 +1,18 @@
 
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
+}
+img#cartImg {
+    background-color: #f2f2f2;
 }
 </style>
 <!-- ================ start banner area ================= -->
@@ -35,33 +43,15 @@ img#cartImg {
 				<div class="sidebar-categories">
 					<div class="head">Browse Categories</div>
 					<ul class="main-categories">
-						<li class="common-filter">
-							<form action="#">
-								<ul>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="men" name="brand"><label for="men">Men<span>
-												(3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="women" name="brand"><label
-										for="women">Women<span> (3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="accessories" name="brand"><label
-										for="accessories">Accessories<span> (3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="footwear" name="brand"><label
-										for="footwear">Footwear<span> (3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="bayItem" name="brand"><label
-										for="bayItem">Bay item<span> (3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="electronics" name="brand"><label
-										for="electronics">Electronics<span> (3600)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="food" name="brand"><label for="food">Food<span>
-												(3600)</span></label></li>
-								</ul>
-							</form>
-						</li>
+						<li class="common-filter"><c:forEach var="c"
+								items="${categoryList}">
+								<form action="#">
+									<ul>
+										<a href="user/${c.name}"><li class="filter-list"><input
+												class="pixel-radio" id="men" name="brand"><label>${c.name}<span></span></label></li></a>
+									</ul>
+								</form>
+							</c:forEach></li>
 					</ul>
 				</div>
 				<div class="sidebar-filter">
@@ -141,7 +131,7 @@ img#cartImg {
 					</div>
 					<div>
 						<div class="input-group filter-bar-search">
-							<input type="text" placeholder="Search">
+							<input type="text" id="search" placeholder="Search">
 							<div class="input-group-append">
 								<button type="button">
 									<i class="ti-search"></i>
@@ -152,32 +142,40 @@ img#cartImg {
 				</div>
 				<!-- End Filter Bar -->
 				<!-- Start Best Seller -->
+				<hr>
+				<jsp:include page="../cart/info.jsp"></jsp:include>
+				<hr>
 				<section class="lattest-product-area pb-40 category-list">
-					<div class="row">
+					<div class="row" id="parent">
 						<c:forEach var="p" items="${productList}">
-							<div class="col-md-6 col-lg-4">
+							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
-										<a href="/user/singleproduct/${p.id}"> <img class="card-img" id="cartImg"
+										<a href="/user/singleproduct/${p.id}"> <img
+											class="card-img" id="cartImg"
 											src="/static/admin/product/${p.image}" alt="">
 											<ul class="card-product__imgOverlay">
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><button>
-														<i class="ti-shopping-cart"></i>
-													</button></li>
+												<li><a href="/cart/add/${p.id}"><button>
+															<i class="ti-shopping-cart"></i>
+														</button></a></li>
 												<li><button>
 														<i class="ti-heart"></i>
 													</button></li>
 											</ul></a>
 									</div>
 									<div class="card-body">
-										<p>${p.category.name}</p>
+										<p id="name">${p.category.name}</p>
 										<h4 class="card-product__title">
 											<a href="#">${p.name}</a>
 										</h4>
-										<p class="card-product__price">${p.unitPrice}</p>
+										<c:set var="basecost" value="p.unitPrice" />
+										<p class="card-product__price">
+											<fmt:formatNumber pattern="##,###,###.####"
+												value="${p.unitPrice}" />
+										</p>
 									</div>
 								</div>
 							</div>
@@ -233,7 +231,7 @@ img#cartImg {
 
 			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
 				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
+					<div id="box" class="single-search-product d-flex">
 						<a href="#"><img
 							src="/static/user/img/product/product-sm-4.png" alt=""></a>
 						<div class="desc">
@@ -353,3 +351,11 @@ img#cartImg {
 	</div>
 </section>
 <!-- ================ Subscribe section end ================= -->
+<script>
+	var $search = $("#search").on('input', function() {
+		var matcher = new RegExp($(this).val(), 'gi');
+		$('.box').show().not(function() {
+			return matcher.test($(this).find('#name').text())
+		}).hide();
+	})
+</script>
