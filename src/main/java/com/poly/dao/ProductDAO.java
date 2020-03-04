@@ -7,6 +7,7 @@ import com.poly.entity.Product;
 public interface ProductDAO {
 	Product findById(Integer id);
 	List<Product>findAll();
+	List<Product>findAllNew();
 	Product create(Product entity);
 	void update(Product entity);
 	Product delete(Integer id);
