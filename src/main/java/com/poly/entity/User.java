@@ -34,6 +34,9 @@ public class User {
 	Role role;
 	
 	@OneToMany(mappedBy="user" )
+	List<Review> reviews;
+	
+	@OneToMany(mappedBy="user" )
 	List<Order> orders;
 	
 
@@ -84,6 +87,14 @@ public class User {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 

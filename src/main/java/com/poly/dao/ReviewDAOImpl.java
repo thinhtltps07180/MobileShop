@@ -10,60 +10,51 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.poly.entity.Product;
+import com.poly.entity.Review;
 
 @Transactional
 @Repository
-public class ProductDAOImpl implements ProductDAO {
+public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	SessionFactory factory;
 
 	@Override
-	public Product findById(Integer id) {
+	public Review findById(Integer id) {
 		Session session = factory.getCurrentSession();
-		return session.find(Product.class, id);
+		return session.find(Review.class, id);
 	}
 
 	@Override
-	public List<Product> findAll() {
-		String hql = "FROM Product";
+	public List<Review> findAll() {
+		String hql = "FROM Review";
 		Session session = factory.getCurrentSession();
-		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
 		return query.getResultList();
 		
 	}
 
 	@Override
-	public Product create(Product entity) {
+	public Review create(Review entity) {
 		Session session = factory.getCurrentSession();
 		session.save(entity);
 		return entity;
 	}
 
 	@Override
-	public void update(Product entity) {
+	public void update(Review entity) {
 		Session session = factory.getCurrentSession();
 		session.update(entity);
 
 	}
 
 	@Override
-	public Product delete(Integer id) {
-		Product entity = this.findById(id);
+	public Review delete(Integer id) {
+		Review entity = this.findById(id);
 		Session session = factory.getCurrentSession();
 		session.remove(entity);
 		return entity;
 	}
 
-	@Override
-	public List<Product> findAllNew() {
-		String hql = "SELECT p FROM Product p  ORDER BY p.id DESC";
-		Session session = factory.getCurrentSession();
-		TypedQuery<Product> query = session.createQuery(hql, Product.class);
-		query.setFirstResult(0);
-		query.setMaxResults(4);
-		return query.getResultList();
-	}
 
 
 	

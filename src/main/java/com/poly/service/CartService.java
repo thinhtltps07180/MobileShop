@@ -15,6 +15,7 @@ import com.poly.entity.Product;
 public class CartService {
 	@Autowired
 	ProductDAO dao;
+	
 
 	List<Product> items = new ArrayList<>();
 	
@@ -22,6 +23,7 @@ public class CartService {
 		for (Product item : items) {
 			if (item.getId().intValue() == id.intValue()) {
 				item.setQuantity(item.getQuantity() + 1);
+
 				
 				return;
 			}
