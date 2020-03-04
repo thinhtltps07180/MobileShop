@@ -60,6 +60,7 @@ public class CartController {
 	@RequestMapping("/cart/add/{id}")
 	public String add(@PathVariable("id") Integer id) {
 		cart.add(id);
+		
 		return "redirect:/user/category";
 	}
 	
@@ -111,7 +112,14 @@ public class CartController {
 			orderDetail.setProduct(p);
 //			orderDetail.setImage(image);
 			orderDetails.add(orderDetail);
+			Product product = productDao.findById(p.getId());
+			int a = product.getQuantity();
+			System.out.println(a);		
+			product.setQuantity(a - p.getQuantity());
+			productDao.update(product);
+			System.out.println(product.getQuantity());	
 		}
+
 
 		orderDao.create(order, orderDetails);
 
