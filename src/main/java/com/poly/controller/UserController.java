@@ -53,7 +53,9 @@ public class UserController {
 	RoleDAO roleDAO;
 
 	@GetMapping("/user/index")
-	public String index() {
+	public String index(Model model) {
+		List<Product> newList = productDao.findAllNew();
+		model.addAttribute("newList", newList);
 		return "user/index";
 	}
 
@@ -65,10 +67,12 @@ public class UserController {
 	@GetMapping("/user/category")
 	public String category(Model model) {
 		List<Product> list = productDao.findAll();
+		List<Category> listCategory = categoryDao.findAll();
+		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 		return "user/category";
 	}
-
+	
 
 	@GetMapping("/user/cart")
 	public String cart() {

@@ -55,6 +55,16 @@ public class ProductDAOImpl implements ProductDAO {
 		return entity;
 	}
 
+	@Override
+	public List<Product> findAllNew() {
+		String hql = "SELECT p FROM Product p  ORDER BY p.id DESC";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(0);
+		query.setMaxResults(4);
+		return query.getResultList();
+	}
+
 	
 
 	
