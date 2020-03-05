@@ -39,6 +39,8 @@
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
 								<li class="nav-item"><a class="nav-link"
+									href="createNews">Create Blog</a></li>
+								<li class="nav-item"><a class="nav-link"
 									href="singleblog">Blog Details</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
