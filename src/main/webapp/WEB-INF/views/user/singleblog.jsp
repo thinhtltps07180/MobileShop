@@ -6,7 +6,7 @@
 									<div class="single-post row">
 											<div class="col-lg-12">
 													<div class="feature-img">
-															<img class="img-fluid" src="/static/user/img/blog/feature-img1.jpg" alt="">
+															<img class="img-fluid" src="/static/user/news/${detail.thumbnail}" alt="">
 													</div>
 											</div>
 											<div class="col-lg-3  col-md-3">
@@ -64,23 +64,10 @@
 													</div>
 											</div>
 											<div class="col-lg-9 col-md-9 blog_details">
-													<h2>Astronomy Binoculars A Great Alternative</h2>
-													<p class="excert">
-															MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money
-															on boot camp when you can get the MCSE study materials yourself at a fraction.
-													</p>
-													<p>
-															Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot
-															camp when you can get the MCSE study materials yourself at a fraction of the camp price.
-															However, who has the willpower to actually sit through a self-imposed MCSE training. who
-															has the willpower to actually sit through a self-imposed
-													</p>
-													<p>
-															Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot
-															camp when you can get the MCSE study materials yourself at a fraction of the camp price.
-															However, who has the willpower to actually sit through a self-imposed MCSE training. who
-															has the willpower to actually sit through a self-imposed
-													</p>
+													<h2>${detail.title }</h2>
+													<p>${detail.description }
+													<p>${detail.content }
+															</p>
 											</div>
 											<div class="col-lg-12">
 													<div class="quotes">

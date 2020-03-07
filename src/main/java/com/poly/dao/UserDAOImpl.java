@@ -54,6 +54,20 @@ public class UserDAOImpl implements UserDAO {
 		session.remove(entity);
 		return entity;
 	}
+	
+	public List<User> findByEmail(String email) {
+		String hql = "FROM User u WHERE u.email =:email";
+		Session session = factory.getCurrentSession();
+		TypedQuery<User> query = session.createQuery(hql, User.class);
+		query.setParameter("email", email);
+		if(query.getResultList().isEmpty()) {
+			return null;
+		}
+		return query.getResultList();
+
+	}
+
+
 
 	
 
