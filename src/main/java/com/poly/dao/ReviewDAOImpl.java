@@ -3,6 +3,7 @@ package com.poly.dao;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -11,19 +12,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poly.entity.Review;
+import com.poly.entity.User;
 
 @Transactional
 @Repository
+
+
 public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	SessionFactory factory;
 
+	@Autowired
+	HttpSession session;
+	
 	@Override
 	public Review findById(Integer id) {
 		Session session = factory.getCurrentSession();
 		return session.find(Review.class, id);
 	}
-
+	
+	@Override
+	public List<Review> findByUser() {
+		User user = (User) session.getAttribute("user");
+		String hql = "FROM Review n WHERE n.user.id =:id ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql,Review.class);
+		query.setParameter("user",user.getId());
+		return query.getResultList();
+	}
 	@Override
 	public List<Review> findAll() {
 		String hql = "FROM Review";

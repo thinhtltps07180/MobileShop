@@ -92,10 +92,11 @@ public class UserController {
 		return "user/checkout";
 	}
 
-	@GetMapping("/user/singleblog")
-	public String singleblog() {
-		return "user/singleblog";
+	@GetMapping("/user/allReview")
+	public String allReview() {
+		return "user/allReview";
 	}
+	
 
 	@GetMapping("/user/singleproduct/{id}")
 	public String singleproduct(Model model , @PathVariable("id") Integer id) {

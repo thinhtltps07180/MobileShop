@@ -33,16 +33,15 @@
 										Cart</a></li>
 								<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
 							</ul></li>
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="createNews">Create Blog</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="singleblog">Blog Details</a></li>
-							</ul></li>
+					<li class="nav-item submenu dropdown"><a href="#"
+						class="nav-link dropdown-toggle" data-toggle="dropdown"
+						role="button" aria-haspopup="true" aria-expanded="false">Reviews</a>
+						<ul class="dropdown-menu">
+							<li class="nav-item"><a class="nav-link" href="allReview">All Review</a></li>					
+							<li class="nav-item"><a class="nav-link" href="singleReview">My Review</a></li>
+							<li class="nav-item"><a class="nav-link" href="createNews">Create Review</a></li>		
+						</ul>
+						</li>
 						<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="contact">About</a></li>
 						<li class="nav-item submenu dropdown"><a href="#"

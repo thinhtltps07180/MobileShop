@@ -7,6 +7,7 @@ import com.poly.entity.Review;
 public interface ReviewDAO {
 	Review findById(Integer id);
 	List<Review>findAll();
+	List<Review>findByUser();
 	Review create(Review entity);
 	void update(Review entity);
 	Review delete(Integer id);

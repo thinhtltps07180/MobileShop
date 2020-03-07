@@ -3,7 +3,7 @@
     <div class="container h-100">
       <div class="blog-banner">
         <div class="text-center">
-          <h1>Our Blog</h1>
+          <h1>All Review</h1>
           <nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -18,7 +18,8 @@
 
 
   <!--================Blog Categorie Area =================-->
-  <section class="blog_categorie_area">
+  <!-- 
+ <section class="blog_categorie_area">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
@@ -66,6 +67,7 @@
       </div>
     </div>
   </section>
+   -->
   <!--================Blog Categorie Area =================-->
 
   <!--================Blog Area =================-->
