@@ -18,6 +18,21 @@
 <link rel="stylesheet"
 	href="/static/user/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="/static/user/css/style.css">
+<!-- Load thư viện flatform -->
+    <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <!-- log out -->
+<script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+            window.location.href = "/user/login"; 
+        } 
+    </script>
+    <!-- Gọi client_id -->
+<meta name="google-signin-client_id"
+	content="948184717663-rj08i17ctdkstbrevfdefokc3mgq1lgp.apps.googleusercontent.com">
 <meta charset="UTF-8">
 <title>Shop Gấu</title>
 </head>
