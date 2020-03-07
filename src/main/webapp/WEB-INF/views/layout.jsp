@@ -4,7 +4,16 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- Load thư viện flatform -->
+<script
+	src="https://apis.google.com/js/client:platform.js?onload=renderButton"
+	async defer></script>
+
+<!-- Gọi client_id -->
+<meta name="google-signin-client_id"
+	content="948184717663-rj08i17ctdkstbrevfdefokc3mgq1lgp.apps.googleusercontent.com">
 <!DOCTYPE html>
 <html>
 <head>
