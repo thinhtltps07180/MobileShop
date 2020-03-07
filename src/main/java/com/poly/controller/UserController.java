@@ -3,12 +3,17 @@ package com.poly.controller;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,21 +48,24 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
-	
+
 	@Autowired
-	CategoryDAO  categoryDao;
-	
+	CategoryDAO categoryDao;
+
 	@Autowired
 	ProductDAO productDao;
-	
+
 	@Autowired
 	OrderDetailDAO orderDetailDao;
-	
+
 	@Autowired
 	ReviewDAO reviewDAO;
 
 	@Autowired
 	RoleDAO roleDAO;
+
+	@Autowired
+	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
@@ -70,12 +78,12 @@ public class UserController {
 	public String contact() {
 		return "user/contact";
 	}
-	
+
 	@GetMapping("/user/category")
 	public String category(Model model) {
 		List<Product> list = productDao.findAll();
 		List<Category> listCategory = categoryDao.findAll();
-		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("categoryList", listCategory);
 		model.addAttribute("productList", list);
 		return "user/category";
 	}
@@ -148,7 +156,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/singleproduct/{id}")
-	public String singleproduct(Model model , @PathVariable("id") Integer id) {
+	public String singleproduct(Model model, @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
 		model.addAttribute("listCategory", list);
@@ -165,8 +173,6 @@ public class UserController {
 	public String confirmation() {
 		return "user/confirmation";
 	}
-	
-
 
 	@GetMapping("/user/blog")
 	public String blog(Model model) {
@@ -207,7 +213,7 @@ public class UserController {
 		model.addAttribute("form", new User());
 		return "user/register";
 	}
-	
+
 	@PostMapping("/user/register")
 	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -232,22 +238,23 @@ public class UserController {
 				user.setRole(role);
 				dao.create(user);
 			} catch (Exception e) {
-				return "redirect:/user/register";		
+				return "redirect:/user/register";
 			}
 		}
 
 //		model.addAttribute("form" , user);
 		return "user/login";
 	}
+
 	@GetMapping("/user/createNews")
 	public String createNews(Model model) {
 		model.addAttribute("news", new Review());
 		// tao object moi
 		return "user/createNews";
 	}
-	
+
 	@PostMapping("/user/createNews")
-	public String register(Model model,@Valid @ModelAttribute("news") Review review,  BindingResult errors ,
+	public String register(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
 		if (file.isEmpty()) {
 			review.setThumbnail("news.png");
@@ -263,11 +270,11 @@ public class UserController {
 		if (errors.hasErrors()) {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
 
-			return "user/createNews";	
-		}else {
+			return "user/createNews";
+		} else {
 			try {
 				User user = (User) session.getAttribute("user");// lay cai thang login vao
-				review.setUser(user);// set cai thang do vao 
+				review.setUser(user);// set cai thang do vao
 				review.setStatus(false);
 				review.setCreateDate(new Date());
 				review.setCountViewer(0);
@@ -275,13 +282,61 @@ public class UserController {
 				model.addAttribute("message", "Tạo bài viết thành công!");
 			} catch (Exception e) {
 				model.addAttribute("message", "Tạo bài viết  thất bại!");
-				
+
 			}
 		}
-		
 
 		// model.addAttribute("form" , user);
 
 		return "redirect:/user/blog";
 	}
+
+	@GetMapping("/user/forget")
+	public String forget() {
+		return "user/forget";
+	}
+
+	@PostMapping("/user/forget")
+	public String forget(Model model, @RequestParam("id") String id, @RequestParam("email") String email) {
+		User user = dao.findById(id);
+		if (user == null) {
+			model.addAttribute("message", "Invalid username!");
+
+		} else if (!email.equals(user.getEmail())) {
+			model.addAttribute("message", "Invalid email!");
+
+		} else {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(user.getEmail());
+			message.setSubject("Your password");
+			message.setText("Welcome to the shop, we are very happy that you have trusted our store\r\n"
+					+ "Here is your account and password:\r\n" + "Your account id is: " + user.getId() + "\r\n"
+					+ "Your password is: " + user.getPassword() + "\r\n" + "Thanks and warm regards");
+			this.emailSender.send(message);
+			
+			model.addAttribute("message", "Success, please check you email!");
+			return "redirect:/user/login";
+			
+		}
+		return "user/forget";
+	}
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("dquangcuong1505@gmail.com");
+		mailSender.setPassword("mingtyno0");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
+	}
+
 }

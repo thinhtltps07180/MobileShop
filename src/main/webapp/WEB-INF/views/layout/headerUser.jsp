@@ -3,7 +3,7 @@
 	<div class="main_menu">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand logo_h" href="index.html"><img
+				<a class="navbar-brand logo_h" href="index"><img
 					src="/static/user/img/logo.png" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
