@@ -28,32 +28,14 @@ span[id*=errors] {
 </script>
 
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Register</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Register</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
-<!-- ================ end banner area ================= -->
 
 <!--================Login Box Area =================-->
 <section class="login_box_area section-margin">
 	<div class="container">
 		<div class="row">
-
-			<div class="col-lg-12">
-				<div class="login_form_inner register_form_inner">
+			<div class="col-12 grid-margin stretch-card">
 					<h3>Create News</h3>
-					<h3>${message }</h3>
+					<h3>${message}</h3>
 					<form:form enctype="multipart/form-data" action="/user/createNews"
 						modelAttribute="news" class="row login_form" id="register_form">
 						<div class="col-md-12 form-group">
@@ -85,7 +67,7 @@ span[id*=errors] {
 							<div id="anh"></div>
 						</div>
 						
-						<div class="form-group area">
+						<div class="col-md-12 form-group area">
 								<form:textarea path="content" style=" height: 200px;"
 									id="content" />
 								<form:errors path="content" />
@@ -93,10 +75,10 @@ span[id*=errors] {
 
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
-								class="button button-register w-100">Register</button>
+								class="button button-register w-100">Upload</button>
 						</div>
 					</form:form>
-				</div>
+
 			</div>
 		</div>
 	</div>
