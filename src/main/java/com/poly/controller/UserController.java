@@ -1,7 +1,6 @@
 package com.poly.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -81,6 +80,54 @@ public class UserController {
 		return "user/category";
 	}
 	
+	@GetMapping("/user/url/{url}")
+	public String url(Model model , @PathVariable("url") String url) {
+		List<User> checkUser =dao.findByEmail(url);
+		if(checkUser == null) {
+			User u = new User();
+			u.setEmail(url);
+			model.addAttribute("usergg", u);
+			return "user/AccountGG";
+		}
+
+		
+
+		
+		return "user/index";
+	}
+	
+	@PostMapping("/user/CreateGG")
+	public String AccountGG(Model model, @Validated @ModelAttribute("usergg") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "user/register";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(2);
+				user.setRole(role);
+				dao.create(user);
+			} catch (Exception e) {
+				return "redirect:/user/AccountGG";		
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "user/login";
+	}
+	
 
 	@GetMapping("/user/cart")
 	public String cart() {
@@ -92,8 +139,11 @@ public class UserController {
 		return "user/checkout";
 	}
 
-	@GetMapping("/user/singleblog")
-	public String singleblog() {
+	
+	@GetMapping("/user/singleblog/{id}")
+	public String singleblog(Model model , @PathVariable("id") Integer id) {
+		Review r = reviewDAO.findById(id);
+		model.addAttribute("detail", r);
 		return "user/singleblog";
 	}
 
@@ -119,7 +169,10 @@ public class UserController {
 
 
 	@GetMapping("/user/blog")
-	public String blog() {
+	public String blog(Model model) {
+		List<Review> listReview = reviewDAO.findAll();
+		
+		model.addAttribute("reviewList" ,listReview );
 		return "user/blog";
 	}
 
@@ -229,6 +282,6 @@ public class UserController {
 
 		// model.addAttribute("form" , user);
 
-		return "redirect:/user/management";
+		return "redirect:/user/blog";
 	}
 }
