@@ -16,43 +16,42 @@
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.html">Home</a></li>
-						<li class="nav-item submenu dropdown"><a href="#"
+							href="/user/index">Home</a></li>
+						<li class="nav-item submenu dropdown"><a href="/user/index"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="category">Shop
-										Category</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="singleproduct">Product Details</a></li>
-								<li class="nav-item"><a class="nav-link" href="checkout">Product
-										Checkout</a></li>
+									href="/user/category">Shop Category</a></li>								
 								<li class="nav-item"><a class="nav-link"
-									href="confirmation">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="cart">Shopping
+									href="/user/checkout">Product Checkout</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/confirmation">Confirmation</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/cart">Shopping
 										Cart</a></li>
-								<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
 							</ul></li>
-						<li class="nav-item submenu dropdown"><a href="#"
+						<li class="nav-item submenu dropdown"><a href="/user/blog"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="blog">Blog</a></li>
-								<li class="nav-item"><a class="nav-link" href="createNews">Create
-										Blog</a></li>
-								<li class="nav-item"><a class="nav-link" href="singleblog">Blog
-										Details</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/blog">Reviews</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/createNews">Create Reviews</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/singleblog">Reviews Details</a></li>
 							</ul></li>
-						<li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
-						<li class="nav-item"><a class="nav-link" href="contact">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="/user/contact">Contact</a></li>
+						<li class="nav-item"><a class="nav-link" href="/user/contact">About</a></li>
 						<li class="nav-item submenu dropdown"><a href="#"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="login">Login</a></li>
-								<li class="nav-item"><a class="nav-link" href="register">Register</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="trackingorder">Tracking</a></li>
+									href="/user/register">Register</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/trackingorder">Tracking</a></li>
 							</ul></li>
 					</ul>
 
@@ -62,14 +61,13 @@
 							</button></li>
 						<li class="nav-item">
 							<button>
-								<a class="nav-link" href="cart"></a> <i class="ti-shopping-cart"></i>
-
-								<span class="nav-shop__circle">3</span>
+								<a class="nav-link" href="/user/cart"> <i
+									class="ti-shopping-cart"></i> <span class="nav-shop__circle">3</span></a>
 							</button>
 						</li>
 						<li class="nav-item"><a class="button button-header" href="#">Buy
 								Now</a></li>
-						<li><a href="#" onclick="signOut();">Sign out</a></li>
+						<li><a href="/user/login" onclick="signOut();">Sign out</a></li>
 					</ul>
 				</div>
 			</div>

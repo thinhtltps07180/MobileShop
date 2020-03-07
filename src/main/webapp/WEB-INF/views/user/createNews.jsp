@@ -50,7 +50,8 @@ span[id*=errors] {
 								name="title" placeholder="title" onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'title'">
 							<form:errors path="title" />
-						</div>
+						</div>					
+						
 						
 						<div class="col-md-12 form-group">
 							<input type="text" path="description" class="form-control" id="description"

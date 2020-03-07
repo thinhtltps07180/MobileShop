@@ -8,20 +8,10 @@
 		console.log('Name: ' + profile.getName());
 		console.log('Image URL: ' + profile.getImageUrl());
 		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-		/* window.location.href = "/user/index"; */
+
+		window.location.href = "/user/url/"+profile.getEmail();
 	}
 </script>
-
-<!-- <script>
-        function signOut() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function () {
-                console.log('User signed out.');
-            });
-        } 
-    </script> -->
 
 <section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -80,13 +70,12 @@
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
 								class="button button-login w-100">Log In</button>
-							<a href="#">Forgot Password?</a>
+							<a href="/user/forget">Forgot Password?</a>
 							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</form>
 
 
-					<a href="#" onclick="signOut();">Sign out</a>
 
 				</div>
 			</div>
