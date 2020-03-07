@@ -66,7 +66,7 @@ public class CartController {
 	
 	@RequestMapping("/cart/view")
 	public String index() {
-		return "cart/index";
+		return "user/cart";
 	}
 
 	@RequestMapping("/cart/remove/{id}")
