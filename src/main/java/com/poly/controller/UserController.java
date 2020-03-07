@@ -3,12 +3,17 @@ package com.poly.controller;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,6 +63,9 @@ public class UserController {
 
 	@Autowired
 	RoleDAO roleDAO;
+	
+	@Autowired
+	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
@@ -285,5 +293,53 @@ public class UserController {
 		// model.addAttribute("form" , user);
 
 		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("/user/forget")
+	public String forget() {
+		return "user/forget";
+	}
+
+	@PostMapping("/user/forget")
+	public String forget(Model model, @RequestParam("id") String id, @RequestParam("email") String email) {
+		User user = dao.findById(id);
+		if (user == null) {
+			model.addAttribute("message", "Invalid username!");
+
+		} else if (!email.equals(user.getEmail())) {
+			model.addAttribute("message", "Invalid email!");
+
+		} else {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(user.getEmail());
+			message.setSubject("Your password");
+			message.setText("Welcome to the shop, we are very happy that you have trusted our store\r\n"
+					+ "Here is your account and password:\r\n" + "Your account id is: " + user.getId() + "\r\n"
+					+ "Your password is: " + user.getPassword() + "\r\n" + "Thanks and warm regards");
+			this.emailSender.send(message);
+			
+			model.addAttribute("message", "Success, please check you email!");
+			return "redirect:/user/login";
+			
+		}
+		return "user/forget";
+	}
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("dquangcuong1505@gmail.com");
+		mailSender.setPassword("mingtyno0");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
 	}
 }
