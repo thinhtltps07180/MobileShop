@@ -4,12 +4,17 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,13 +49,13 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
-	
+
 	@Autowired
-	CategoryDAO  categoryDao;
-	
+	CategoryDAO categoryDao;
+
 	@Autowired
 	ProductDAO productDao;
-	
+
 	@Autowired
 	OrderDetailDAO orderDetailDao;
 	
@@ -59,6 +64,9 @@ public class UserController {
 
 	@Autowired
 	RoleDAO roleDAO;
+
+	@Autowired
+	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
@@ -71,7 +79,7 @@ public class UserController {
 	public String contact() {
 		return "user/contact";
 	}
-	
+
 	@GetMapping("/user/category")
 	public String category(Model model) {
 		List<Product> list = productDao.findAll();
@@ -99,7 +107,7 @@ public class UserController {
 	
 
 	@GetMapping("/user/singleproduct/{id}")
-	public String singleproduct(Model model , @PathVariable("id") Integer id) {
+	public String singleproduct(Model model, @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
 		model.addAttribute("listCategory", list);
@@ -155,7 +163,7 @@ public class UserController {
 		model.addAttribute("form", new User());
 		return "user/register";
 	}
-	
+
 	@PostMapping("/user/register")
 	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -180,7 +188,7 @@ public class UserController {
 				user.setRole(role);
 				dao.create(user);
 			} catch (Exception e) {
-				return "redirect:/user/register";		
+				return "redirect:/user/register";
 			}
 		}
 

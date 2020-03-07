@@ -3,7 +3,7 @@
 	<div class="main_menu">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand logo_h" href="index.html"><img
+				<a class="navbar-brand logo_h" href="index"><img
 					src="/static/user/img/logo.png" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -16,7 +16,7 @@
 					id="navbarSupportedContent">
 					<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 						<li class="nav-item active"><a class="nav-link"
-							href="index.html">Home</a></li>
+							href="index">Home</a></li>
 						<li class="nav-item submenu dropdown"><a href="#"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
