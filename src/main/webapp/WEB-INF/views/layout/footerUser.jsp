@@ -18,12 +18,12 @@
 						<div class="single-footer-widget tp_widgets">
 							<h4 class="footer_title">Quick Links</h4>
 							<ul class="list">
-								<li><a href="index">Home</a></li>
-								<li><a href="shop">Shop</a></li>
-								<li><a href="blog">Blog</a></li>
-								<li><a href="product">Product</a></li>
-								<li><a href="brand">Brand</a></li>
-								<li><a href="contract">Contact</a></li>
+								<li><a href="#">Home</a></li>
+								<li><a href="#">Shop</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">Product</a></li>
+								<li><a href="#">Brand</a></li>
+								<li><a href="#">Contact</a></li>
 							</ul>
 						</div>
 					</div>
