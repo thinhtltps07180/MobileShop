@@ -1,7 +1,6 @@
 package com.poly.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -63,7 +62,9 @@ public class UserController {
 	@GetMapping("/user/index")
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
+		List<Product> trendList = productDao.findTrend();
 		model.addAttribute("newList", newList);
+		model.addAttribute("trendList", trendList);
 		return "user/index";
 	}
 
