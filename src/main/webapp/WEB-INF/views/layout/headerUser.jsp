@@ -67,7 +67,7 @@
 						</li>
 						<li class="nav-item"><a class="button button-header" href="#">Buy
 								Now</a></li>
-						<li><a href="/user/login" onclick="signOut();">Sign out</a></li>
+						<li><a href="login" onclick="signOut();">Sign out</a></li>
 					</ul>
 				</div>
 			</div>
