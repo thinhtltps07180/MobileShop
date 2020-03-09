@@ -22,7 +22,7 @@
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="/user/category">Shop Category</a></li>								
+									href="/user/category">Shop Category</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="/user/checkout">Product Checkout</a></li>
 								<li class="nav-item"><a class="nav-link"
@@ -33,13 +33,13 @@
 							</ul></li>
 						<li class="nav-item submenu dropdown"><a href="/user/blog"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
+							role="button" aria-haspopup="true" aria-expanded="false">Reviews</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="/user/blog">Reviews</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="/user/createNews">Create Reviews</a></li>
+									href="/user/createNews">Create Reviews</a></li>								
 								<li class="nav-item"><a class="nav-link"
-									href="/user/singleblog">Reviews Details</a></li>
+									href="/user/myreview/${user.id}">My Reviews</a></li>
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">About</a></li>

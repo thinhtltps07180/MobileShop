@@ -131,6 +131,7 @@ div#overflow {
 										</div>
 										<a class="button button-blog" href="/user/singleblog/${r.id}">View
 											More</a>
+											<a class="button button-blog" href="/user/reviewedit/${r.id}">Edit</a>
 									</div>
 								</div>
 							</div>

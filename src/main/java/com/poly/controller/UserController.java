@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.sound.sampled.ReverbType;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -288,6 +289,64 @@ public class UserController {
 
 		// model.addAttribute("form" , user);
 
+		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("/user/myreview/{createBy}")
+	public String myreview(Model model,@PathVariable("createBy") String createBy) {
+		List<Review> reviewList= reviewDAO.findBycreateBy(createBy);
+		model.addAttribute("reviewList", reviewList);
+		return "user/myreview";
+	}
+	
+	@GetMapping("/user/reviewedit/{id}")
+	public String reviewedit(Model model,@PathVariable("id") Integer id) {
+		Review r = reviewDAO.findById(id);
+		model.addAttribute("news", r);
+		return "user/reviewedit";
+	}
+	
+	@PostMapping("/user/update")
+	public String update(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			review.setThumbnail("news.png");
+		} else {
+			review.setThumbnail(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/news/" + review.getThumbnail());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+
+			return "user/myreview";
+		} else {
+			try {
+				User user = (User) session.getAttribute("user");// lay cai thang login vao
+				review.setUser(user);// set cai thang do vao
+				review.setStatus(false);
+				review.setCreateDate(new Date());
+				review.setCountViewer(0);
+				reviewDAO.update(review);
+				model.addAttribute("message", "Tạo bài viết thành công!");
+			} catch (Exception e) {
+				model.addAttribute("message", "Tạo bài viết  thất bại!");
+
+			}
+		}
+
+		// model.addAttribute("form" , user);
+
+		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("user/reviewdelete/{id}")
+	public String delete(Model model, @PathVariable("id") Integer id) {
+		reviewDAO.delete(id);
 		return "redirect:/user/blog";
 	}
 
