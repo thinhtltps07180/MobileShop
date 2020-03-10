@@ -55,6 +55,18 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return entity;
 	}
 
+	@Override
+	public List<Review> findBycreateBy(String createBy) {
+		String hql = "FROM Review r where r.user.id =:createBy";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		query.setParameter("createBy", createBy);
+		if(query.getResultList().isEmpty()) {
+			return null;
+		}
+		return query.getResultList();
+	}
+
 
 
 	

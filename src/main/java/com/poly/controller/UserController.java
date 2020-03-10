@@ -1,13 +1,13 @@
 package com.poly.controller;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
+import javax.sound.sampled.ReverbType;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +88,55 @@ public class UserController {
 		model.addAttribute("productList", list);
 		return "user/category";
 	}
+	
+	@GetMapping("/user/url/{url}")
+	public String url(Model model , @PathVariable("url") String url) {
+		List<User> checkUser =dao.findByEmail(url);
+		if(checkUser == null) {
+			User u = new User();
+			u.setEmail(url);
+			model.addAttribute("usergg", u);
+			return "user/AccountGG";
+		}
+
+		
+
+		
+		return "user/index";
+	}
+	
+	@PostMapping("/user/CreateGG")
+	public String AccountGG(Model model, @Validated @ModelAttribute("usergg") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "user/register";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(2);
+				user.setRole(role);
+				dao.create(user);
+			} catch (Exception e) {
+				return "redirect:/user/AccountGG";		
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "user/login";
+	}
+	
 
 	@GetMapping("/user/cart")
 	public String cart() {
@@ -99,8 +148,11 @@ public class UserController {
 		return "user/checkout";
 	}
 
-	@GetMapping("/user/singleblog")
-	public String singleblog() {
+	
+	@GetMapping("/user/singleblog/{id}")
+	public String singleblog(Model model , @PathVariable("id") Integer id) {
+		Review r = reviewDAO.findById(id);
+		model.addAttribute("detail", r);
 		return "user/singleblog";
 	}
 
@@ -124,7 +176,10 @@ public class UserController {
 	}
 
 	@GetMapping("/user/blog")
-	public String blog() {
+	public String blog(Model model) {
+		List<Review> listReview = reviewDAO.findAll();
+		
+		model.addAttribute("reviewList" ,listReview );
 		return "user/blog";
 	}
 
@@ -234,7 +289,65 @@ public class UserController {
 
 		// model.addAttribute("form" , user);
 
-		return "redirect:/user/management";
+		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("/user/myreview/{createBy}")
+	public String myreview(Model model,@PathVariable("createBy") String createBy) {
+		List<Review> reviewList= reviewDAO.findBycreateBy(createBy);
+		model.addAttribute("reviewList", reviewList);
+		return "user/myreview";
+	}
+	
+	@GetMapping("/user/reviewedit/{id}")
+	public String reviewedit(Model model,@PathVariable("id") Integer id) {
+		Review r = reviewDAO.findById(id);
+		model.addAttribute("news", r);
+		return "user/reviewedit";
+	}
+	
+	@PostMapping("/user/update")
+	public String update(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			review.setThumbnail("news.png");
+		} else {
+			review.setThumbnail(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/news/" + review.getThumbnail());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+
+			return "user/myreview";
+		} else {
+			try {
+				User user = (User) session.getAttribute("user");// lay cai thang login vao
+				review.setUser(user);// set cai thang do vao
+				review.setStatus(false);
+				review.setCreateDate(new Date());
+				review.setCountViewer(0);
+				reviewDAO.update(review);
+				model.addAttribute("message", "Tạo bài viết thành công!");
+			} catch (Exception e) {
+				model.addAttribute("message", "Tạo bài viết  thất bại!");
+
+			}
+		}
+
+		// model.addAttribute("form" , user);
+
+		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("user/reviewdelete/{id}")
+	public String delete(Model model, @PathVariable("id") Integer id) {
+		reviewDAO.delete(id);
+		return "redirect:/user/blog";
 	}
 
 	@GetMapping("/user/forget")
