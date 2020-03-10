@@ -11,12 +11,15 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +34,7 @@ import com.poly.entity.Product;
 import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
+import com.poly.service.Pagination;
 
 @Controller
 public class UserController {
@@ -58,6 +62,8 @@ public class UserController {
 
 	@Autowired
 	RoleDAO roleDAO;
+	
+	Pagination pagination = new Pagination();
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
@@ -73,12 +79,32 @@ public class UserController {
 		return "user/contact";
 	}
 	
-	@GetMapping("/user/category")
-	public String category(Model model) {
+	@RequestMapping(value = "/user/category", method = RequestMethod.GET)
+	public String category(@RequestParam(value = "page", defaultValue = "0", required = false) int page, ModelMap model) {
 		List<Product> list = productDao.findAll();
 		List<Category> listCategory = categoryDao.findAll();
-		model.addAttribute("categoryList" ,listCategory );
+		long getCount = productDao.getCount();
+		
+		
+		List<Product> articleEntities;
+	    long count = productDao.getCount();
+	    pagination.setCount(count);
+	    pagination.setResultsPerPage(6);
+	    pagination.setCurrentPage(page);
+	    if(pagination.isPagination()){
+	        System.out.println("table rows count were enough and could paginate results");
+	    }else {
+	        System.out.println("table rows count were not enough and could not paginate results");
+	    }
+	    articleEntities = productDao.pagination(pagination.getResultsPerPage(),pagination.getCurrentPage());
+	    model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
+		model.addAttribute("getCount", getCount);
+	    model.addAttribute("pagination",pagination);
+	    model.addAttribute("articleEntities", articleEntities);
+		
+		
+		
 		return "user/category";
 	}
 	

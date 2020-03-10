@@ -1,5 +1,6 @@
 package com.poly.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -75,7 +76,32 @@ public class ProductDAOImpl implements ProductDAO {
 		return query.getResultList();
 	}
 
-
+	//Total product number
+	@Override
+	public long getCount() {
+		String hql = "SELECT count(p) FROM Product p";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Long> query = session.createQuery(hql, Long.class);
+	    long count = query.getSingleResult();
+	    
+	    return count;
+	}
+	
+	@Override
+	public List<Product> pagination(int resultsPerPage, int page) {
+	    String hql = "FROM Product";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+	    query.setMaxResults(resultsPerPage);
+	    if(page <= 0)
+	       query.setFirstResult(page * resultsPerPage);
+	    else
+	       query.setFirstResult((page-1) * resultsPerPage);
+	    List<Product> resultList = query.getResultList();
+	    
+	    return resultList;
+	}
+	
 	
 
 	

@@ -1,4 +1,8 @@
 
+<%@page import="com.poly.dao.ProductDAOImpl"%>
+<%@page import="com.poly.dao.ProductDAO"%>
+<%@page import="com.poly.entity.Product"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <script
@@ -11,8 +15,9 @@ img#cartImg {
 	height: 255px;
 	width: 271.48px;
 }
+
 img#cartImg {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 </style>
 <!-- ================ start banner area ================= -->
@@ -147,7 +152,8 @@ img#cartImg {
 				<hr>
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="parent">
-						<c:forEach var="p" items="${productList}">
+
+						<c:forEach var="p" items="${articleEntities}">
 							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
@@ -180,7 +186,19 @@ img#cartImg {
 								</div>
 							</div>
 						</c:forEach>
-
+						<c:if test="${pagination.isPagination() == true}">
+							<ul class="pagination">
+								<li><a
+									href="<c:if test="${pagination.getPreviousPage()!=-1}">?page=${pagination.getPreviousPage()}</c:if>">&laquo;</a></li>
+								<c:set var="count" value="1"></c:set>
+								<c:forEach begin="1" end="${pagination.getPagesCount()}">
+									<li><a href="?page=${count}">${count}</a></li>
+									<c:set var="count" value="${count + 1}"></c:set>
+								</c:forEach>
+								<li><a
+									href="<c:if test="${pagination.getNextPage()!=-1}">?page=${pagination.getNextPage()}</c:if>">&raquo;</a></li>
+							</ul>
+						</c:if>
 					</div>
 				</section>
 				<!-- End Best Seller -->

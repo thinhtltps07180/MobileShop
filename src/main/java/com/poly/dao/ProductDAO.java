@@ -12,5 +12,6 @@ public interface ProductDAO {
 	Product create(Product entity);
 	void update(Product entity);
 	Product delete(Integer id);
-
+	long getCount();
+	List<Product> pagination(int a, int b);
 }
