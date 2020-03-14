@@ -26,10 +26,12 @@ import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.ProductDAOImpl;
+import com.poly.dao.PromotionDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
 import com.poly.entity.Product;
+import com.poly.entity.Promotion;
 import com.poly.entity.User;
 
 @Controller
@@ -37,6 +39,9 @@ public class AdminController {
 
 	@Autowired
 	UserDAO userDao;
+	
+	@Autowired
+	PromotionDAO promotionDao;
 
 	@Autowired
 	ProductDAO productDao;
@@ -126,8 +131,10 @@ public class AdminController {
 	public String edit(Model model, @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
+		List<Promotion> listPromotion = promotionDao.findAll();
 		model.addAttribute("list", list);
 		model.addAttribute("form", p);
+		model.addAttribute("listPromotion", listPromotion);
 		return "admin/edit";
 	}
 

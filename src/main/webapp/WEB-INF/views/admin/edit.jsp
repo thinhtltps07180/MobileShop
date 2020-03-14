@@ -83,6 +83,15 @@ span[id*=errors] {
 
 								<form:errors path="category.id" />
 							</div>
+							<div class="form-group">
+								<form:select path="promotion.id">
+									<form:option value="" label="--Please Select"></form:option>
+									<!-- <option selected="selected" value="">--Please Select</option> -->
+									<form:options items="${listPromotion}" itemValue="id" itemLabel="name" />
+								</form:select>
+
+								<form:errors path="promotion.id" />
+							</div>
 
 							<div class="form-group area">
 								<form:textarea path="description" style=" height: 200px;"
