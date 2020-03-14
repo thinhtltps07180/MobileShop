@@ -5,6 +5,7 @@ import java.util.List;
 import com.poly.entity.Product;
 
 public interface ProductDAO {
+	List<Product> sortAsc(int pageNo);
 	Product findById(Integer id);
 	List<Product>findAll();
 	List<Product>findAllNew();
@@ -14,5 +15,6 @@ public interface ProductDAO {
 	Product delete(Integer id);
 	List<Product> findPage(int pageNo);
 	int getPageCount();
+	List<Product> sortDesc(int pageNo);
 
 }

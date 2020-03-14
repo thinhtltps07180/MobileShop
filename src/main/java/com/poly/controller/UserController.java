@@ -98,11 +98,38 @@ public class UserController {
 		return "user/category";
 	}
 	
-	@GetMapping("/user/category/{pageNo}")
-	public String sortACS(Model model) {
-		List<Product> listSortAsc = productDao.sortAsc;
-		model.addAttribute("sortAsc",listSortAsc );
-		return "user/category";
+	@GetMapping("/user/categorySortAsc/{pageNo}")
+	public String categorySortAsc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortAsc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortAsc";
+	}
+	
+	@GetMapping("/user/categorySortDesc/{pageNo}")
+	public String categorySortDesc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortDesc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortDesc";
 	}
 	
 	@GetMapping("/user/url/{url}")
