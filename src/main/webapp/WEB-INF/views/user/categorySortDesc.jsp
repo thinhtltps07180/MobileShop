@@ -122,8 +122,8 @@ img#cartImg {
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting">
 						<select onChange="window.location.href=this.value">
-							<option value="/user/category/0" selected="selected">Default sorting</option>
-							<option value="/user/categorySortDesc/0"><a>DESC sorting</a></option>
+							<option value="/user/category/0">Default sorting</option>
+							<option value="/user/categorySortDesc/0"selected="selected"><a>DESC sorting</a></option>
 							<option value="/user/categorySortAsc/0">ASC sorting</option>
 						</select>
 					</div>
@@ -181,10 +181,10 @@ img#cartImg {
 						
 						<nav id="pagerId" aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="/user/category/0">First</a></li>
-								<li class="page-item"><a class="page-link" href="/user/category/${pageNo -1}">Previous</a></li>
-								<li class="page-item"><a class="page-link" href="/user/category/${pageNo +1}">Next</a></li>		
-								<li class="page-item"><a class="page-link" href="/user/category/${lastPageCount}">Last</a></li>
+								<li class="page-item"><a class="page-link" href="/user/categorySortDesc/0">First</a></li>
+								<li class="page-item"><a class="page-link" href="/user/categorySortDesc/${pageNo -1}">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="/user/categorySortDesc/${pageNo +1}">Next</a></li>		
+								<li class="page-item"><a class="page-link" href="/user/categorySortDesc/${lastPageCount}">Last</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -364,4 +364,9 @@ img#cartImg {
 			return matcher.test($(this).find('#name').text())
 		}).hide();
 	})
+</script><script type="text/javascript">
+function handleSelect(elm)
+{
+window.location = elm.value;
+}
 </script>
