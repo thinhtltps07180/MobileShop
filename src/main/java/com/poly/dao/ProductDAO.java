@@ -12,5 +12,7 @@ public interface ProductDAO {
 	Product create(Product entity);
 	void update(Product entity);
 	Product delete(Integer id);
+	List<Product> findPage(int pageNo);
+	int getPageCount();
 
 }

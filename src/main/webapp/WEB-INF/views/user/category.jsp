@@ -6,13 +6,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <style>
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
 }
+nav#pagerId {
+    padding-left: 311px;
+}
 img#cartImg {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 </style>
 <!-- ================ start banner area ================= -->
@@ -118,15 +123,8 @@ img#cartImg {
 					<div class="sorting">
 						<select>
 							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-						</select>
-					</div>
-					<div class="sorting mr-auto">
-						<select>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
+							<option value="1">ASC sorting</option>
+							<option value="1">DESC sorting</option>
 						</select>
 					</div>
 					<div>
@@ -180,7 +178,15 @@ img#cartImg {
 								</div>
 							</div>
 						</c:forEach>
-
+						
+						<nav id="pagerId" aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item"><a class="page-link" href="/user/category/0">First</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo -1}">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo +1}">Next</a></li>		
+								<li class="page-item"><a class="page-link" href="/user/category/${lastPageCount}">Last</a></li>
+							</ul>
+						</nav>
 					</div>
 				</section>
 				<!-- End Best Seller -->

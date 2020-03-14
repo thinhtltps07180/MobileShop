@@ -81,12 +81,27 @@ public class UserController {
 		return "user/contact";
 	}
 	
-	@GetMapping("/user/category")
-	public String category(Model model) {
-		List<Product> list = productDao.findAll();
+	@GetMapping("/user/category/{pageNo}")
+	public String category(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findPage(pageNo);
 		List<Category> listCategory = categoryDao.findAll();
+		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
+		return "user/category";
+	}
+	
+	@GetMapping("/user/category/{pageNo}")
+	public String sortACS(Model model) {
+		List<Product> listSortAsc = productDao.sortAsc;
+		model.addAttribute("sortAsc",listSortAsc );
 		return "user/category";
 	}
 	
