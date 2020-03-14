@@ -156,7 +156,7 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/add/${p.id}"><button>
+												<li><a href="/cart/addAsc/${pageNo}/${p.id}"><button>
 															<i class="ti-shopping-cart"></i>
 														</button></a></li>
 												<li><button>

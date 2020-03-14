@@ -88,6 +88,8 @@ public class UserController {
 		}else if(pageNo < 0) {
 			pageNo = productDao.getPageCount() - 1;
 		}
+		
+
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
 		List<Product> list = productDao.findPage(pageNo);
