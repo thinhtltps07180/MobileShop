@@ -49,29 +49,31 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
-
+	
 	@Autowired
-	CategoryDAO categoryDao;
-
+	CategoryDAO  categoryDao;
+	
 	@Autowired
 	ProductDAO productDao;
-
+	
 	@Autowired
 	OrderDetailDAO orderDetailDao;
-
+	
 	@Autowired
 	ReviewDAO reviewDAO;
 
 	@Autowired
 	RoleDAO roleDAO;
-
+	
 	@Autowired
 	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
+		List<Product> trendList = productDao.findTrend();
 		model.addAttribute("newList", newList);
+		model.addAttribute("trendList", trendList);
 		return "user/index";
 	}
 
@@ -79,12 +81,12 @@ public class UserController {
 	public String contact() {
 		return "user/contact";
 	}
-
+	
 	@GetMapping("/user/category")
 	public String category(Model model) {
 		List<Product> list = productDao.findAll();
 		List<Category> listCategory = categoryDao.findAll();
-		model.addAttribute("categoryList", listCategory);
+		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 		return "user/category";
 	}
@@ -157,7 +159,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/singleproduct/{id}")
-	public String singleproduct(Model model, @PathVariable("id") Integer id) {
+	public String singleproduct(Model model , @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
 		model.addAttribute("listCategory", list);
@@ -174,6 +176,8 @@ public class UserController {
 	public String confirmation() {
 		return "user/confirmation";
 	}
+	
+
 
 	@GetMapping("/user/blog")
 	public String blog(Model model) {
@@ -214,7 +218,7 @@ public class UserController {
 		model.addAttribute("form", new User());
 		return "user/register";
 	}
-
+	
 	@PostMapping("/user/register")
 	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -239,23 +243,22 @@ public class UserController {
 				user.setRole(role);
 				dao.create(user);
 			} catch (Exception e) {
-				return "redirect:/user/register";
+				return "redirect:/user/register";		
 			}
 		}
 
 //		model.addAttribute("form" , user);
 		return "user/login";
 	}
-
 	@GetMapping("/user/createNews")
 	public String createNews(Model model) {
 		model.addAttribute("news", new Review());
 		// tao object moi
 		return "user/createNews";
 	}
-
+	
 	@PostMapping("/user/createNews")
-	public String register(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
+	public String register(Model model,@Valid @ModelAttribute("news") Review review,  BindingResult errors ,
 			@RequestParam("up_photo") MultipartFile file) {
 		if (file.isEmpty()) {
 			review.setThumbnail("news.png");
@@ -271,11 +274,11 @@ public class UserController {
 		if (errors.hasErrors()) {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
 
-			return "user/createNews";
-		} else {
+			return "user/createNews";	
+		}else {
 			try {
 				User user = (User) session.getAttribute("user");// lay cai thang login vao
-				review.setUser(user);// set cai thang do vao
+				review.setUser(user);// set cai thang do vao 
 				review.setStatus(false);
 				review.setCreateDate(new Date());
 				review.setCountViewer(0);
@@ -283,9 +286,10 @@ public class UserController {
 				model.addAttribute("message", "Tạo bài viết thành công!");
 			} catch (Exception e) {
 				model.addAttribute("message", "Tạo bài viết  thất bại!");
-
+				
 			}
 		}
+		
 
 		// model.addAttribute("form" , user);
 
@@ -397,5 +401,4 @@ public class UserController {
 
 		return mailSender;
 	}
-
 }
