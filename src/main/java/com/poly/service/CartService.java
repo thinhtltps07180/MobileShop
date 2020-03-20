@@ -18,7 +18,6 @@ public class CartService {
 	
 
 	List<Product> items = new ArrayList<>();
-	
 	public void add(Integer id) {
 		for (Product item : items) {
 			if (item.getId().intValue() == id.intValue()) {
