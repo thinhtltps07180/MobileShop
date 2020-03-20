@@ -89,6 +89,8 @@ public class UserController {
 		}else if(pageNo < 0) {
 			pageNo = productDao.getPageCount() - 1;
 		}
+		
+
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
 		List<Product> list = productDao.findPage(pageNo);
@@ -149,37 +151,8 @@ public class UserController {
 		return "user/index";
 	}
 	
-	@PostMapping("/user/CreateGG")
-	public String AccountGG(Model model, @Validated @ModelAttribute("usergg") User user, BindingResult errors,
-			@RequestParam("up_photo") MultipartFile file) {
-		if (file.isEmpty()) {
-			user.setPhoto(user.getPhoto());
-		} else {
-			user.setPhoto(file.getOriginalFilename());
-			try {
-				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
-				file.transferTo(new File(path));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (errors.hasErrors()) {
-			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
-			return "user/register";
-		} else {
-			try {
-				Role role = new Role();
-				role.setId(2);
-				user.setRole(role);
-				dao.create(user);
-			} catch (Exception e) {
-				return "redirect:/user/AccountGG";		
-			}
-		}
 
-//		model.addAttribute("form" , user);
-		return "user/login";
-	}
+
 	
 
 	@GetMapping("/user/cart")

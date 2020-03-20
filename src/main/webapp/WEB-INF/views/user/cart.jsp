@@ -38,7 +38,9 @@ img#cartImg {
 								<th scope="col">Product</th>
 								<th scope="col">Price</th>
 								<th scope="col">Quantity</th>
+								<th scope="col">Promotion</th>
 								<th scope="col">Total</th>
+								
 							</tr>
 						</thead>
 						<tbody>
@@ -63,9 +65,11 @@ img#cartImg {
 
 									<td><input name="${p.id}" value="${p.quantity}"
 										type="number" min="1"></td>
+										<td>${p.promotion.name}</td>
 									<c:set var="basecost" value="p.unitPrice" />
 									<td><fmt:formatNumber pattern="##,###,###.####"
-											value="${p.unitPrice*p.quantity}" /></td>
+											value="${(p.unitPrice-(p.unitPrice/100*p.promotion.discount))*p.quantity}" /></td>
+									<td></td>		
 									<td><a class="btn btn-primary" href="/cart/remove/${p.id}">Remove</a></td>
 								</tr>
 							</c:forEach>

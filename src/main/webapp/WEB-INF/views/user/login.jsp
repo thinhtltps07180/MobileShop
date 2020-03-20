@@ -1,17 +1,6 @@
 
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!-- ================ start banner area ================= -->
-<script>
-	function onSignIn(googleUser) {
-		var profile = googleUser.getBasicProfile();
-		console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-		console.log('Name: ' + profile.getName());
-		console.log('Image URL: ' + profile.getImageUrl());
-		console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-		window.location.href = "/user/url/"+profile.getEmail();
-	}
-</script>
 
 <section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -71,7 +60,6 @@
 							<button type="submit" value="submit"
 								class="button button-login w-100">Log In</button>
 							<a href="/user/forget">Forgot Password?</a>
-							<div class="g-signin2" data-onsuccess="onSignIn"></div>
 						</div>
 					</form>
 

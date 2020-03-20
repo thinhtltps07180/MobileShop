@@ -57,13 +57,26 @@ public class CartController {
 	@Autowired
 	CartService cart;
 
-	@RequestMapping("/cart/add/{id}")
-	public String add(@PathVariable("id") Integer id) {
+	@RequestMapping("/cart/add/{pageNo}/{id}")
+	public String add(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
 		cart.add(id);
-		
-		return "redirect:/user/category";
+		String redirect = "redirect:/user/category/"+pageNo;
+		return redirect;
 	}
 	
+	@RequestMapping("/cart/addAsc/{pageNo}/{id}")
+	public String addSortAsc(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
+		cart.add(id);
+		String redirect = "redirect:/user/categorySortAsc/"+pageNo;
+		return redirect;
+	}
+	
+	@RequestMapping("/cart/addDesc/{pageNo}/{id}")
+	public String addSortDesc(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
+		cart.add(id);
+		String redirect = "redirect:/user/categorySortDesc/"+pageNo;
+		return redirect;
+	}
 	@RequestMapping("/cart/view")
 	public String index() {
 		return "user/cart";
