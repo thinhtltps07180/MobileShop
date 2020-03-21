@@ -4,7 +4,7 @@
 				<div class="row section_gap">
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title large_title">Our Mission</h4>
+							<h4 class="footer_title large_title">Shop Gấu</h4>
 							<p>
 								So seed seed green that winged cattle in. Gathering thing made fly you're no 
 								divided deep moved us lan Gathering thing us land years living.

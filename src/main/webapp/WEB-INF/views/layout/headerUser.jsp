@@ -17,15 +17,7 @@
 					<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
 						<li class="nav-item active"><a class="nav-link"
 							href="/user/index">Home</a></li>
-						<li class="nav-item submenu dropdown"><a href="/user/index"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="/user/category">Shop Category</a></li>								
-								
-								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
-							</ul></li>
+							<li class="nav-item"><a class="nav-link" href="/user/category/0">Products</a></li>
 						<li class="nav-item submenu dropdown"><a href="/user/blog"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
@@ -38,16 +30,6 @@
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">About</a></li>
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/register">Register</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/trackingorder">Tracking</a></li>
-							</ul></li>
 					</ul>
 
 					<ul class="nav-shop">
@@ -73,12 +55,13 @@
 							role="button" aria-haspopup="true" aria-expanded="false">${user.id}</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="/user/checkout"></a></li>
+									href="/user/checkout">Product Checkout</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="/user/confirmation">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/cart">t</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/cart">Shopping
+										Cart</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="/user/trackingorder"></a></li>
+									href="/user/trackingorder"></a>Tracking</li>
 							</ul></li>
 					
 						</li>
