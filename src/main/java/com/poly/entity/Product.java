@@ -28,6 +28,7 @@ public class Product {
 	Date createDate;
 	String image;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	Category category;

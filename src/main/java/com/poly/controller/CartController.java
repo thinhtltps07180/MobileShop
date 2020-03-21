@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDAO;
@@ -136,7 +134,28 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-		return "redirect:/cart/view";
+		return "redirect:/user/confirmation";
 	}
+	
+	@RequestMapping("/user/orderList")
+	public String orderList(Model model) {
+		List<Order> listOrDer = orderDao.findAllByUser();
+		model.addAttribute("listDetailByUser", listOrDer);
+	
+		return "user/orderList";
+	}
+	
+	@RequestMapping("/user/orderDetail/{orderId}/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
+		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
+		Order order = orderDao.findById(orderId);
+		System.out.println(order.getId());
+		model.addAttribute("order", order);
+		model.addAttribute("listDetail", list);
+
+		return "user/orderDetail";
+	}
+	
+
 
 }
