@@ -27,6 +27,9 @@ public class User {
 	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
 	@Email (message = "Định dạng email không đúng")
 	String email;
+	String address;
+	Integer phoneNumber;
+	String name;
 //	Integer roleId;
 
 	@ManyToOne
@@ -95,6 +98,30 @@ public class User {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(Integer phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

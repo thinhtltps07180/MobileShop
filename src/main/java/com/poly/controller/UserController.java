@@ -3,12 +3,17 @@ package com.poly.controller;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -63,7 +68,8 @@ public class UserController {
 	@Autowired
 	RoleDAO roleDAO;
 	
-	Pagination pagination = new Pagination();
+	@Autowired
+	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
@@ -79,25 +85,21 @@ public class UserController {
 		return "user/contact";
 	}
 	
-	@RequestMapping(value = "/user/category", method = RequestMethod.GET)
-	public String category(@RequestParam(value = "page", defaultValue = "0", required = false) int page, ModelMap model) {
-		List<Product> list = productDao.findAll();
+	@GetMapping("/user/category/{pageNo}")
+	public String category(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		
+
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findPage(pageNo);
 		List<Category> listCategory = categoryDao.findAll();
-		long getCount = productDao.getCount();
 		
-		
-		List<Product> articleEntities;
-	    long count = productDao.getCount();
-	    pagination.setCount(count);
-	    pagination.setResultsPerPage(6);
-	    pagination.setCurrentPage(page);
-	    if(pagination.isPagination()){
-	        System.out.println("table rows count were enough and could paginate results");
-	    }else {
-	        System.out.println("table rows count were not enough and could not paginate results");
-	    }
-	    articleEntities = productDao.pagination(pagination.getResultsPerPage(),pagination.getCurrentPage());
-	    model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 		model.addAttribute("getCount", getCount);
 	    model.addAttribute("pagination",pagination);
@@ -106,6 +108,40 @@ public class UserController {
 		
 		
 		return "user/category";
+	}
+	
+	@GetMapping("/user/categorySortAsc/{pageNo}")
+	public String categorySortAsc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortAsc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortAsc";
+	}
+	
+	@GetMapping("/user/categorySortDesc/{pageNo}")
+	public String categorySortDesc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortDesc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortDesc";
 	}
 	
 	@GetMapping("/user/url/{url}")
@@ -124,37 +160,8 @@ public class UserController {
 		return "user/index";
 	}
 	
-	@PostMapping("/user/CreateGG")
-	public String AccountGG(Model model, @Validated @ModelAttribute("usergg") User user, BindingResult errors,
-			@RequestParam("up_photo") MultipartFile file) {
-		if (file.isEmpty()) {
-			user.setPhoto(user.getPhoto());
-		} else {
-			user.setPhoto(file.getOriginalFilename());
-			try {
-				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
-				file.transferTo(new File(path));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (errors.hasErrors()) {
-			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
-			return "user/register";
-		} else {
-			try {
-				Role role = new Role();
-				role.setId(2);
-				user.setRole(role);
-				dao.create(user);
-			} catch (Exception e) {
-				return "redirect:/user/AccountGG";		
-			}
-		}
 
-//		model.addAttribute("form" , user);
-		return "user/login";
-	}
+
 	
 
 	@GetMapping("/user/cart")
@@ -311,5 +318,53 @@ public class UserController {
 		// model.addAttribute("form" , user);
 
 		return "redirect:/user/blog";
+	}
+	
+	@GetMapping("/user/forget")
+	public String forget() {
+		return "user/forget";
+	}
+
+	@PostMapping("/user/forget")
+	public String forget(Model model, @RequestParam("id") String id, @RequestParam("email") String email) {
+		User user = dao.findById(id);
+		if (user == null) {
+			model.addAttribute("message", "Invalid username!");
+
+		} else if (!email.equals(user.getEmail())) {
+			model.addAttribute("message", "Invalid email!");
+
+		} else {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(user.getEmail());
+			message.setSubject("Your password");
+			message.setText("Welcome to the shop, we are very happy that you have trusted our store\r\n"
+					+ "Here is your account and password:\r\n" + "Your account id is: " + user.getId() + "\r\n"
+					+ "Your password is: " + user.getPassword() + "\r\n" + "Thanks and warm regards");
+			this.emailSender.send(message);
+			
+			model.addAttribute("message", "Success, please check you email!");
+			return "redirect:/user/login";
+			
+		}
+		return "user/forget";
+	}
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("dquangcuong1505@gmail.com");
+		mailSender.setPassword("mingtyno0");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
 	}
 }

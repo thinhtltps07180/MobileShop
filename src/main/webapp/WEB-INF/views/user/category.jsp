@@ -10,12 +10,16 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <style>
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
 }
-
+nav#pagerId {
+    padding-left: 311px;
+}
 img#cartImg {
 	background-color: #f2f2f2;
 }
@@ -121,17 +125,10 @@ img#cartImg {
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting">
-						<select>
-							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-						</select>
-					</div>
-					<div class="sorting mr-auto">
-						<select>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
+						<select onChange="window.location.href=this.value">
+							<option value="/user/category/0" selected="selected">Default sorting</option>
+							<option value="/user/categorySortDesc/0"><a>DESC sorting</a></option>
+							<option value="/user/categorySortAsc/0">ASC sorting</option>
 						</select>
 					</div>
 					<div>
@@ -164,7 +161,7 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/add/${p.id}"><button>
+												<li><a href="/cart/add/${pageNo}/${p.id}"><button>
 															<i class="ti-shopping-cart"></i>
 														</button></a></li>
 												<li><button>
@@ -186,19 +183,15 @@ img#cartImg {
 								</div>
 							</div>
 						</c:forEach>
-						<c:if test="${pagination.isPagination() == true}">
+						
+						<nav id="pagerId" aria-label="Page navigation example">
 							<ul class="pagination">
-								<li><a
-									href="<c:if test="${pagination.getPreviousPage()!=-1}">?page=${pagination.getPreviousPage()}</c:if>">&laquo;</a></li>
-								<c:set var="count" value="1"></c:set>
-								<c:forEach begin="1" end="${pagination.getPagesCount()}">
-									<li><a href="?page=${count}">${count}</a></li>
-									<c:set var="count" value="${count + 1}"></c:set>
-								</c:forEach>
-								<li><a
-									href="<c:if test="${pagination.getNextPage()!=-1}">?page=${pagination.getNextPage()}</c:if>">&raquo;</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/0">First</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo -1}">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo +1}">Next</a></li>		
+								<li class="page-item"><a class="page-link" href="/user/category/${lastPageCount}">Last</a></li>
 							</ul>
-						</c:if>
+						</nav>
 					</div>
 				</section>
 				<!-- End Best Seller -->
