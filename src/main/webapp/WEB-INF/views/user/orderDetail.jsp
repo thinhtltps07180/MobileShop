@@ -87,6 +87,8 @@
 						<tr>
 							<th scope="col">Product</th>
 							<th scope="col">Quantity</th>
+							<th scope="col">Price</th>
+							<th scope="col">Promotion</th>
 							<th scope="col">Total</th>
 						</tr>
 					</thead>
@@ -94,8 +96,10 @@
 						<c:forEach var="ldt" items="${listDetail}">
 							<tr>
 								<td>${ldt.product.name}</td>
-								<td>${ldt.quantity}</td>							
-								<td>${ldt.unitPrice}</td>
+								<td>${ldt.quantity}</td>
+								<td>${ldt.product.unitPrice}</td>
+								<td>${ldt.product.promotion.name}</td>
+								<td>${ltd.product.unitPrice * ltd.quantity}</td>
 							</tr>
 
 						</c:forEach>
