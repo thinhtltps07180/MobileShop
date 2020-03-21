@@ -134,7 +134,7 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-<<<<<<< HEAD
+
 		return "redirect:/user/confirmation";
 	}
 	
@@ -155,9 +155,7 @@ public class CartController {
 		model.addAttribute("listDetail", list);
 
 		return "user/orderDetail";
-=======
-		return "redirect:/cart/view";
->>>>>>> parent of 278e182... Revert "Revert "Revert "Revert "Merge branch 'thinh' into canh1234""""
+
 	}
 
 }

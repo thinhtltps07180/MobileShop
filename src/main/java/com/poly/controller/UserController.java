@@ -102,9 +102,7 @@ public class UserController {
 		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
-		
-		
-		
+
 		return "user/category";
 	}
 	
