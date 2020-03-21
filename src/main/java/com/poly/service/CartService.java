@@ -69,7 +69,9 @@ public class CartService {
 	public double getAmount() {
 		int amount = 0;
 		for (Product item : items) {
-			amount += item.getQuantity() * item.getUnitPrice();
+			amount += (item.getUnitPrice()-(item.getUnitPrice()/100*item.getPromotion().getDiscount()))*item.getQuantity();
+			System.out.println(amount);
+
 		}
 		return amount;
 	}
