@@ -134,7 +134,6 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-
 		return "redirect:/user/confirmation";
 	}
 	
@@ -155,7 +154,8 @@ public class CartController {
 		model.addAttribute("listDetail", list);
 
 		return "user/orderDetail";
-
 	}
+	
+
 
 }
