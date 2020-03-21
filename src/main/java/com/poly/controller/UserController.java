@@ -16,15 +16,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,7 +36,6 @@ import com.poly.entity.Product;
 import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
-import com.poly.service.Pagination;
 
 @Controller
 public class UserController {
@@ -101,12 +97,6 @@ public class UserController {
 		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
-		model.addAttribute("getCount", getCount);
-	    model.addAttribute("pagination",pagination);
-	    model.addAttribute("articleEntities", articleEntities);
-		
-		
-		
 		return "user/category";
 	}
 	
