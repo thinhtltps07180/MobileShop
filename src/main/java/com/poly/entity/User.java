@@ -17,15 +17,15 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "Users")
 public class User {
 	@Id
-	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
-	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
+//	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
+//	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
 	String id;
-	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
-	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
+//	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
+//	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
 	String password;
 	String photo;
-	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
-	@Email (message = "Định dạng email không đúng")
+//	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
+//	@Email (message = "Định dạng email không đúng")
 	String email;
 	String address;
 	Integer phoneNumber;
