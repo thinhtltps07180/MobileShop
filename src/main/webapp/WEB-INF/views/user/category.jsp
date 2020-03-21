@@ -1,4 +1,8 @@
 
+<%@page import="com.poly.dao.ProductDAOImpl"%>
+<%@page import="com.poly.dao.ProductDAO"%>
+<%@page import="com.poly.entity.Product"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <script
@@ -145,7 +149,8 @@ img#cartImg {
 				<hr>
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="parent">
-						<c:forEach var="p" items="${productList}">
+
+						<c:forEach var="p" items="${articleEntities}">
 							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
