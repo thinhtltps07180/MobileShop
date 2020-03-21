@@ -3,7 +3,7 @@
 	<div class="main_menu">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand logo_h" href="index.html"><img
+				<a class="navbar-brand logo_h" href="/user/index"><img
 					src="/static/user/img/logo.png" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
@@ -23,12 +23,7 @@
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
 									href="/user/category">Shop Category</a></li>								
-								<li class="nav-item"><a class="nav-link"
-									href="/user/checkout">Product Checkout</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/confirmation">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/cart">Shopping
-										Cart</a></li>
+								
 								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
 							</ul></li>
 						<li class="nav-item submenu dropdown"><a href="/user/blog"
@@ -67,7 +62,33 @@
 						</li>
 						<li class="nav-item"><a class="button button-header" href="#">Buy
 								Now</a></li>
-						<li><a href="login" onclick="signOut();">Sign out</a></li>
+						<li><a href="/user/login"><%if(session.getAttribute("user") == null) { 
+						out.print("Login"); 
+						} 
+						 %>
+						</a>
+						
+						<li class="nav-item submenu dropdown"><a href="#"
+							class="nav-link dropdown-toggle" data-toggle="dropdown"
+							role="button" aria-haspopup="true" aria-expanded="false">${user.id}</a>
+							<ul class="dropdown-menu">
+								<li class="nav-item"><a class="nav-link"
+									href="/user/checkout"></a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/confirmation">Confirmation</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/cart">t</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/user/trackingorder"></a></li>
+							</ul></li>
+					
+						</li>
+						<li><a href="/home/logout">
+						<%if(session.getAttribute("user") != null) { 
+						out.print("Logout"); 
+						} 
+						 %>
+						</a>
+						</li>
 					</ul>
 				</div>
 			</div>
