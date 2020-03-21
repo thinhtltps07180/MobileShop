@@ -22,7 +22,7 @@
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="/user/category">Shop Category</a></li>								
+									href="/user/category/0">Shop Category</a></li>								
 								
 								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
 							</ul></li>
@@ -82,7 +82,7 @@
 							</ul></li>
 					
 						</li>
-						<li><a href="/home/logout">
+						<li><a href="/user/logout">
 						<%if(session.getAttribute("user") != null) { 
 						out.print("Logout"); 
 						} 

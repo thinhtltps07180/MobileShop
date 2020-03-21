@@ -134,7 +134,7 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-		return "redirect:/user/confirmation";
+		return "redirect:/user/orderList";
 	}
 	
 	@RequestMapping("/user/orderList")
