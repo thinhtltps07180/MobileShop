@@ -40,7 +40,7 @@
 										<td>${u.id}</td>
 										<td>${u.email}</td>
 										<td>${u.role.name}</td>
-										<td><a href="/admin/editUser/${u.id}">Edit</a></td>
+										<td><a href="/admin/edit/${u.id}">Edit</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
