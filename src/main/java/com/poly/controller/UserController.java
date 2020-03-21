@@ -39,7 +39,6 @@ import com.poly.entity.Product;
 import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
-import com.poly.service.Pagination;
 
 @Controller
 public class UserController {
@@ -101,9 +100,7 @@ public class UserController {
 		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
-		model.addAttribute("getCount", getCount);
-	    model.addAttribute("pagination",pagination);
-	    model.addAttribute("articleEntities", articleEntities);
+
 		
 		
 		

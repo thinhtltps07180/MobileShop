@@ -1,17 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<div class="card mb-3">
-	<div class="card-header">
-		<i class="fas fa-table"></i> Data Table Orders</div>
-	<div class="card-body">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<!--================Order Details Area =================-->
+<section class="order_details section-margin--small">
+	<div class="container">
+		<div class="card-header">
+		<div class="fas fa-table"></i> Orders Detail</div>
+		</div>
+		<div class="card-body">
 		<div class="table-responsive">
 			<table class="table table-bordered" id="dataTable" width="100%"
 				cellspacing="0">
 				<thead>
 					<tr>
-						
 						<th>OrderDate</th>
 						<th>Amount</th>
 						<th>OrderBy</th>
@@ -39,4 +46,6 @@
 	</div>
 	<div class="card-footer small text-muted">Updated yesterday at
 		11:59 PM</div>
-</div>
+	</div>
+</section>
+<!--================End Order Details Area =================-->
