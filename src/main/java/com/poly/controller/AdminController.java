@@ -25,13 +25,15 @@ import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
-import com.poly.dao.ProductDAOImpl;
 import com.poly.dao.PromotionDAO;
+import com.poly.dao.ReviewDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
+import com.poly.entity.Order;
 import com.poly.entity.Product;
 import com.poly.entity.Promotion;
+import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
 
@@ -58,9 +60,14 @@ public class AdminController {
 
 	@Autowired
 	CategoryDAO categoryDao;
+	
+	@Autowired
+	ReviewDAO reviewDao;
 
 	@Autowired
 	ServletContext app;
+	
+	
 
 	@ResponseBody
 	@RequestMapping("/test/query")
@@ -223,6 +230,20 @@ public class AdminController {
 
 //		model.addAttribute("form" , user);
 		return "redirect:/admin/users";
+	}
+	
+	@GetMapping("/admin/blog")
+	public String blog(Model model) {
+		List<Review> listReview = reviewDao.findAll();
+		model.addAttribute("reviewList" ,listReview );
+		return "admin/blog";
+	}
+	
+	@GetMapping("/admin/order")
+	public String order(Model model) {
+		List<Order> listOrder = orderDao.findAll();
+		model.addAttribute("listOrder" ,listOrder );
+		return "admin/order";
 	}
 
 }

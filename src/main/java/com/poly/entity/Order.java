@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,11 +26,11 @@ public class Order {
 	Date orderDate;
 	Double amount;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name="orderBy")
 	User user;
 	
-	@OneToMany(mappedBy="order" )
+	@OneToMany(mappedBy="order" , fetch = FetchType.EAGER )
 	List<OrderDetail> orderDetails;
 
 	public Integer getId() {
