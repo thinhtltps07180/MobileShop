@@ -1,5 +1,6 @@
 package com.poly.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -17,6 +18,8 @@ import com.poly.entity.Product;
 public class ProductDAOImpl implements ProductDAO {
 	@Autowired
 	SessionFactory factory;
+	
+	int pageSize = 6;
 
 	@Override
 	public Product findById(Integer id) {
@@ -62,6 +65,57 @@ public class ProductDAOImpl implements ProductDAO {
 		TypedQuery<Product> query = session.createQuery(hql, Product.class);
 		query.setFirstResult(0);
 		query.setMaxResults(4);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findTrend() {
+		String hql = "SELECT p FROM Product p  ORDER BY p.quantity ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(0);
+		query.setMaxResults(4);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findPage(int pageNo) {
+		String hql = "FROM Product";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public int getPageCount() {
+		String hql = "SELECT count(p) FROM Product p ";
+		
+		Session session = factory.getCurrentSession();
+		TypedQuery<Long> query = session.createQuery(hql, Long.class);
+		long count = query.getSingleResult();
+		int pageCount = (int) Math.ceil(1.0 * count/pageSize);
+		return pageCount;
+	}
+
+	@Override
+	public List<Product> sortAsc(int pageNo) {
+		String hql = "SELECT p FROM Product p  ORDER BY p.unitPrice ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> sortDesc(int pageNo) {
+		String hql = "SELECT p FROM Product p  ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
 

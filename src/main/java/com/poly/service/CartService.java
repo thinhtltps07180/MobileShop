@@ -18,7 +18,6 @@ public class CartService {
 	
 
 	List<Product> items = new ArrayList<>();
-	
 	public void add(Integer id) {
 		for (Product item : items) {
 			if (item.getId().intValue() == id.intValue()) {
@@ -70,7 +69,9 @@ public class CartService {
 	public double getAmount() {
 		int amount = 0;
 		for (Product item : items) {
+	
 			amount += item.getQuantity() * item.getUnitPrice();
+			System.out.println(amount);
 		}
 		return amount;
 	}

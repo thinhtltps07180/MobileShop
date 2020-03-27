@@ -26,10 +26,13 @@ import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.ProductDAOImpl;
+import com.poly.dao.PromotionDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
 import com.poly.entity.Product;
+import com.poly.entity.Promotion;
+import com.poly.entity.Role;
 import com.poly.entity.User;
 
 @Controller
@@ -37,6 +40,9 @@ public class AdminController {
 
 	@Autowired
 	UserDAO userDao;
+	
+	@Autowired
+	PromotionDAO promotionDao;
 
 	@Autowired
 	ProductDAO productDao;
@@ -67,12 +73,7 @@ public class AdminController {
 		return "admin/index";
 	}
 
-	@GetMapping("/admin/users")
-	public String adminList(Model model) {
-		List<User> list = userDao.findAll();
-		model.addAttribute("listUsers", list);
-		return "admin/users";
-	}
+
 
 	@GetMapping("/admin/products")
 	public String productList(Model model) {
@@ -126,8 +127,10 @@ public class AdminController {
 	public String edit(Model model, @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
+		List<Promotion> listPromotion = promotionDao.findAll();
 		model.addAttribute("list", list);
 		model.addAttribute("form", p);
+		model.addAttribute("listPromotion", listPromotion);
 		return "admin/edit";
 	}
 
@@ -168,10 +171,58 @@ public class AdminController {
 		}
 	}
 	
+	@GetMapping("/admin/users")
+	public String adminList(Model model) {
+		List<User> list = userDao.findAll();
+		model.addAttribute("listUsers", list);
+		return "admin/users";
+	}
+	
 	@RequestMapping("/admin/delete/{id}")
 	public String delete(Model model, @PathVariable("id") Integer id) {	
 		productDao.delete(id);
 		return "redirect:/admin/products";
+	}
+	
+	@RequestMapping("/admin/editUser/{id}")
+	public String edit(Model model, @PathVariable("id") String id) {
+		User user = userDao.findById(id);
+		model.addAttribute("listRole", roleDao.findAll());
+		model.addAttribute("userEdit", user);
+		return "admin/userEdit";
+	}
+	
+	
+	@PostMapping("/admin/updateUser")
+	public String register(Model model, @Validated @ModelAttribute("userEdit") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "redirect:/admin/userEdit";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(user.getRole().getId());
+				user.setRole(role);
+				userDao.update(user);
+			} catch (Exception e) {
+				return "redirect:/admin/userEdit";		
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "redirect:/admin/users";
 	}
 
 }

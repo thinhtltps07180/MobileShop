@@ -1,4 +1,8 @@
 
+<%@page import="com.poly.dao.ProductDAOImpl"%>
+<%@page import="com.poly.dao.ProductDAO"%>
+<%@page import="com.poly.entity.Product"%>
+<%@page import="java.util.List"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <script
@@ -6,13 +10,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <style>
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
 }
+nav#pagerId {
+    padding-left: 311px;
+}
 img#cartImg {
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 </style>
 <!-- ================ start banner area ================= -->
@@ -116,17 +125,10 @@ img#cartImg {
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting">
-						<select>
-							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-							<option value="1">Default sorting</option>
-						</select>
-					</div>
-					<div class="sorting mr-auto">
-						<select>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
-							<option value="1">Show 12</option>
+						<select onChange="window.location.href=this.value">
+							<option value="/user/category/0" selected="selected">Default sorting</option>
+							<option value="/user/categorySortDesc/0"><a>DESC sorting</a></option>
+							<option value="/user/categorySortAsc/0">ASC sorting</option>
 						</select>
 					</div>
 					<div>
@@ -147,7 +149,8 @@ img#cartImg {
 				<hr>
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="parent">
-						<c:forEach var="p" items="${productList}">
+
+						<c:forEach var="p" items="${articleEntities}">
 							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
@@ -158,7 +161,7 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/add/${p.id}"><button>
+												<li><a href="/cart/add/${pageNo}/${p.id}"><button>
 															<i class="ti-shopping-cart"></i>
 														</button></a></li>
 												<li><button>
@@ -180,7 +183,15 @@ img#cartImg {
 								</div>
 							</div>
 						</c:forEach>
-
+						
+						<nav id="pagerId" aria-label="Page navigation example">
+							<ul class="pagination">
+								<li class="page-item"><a class="page-link" href="/user/category/0">First</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo -1}">Previous</a></li>
+								<li class="page-item"><a class="page-link" href="/user/category/${pageNo +1}">Next</a></li>		
+								<li class="page-item"><a class="page-link" href="/user/category/${lastPageCount}">Last</a></li>
+							</ul>
+						</nav>
 					</div>
 				</section>
 				<!-- End Best Seller -->

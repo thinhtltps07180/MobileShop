@@ -32,6 +32,7 @@
 									<th>UnitPrice</th>
 									<th>Quantity</th>
 									<th>Category</th>
+									<th>Promotion</th>
 									<th></th>
 									<th></th>
 								</tr>
@@ -48,6 +49,7 @@
 										value="${p.unitPrice}" /></td>
 										<td>${p.quantity}</td>
 										<td>${p.category.name}</td>
+										<td>${p.promotion.name}</td>
 										<td><a href="/admin/edit/${p.id}">Edit</a></td>
 										<td><a href="/admin/delete/${p.id}">Delete</a></td>
 									</tr>

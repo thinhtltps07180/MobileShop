@@ -9,12 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDAO;
@@ -57,16 +55,29 @@ public class CartController {
 	@Autowired
 	CartService cart;
 
-	@RequestMapping("/cart/add/{id}")
-	public String add(@PathVariable("id") Integer id) {
+	@RequestMapping("/cart/add/{pageNo}/{id}")
+	public String add(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
 		cart.add(id);
-		
-		return "redirect:/user/category";
+		String redirect = "redirect:/user/category/"+pageNo;
+		return redirect;
 	}
 	
+	@RequestMapping("/cart/addAsc/{pageNo}/{id}")
+	public String addSortAsc(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
+		cart.add(id);
+		String redirect = "redirect:/user/categorySortAsc/"+pageNo;
+		return redirect;
+	}
+	
+	@RequestMapping("/cart/addDesc/{pageNo}/{id}")
+	public String addSortDesc(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
+		cart.add(id);
+		String redirect = "redirect:/user/categorySortDesc/"+pageNo;
+		return redirect;
+	}
 	@RequestMapping("/cart/view")
 	public String index() {
-		return "cart/index";
+		return "user/cart";
 	}
 
 	@RequestMapping("/cart/remove/{id}")
@@ -123,7 +134,28 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-		return "redirect:/cart/view";
+		return "redirect:/user/confirmation";
 	}
+	
+	@RequestMapping("/user/orderList")
+	public String orderList(Model model) {
+		List<Order> listOrDer = orderDao.findAllByUser();
+		model.addAttribute("listDetailByUser", listOrDer);
+	
+		return "user/orderList";
+	}
+	
+	@RequestMapping("/user/orderDetail/{orderId}/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
+		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
+		Order order = orderDao.findById(orderId);
+		System.out.println(order.getId());
+		model.addAttribute("order", order);
+		model.addAttribute("listDetail", list);
+
+		return "user/orderDetail";
+	}
+	
+
 
 }

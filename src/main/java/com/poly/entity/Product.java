@@ -28,13 +28,20 @@ public class Product {
 	Date createDate;
 	String image;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "categoryId")
 	Category category;
 	
+	@ManyToOne
+	@JoinColumn(name = "promotionId")
+	Promotion promotion;
+	
 
 	@OneToMany(mappedBy="product" )
 	List<OrderDetail> orderDetails;
+	
+
 
 	public Integer getId() {
 		return id;
@@ -80,6 +87,14 @@ public class Product {
 
 	public Category getCategory() {
 		return category;
+	}
+
+	public Promotion getPromotion() {
+		return promotion;
+	}
+
+	public void setPromotion(Promotion promotion) {
+		this.promotion = promotion;
 	}
 
 	public void setCategory(Category category) {

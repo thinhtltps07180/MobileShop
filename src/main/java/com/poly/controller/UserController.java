@@ -17,12 +17,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +40,8 @@ import com.poly.entity.Product;
 import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
+import com.poly.service.Pagination;
+
 
 @Controller
 public class UserController {
@@ -49,29 +54,31 @@ public class UserController {
 
 	@Autowired
 	UserDAO dao;
-
+	
 	@Autowired
-	CategoryDAO categoryDao;
-
+	CategoryDAO  categoryDao;
+	
 	@Autowired
 	ProductDAO productDao;
-
+	
 	@Autowired
 	OrderDetailDAO orderDetailDao;
-
+	
 	@Autowired
 	ReviewDAO reviewDAO;
 
 	@Autowired
 	RoleDAO roleDAO;
-
+	
 	@Autowired
 	public JavaMailSender emailSender;
 
 	@GetMapping("/user/index")
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
+		List<Product> trendList = productDao.findTrend();
 		model.addAttribute("newList", newList);
+		model.addAttribute("trendList", trendList);
 		return "user/index";
 	}
 
@@ -79,14 +86,61 @@ public class UserController {
 	public String contact() {
 		return "user/contact";
 	}
+	
+	@GetMapping("/user/category/{pageNo}")
+	public String category(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		
 
-	@GetMapping("/user/category")
-	public String category(Model model) {
-		List<Product> list = productDao.findAll();
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findPage(pageNo);
 		List<Category> listCategory = categoryDao.findAll();
-		model.addAttribute("categoryList", listCategory);
+		
+		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
+		
+		
+		
 		return "user/category";
+	}
+	
+	@GetMapping("/user/categorySortAsc/{pageNo}")
+	public String categorySortAsc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortAsc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortAsc";
+	}
+	
+	@GetMapping("/user/categorySortDesc/{pageNo}")
+	public String categorySortDesc(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.sortDesc(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+		return "user/categorySortDesc";
 	}
 	
 	@GetMapping("/user/url/{url}")
@@ -105,37 +159,8 @@ public class UserController {
 		return "user/index";
 	}
 	
-	@PostMapping("/user/CreateGG")
-	public String AccountGG(Model model, @Validated @ModelAttribute("usergg") User user, BindingResult errors,
-			@RequestParam("up_photo") MultipartFile file) {
-		if (file.isEmpty()) {
-			user.setPhoto(user.getPhoto());
-		} else {
-			user.setPhoto(file.getOriginalFilename());
-			try {
-				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
-				file.transferTo(new File(path));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (errors.hasErrors()) {
-			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
-			return "user/register";
-		} else {
-			try {
-				Role role = new Role();
-				role.setId(2);
-				user.setRole(role);
-				dao.create(user);
-			} catch (Exception e) {
-				return "redirect:/user/AccountGG";		
-			}
-		}
 
-//		model.addAttribute("form" , user);
-		return "user/login";
-	}
+
 	
 
 	@GetMapping("/user/cart")
@@ -157,7 +182,7 @@ public class UserController {
 	}
 
 	@GetMapping("/user/singleproduct/{id}")
-	public String singleproduct(Model model, @PathVariable("id") Integer id) {
+	public String singleproduct(Model model , @PathVariable("id") Integer id) {
 		Product p = productDao.findById(id);
 		List<Category> list = categoryDao.findAll();
 		model.addAttribute("listCategory", list);
@@ -174,6 +199,8 @@ public class UserController {
 	public String confirmation() {
 		return "user/confirmation";
 	}
+	
+
 
 	@GetMapping("/user/blog")
 	public String blog(Model model) {
@@ -214,7 +241,7 @@ public class UserController {
 		model.addAttribute("form", new User());
 		return "user/register";
 	}
-
+	
 	@PostMapping("/user/register")
 	public String register(Model model, @Validated @ModelAttribute("form") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -239,23 +266,22 @@ public class UserController {
 				user.setRole(role);
 				dao.create(user);
 			} catch (Exception e) {
-				return "redirect:/user/register";
+				return "redirect:/user/register";		
 			}
 		}
 
 //		model.addAttribute("form" , user);
 		return "user/login";
 	}
-
 	@GetMapping("/user/createNews")
 	public String createNews(Model model) {
 		model.addAttribute("news", new Review());
 		// tao object moi
 		return "user/createNews";
 	}
-
+	
 	@PostMapping("/user/createNews")
-	public String register(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
+	public String register(Model model,@Valid @ModelAttribute("news") Review review,  BindingResult errors ,
 			@RequestParam("up_photo") MultipartFile file) {
 		if (file.isEmpty()) {
 			review.setThumbnail("news.png");
@@ -271,11 +297,11 @@ public class UserController {
 		if (errors.hasErrors()) {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
 
-			return "user/createNews";
-		} else {
+			return "user/createNews";	
+		}else {
 			try {
 				User user = (User) session.getAttribute("user");// lay cai thang login vao
-				review.setUser(user);// set cai thang do vao
+				review.setUser(user);// set cai thang do vao 
 				review.setStatus(false);
 				review.setCreateDate(new Date());
 				review.setCountViewer(0);
@@ -283,73 +309,16 @@ public class UserController {
 				model.addAttribute("message", "Tạo bài viết thành công!");
 			} catch (Exception e) {
 				model.addAttribute("message", "Tạo bài viết  thất bại!");
-
+				
 			}
 		}
+		
 
 		// model.addAttribute("form" , user);
 
 		return "redirect:/user/blog";
 	}
 	
-	@GetMapping("/user/myreview/{createBy}")
-	public String myreview(Model model,@PathVariable("createBy") String createBy) {
-		List<Review> reviewList= reviewDAO.findBycreateBy(createBy);
-		model.addAttribute("reviewList", reviewList);
-		return "user/myreview";
-	}
-	
-	@GetMapping("/user/reviewedit/{id}")
-	public String reviewedit(Model model,@PathVariable("id") Integer id) {
-		Review r = reviewDAO.findById(id);
-		model.addAttribute("news", r);
-		return "user/reviewedit";
-	}
-	
-	@PostMapping("/user/update")
-	public String update(Model model, @Valid @ModelAttribute("news") Review review, BindingResult errors,
-			@RequestParam("up_photo") MultipartFile file) {
-		if (file.isEmpty()) {
-			review.setThumbnail("news.png");
-		} else {
-			review.setThumbnail(file.getOriginalFilename());
-			try {
-				String path = app.getRealPath("/static/user/news/" + review.getThumbnail());
-				file.transferTo(new File(path));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		if (errors.hasErrors()) {
-			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
-
-			return "user/myreview";
-		} else {
-			try {
-				User user = (User) session.getAttribute("user");// lay cai thang login vao
-				review.setUser(user);// set cai thang do vao
-				review.setStatus(false);
-				review.setCreateDate(new Date());
-				review.setCountViewer(0);
-				reviewDAO.update(review);
-				model.addAttribute("message", "Tạo bài viết thành công!");
-			} catch (Exception e) {
-				model.addAttribute("message", "Tạo bài viết  thất bại!");
-
-			}
-		}
-
-		// model.addAttribute("form" , user);
-
-		return "redirect:/user/blog";
-	}
-	
-	@GetMapping("user/reviewdelete/{id}")
-	public String delete(Model model, @PathVariable("id") Integer id) {
-		reviewDAO.delete(id);
-		return "redirect:/user/blog";
-	}
-
 	@GetMapping("/user/forget")
 	public String forget() {
 		return "user/forget";
@@ -397,5 +366,4 @@ public class UserController {
 
 		return mailSender;
 	}
-
 }
