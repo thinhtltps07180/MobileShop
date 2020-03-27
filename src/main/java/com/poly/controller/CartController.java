@@ -19,10 +19,12 @@ import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.RoleDAO;
+import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Order;
 import com.poly.entity.OrderDetail;
 import com.poly.entity.Product;
+import com.poly.entity.Status;
 import com.poly.entity.User;
 import com.poly.service.CartService;
 
@@ -51,6 +53,9 @@ public class CartController {
 	
 	@Autowired
 	RoleDAO roleDAO;
+	
+	@Autowired
+	StatusDAO statusDAO;
 
 	@Autowired
 	CartService cart;
@@ -110,6 +115,9 @@ public class CartController {
 		order.setAmount(cart.getAmount());
 		User user = (User) session.getAttribute("user");
 		order.setUser(user);
+		Status st = statusDAO.findById(1);
+		order.setStatus(st);
+
 
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		List<Product> list = cart.getItems();

@@ -80,6 +80,22 @@ public class OrDerDAOImpl implements OrderDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Order> findByStatus() {
+		String hql = "from Order o where o.status = 1 ";
+		Session session = factory.getCurrentSession(); 
+		TypedQuery<Order> query = session.createQuery(hql, Order.class);
+		return query.getResultList();	
+	}
+
+	@Override
+	public List<Order> findByIsDelivery() {
+		String hql = "from Order o where o.status = 2 ";
+		Session session = factory.getCurrentSession(); 
+		TypedQuery<Order> query = session.createQuery(hql, Order.class);
+		return query.getResultList();	
+	}
+
 	
 
 	

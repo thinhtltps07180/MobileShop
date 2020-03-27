@@ -26,6 +26,10 @@ public class Order {
 	Date orderDate;
 	Double amount;
 	
+	@ManyToOne
+	@JoinColumn(name = "statusId")
+	Status status;
+	
 	@ManyToOne()
 	@JoinColumn(name="orderBy")
 	User user;
@@ -50,6 +54,14 @@ public class Order {
 	}
 
 
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public Double getAmount() {
 		return amount;
