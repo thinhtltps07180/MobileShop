@@ -150,7 +150,7 @@ img#cartImg {
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="parent">
 
-						<c:forEach var="p" items="${articleEntities}">
+						<c:forEach var="p" items="${productList}">
 							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">

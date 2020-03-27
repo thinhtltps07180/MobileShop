@@ -4,17 +4,12 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Report</title>
-</head>
-<body>
+
+
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">Category</th>
+				<th scope="col">Product</th>
 				<th scope="col">Quantity</th>
 				<th scope="col">Revenue</th>
 				<th scope="col">Min (Product price)</th>
@@ -39,10 +34,11 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<br/>
-	
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+	<br />
+
+	<script type="text/javascript"
+		src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript">
     var mydata = [
     	['Product', 'Revenue'],
     	<c:forEach var="array" items="${data}">
@@ -67,5 +63,3 @@
       }
     </script>
 	<div id="columnchart_material" style="width: 800px; height: 400px;"></div>
-</body>
-</html>

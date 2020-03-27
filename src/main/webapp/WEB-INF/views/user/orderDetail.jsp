@@ -97,9 +97,13 @@
 							<tr>
 								<td>${ldt.product.name}</td>
 								<td>${ldt.quantity}</td>
-								<td>${ldt.product.unitPrice}</td>
+								<c:set var="basecost" value="ldt.product.unitPrice" />
+								<td><fmt:formatNumber pattern="##,###,###.####"
+								value="${ldt.product.unitPrice}" /></td>
 								<td>${ldt.product.promotion.name}</td>
-								<td>${ltd.product.unitPrice * ltd.quantity}</td>
+								<c:set var="basecost" value="ldt.product.unitPrice" />
+								<td><fmt:formatNumber pattern="##,###,###.####"
+								value="${(ldt.product.unitPrice-(ldt.product.unitPrice/100*ldt.product.promotion.discount))*ldt.quantity}" /></td>
 							</tr>
 
 						</c:forEach>
