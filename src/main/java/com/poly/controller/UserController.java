@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -72,6 +73,8 @@ public class UserController {
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
 		List<Product> trendList = productDao.findTrend();
+		List<Product> iphoneList = productDao.findTrend();
+		model.addAttribute("iphoneList", iphoneList);
 		model.addAttribute("newList", newList);
 		model.addAttribute("trendList", trendList);
 		return "user/index";
@@ -136,6 +139,46 @@ public class UserController {
 		return "user/categorySortDesc";
 	}
 	
+	@GetMapping("/user/categoryByIphone/{pageNo}")
+	public String categoryByIphone(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		
+
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findByIphone(pageNo);
+		List<Category> listCategory = categoryDao.findByIphone();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+
+		return "user/category";
+	}
+	
+	@GetMapping("/user/categoryBySamSung/{pageNo}")
+	public String categoryBySamSung(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		
+
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findByIphone(pageNo);
+		List<Category> listCategory = categoryDao.findBySamSung();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+
+		return "user/category";
+	}
+	
 	@GetMapping("/user/url/{url}")
 	public String url(Model model , @PathVariable("url") String url) {
 		List<User> checkUser =dao.findByEmail(url);
@@ -153,8 +196,6 @@ public class UserController {
 	}
 	
 
-
-	
 
 	@GetMapping("/user/cart")
 	public String cart() {
@@ -207,6 +248,15 @@ public class UserController {
 		model.addAttribute("reviewList" ,listReview );
 		return "user/blog";
 	}
+	
+	@GetMapping("/user/myBlog")
+	public String myBlog(Model model) {
+		List<Review> list = reviewDAO.findByUserId();
+		model.addAttribute("listMyBlog", list);
+		return "user/myBlog";
+	}
+	
+
 
 	@GetMapping("/user/login")
 	public String login() {
@@ -223,6 +273,7 @@ public class UserController {
 			model.addAttribute("message", "Invalid password!");
 		} else {
 			session.setAttribute("user", user);
+			model.addAttribute("userInfor", user);
 
 			if (user.getRole().getName().equals("admin")) {
 				return "redirect:/admin/index";
@@ -271,6 +322,63 @@ public class UserController {
 //		model.addAttribute("form" , user);
 		return "user/login";
 	}
+	
+	@GetMapping("/user/edit")
+	public String edit(Model model) {
+		User user = (User) session.getAttribute("user");
+		user = dao.findById(user.getId());
+		List<Role> list = roleDAO.findAll();
+		model.addAttribute("listRole", list);
+		model.addAttribute("userEdit", user);
+		return "user/profile";
+	}
+	
+	@RequestMapping("/user/editUser/{id}")
+	public String edit(Model model, @PathVariable("id") String id) {
+		User user = dao.findById(id);
+		model.addAttribute("listRole", roleDAO.findAll());
+		model.addAttribute("userEdit", user);
+		return "user/edit";
+	}
+
+	@PostMapping("/user/updateUser")
+	public String updateUser(Model model, @Validated @ModelAttribute("userEdit") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "redirect:/user/edit";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(user.getRole().getId());
+				user.setRole(role);
+				dao.update(user);
+			} catch (Exception e) {
+				return "redirect:/user/edit";		
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "redirect:/admin/profile";
+	}
+	
+
+	
+	
+	
+	
+	
 	@GetMapping("/user/createNews")
 	public String createNews(Model model) {
 		model.addAttribute("news", new Review());

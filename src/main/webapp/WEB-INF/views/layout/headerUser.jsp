@@ -57,34 +57,27 @@
 						<li class="nav-item">
 							<button>
 								<a class="nav-link" href="/user/cart"> <i
-									class="ti-shopping-cart"></i> <span class="nav-shop__circle">3</span></a>
+									class="ti-shopping-cart"></i> <span class="nav-shop__circle">
+								</span></a>
 							</button>
 						</li>
-						<li class="nav-item"><a class="button button-header" href="#">Buy
+						<li class="nav-item"><a class="button button-header" href="/user/category/0">Buy
 								Now</a></li>
 						<li><a href="/user/login"><%if(session.getAttribute("user") == null) { 
 						out.print("Login"); 
 						} 
 						 %>
-						</a>
-						
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">${user.id}</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="/user/checkout"></a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/confirmation">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/cart">t</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/trackingorder"></a></li>
-							</ul></li>
-					
-						</li>
+						</a>					
 						<li><a href="/user/logout">
 						<%if(session.getAttribute("user") != null) { 
-						out.print("Logout"); 
+						out.print("Logout");
+						} 
+						 %>
+						</a>
+						</li>
+						<li><a href="/user/edit">
+						<%if(session.getAttribute("user") != null) { 
+						out.print("My Profile");
 						} 
 						 %>
 						</a>

@@ -48,7 +48,7 @@ img#bestId {
 	<div class="owl-carousel owl-theme hero-carousel">
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/iphone.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryByIphone/0"
 				class="hero-carousel__slideOverlay">
 				<h3>xiaomi redmi note 8</h3>
 				<p>XIAOMI</p>

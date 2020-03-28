@@ -1,6 +1,5 @@
 package com.poly.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -118,6 +117,25 @@ public class ProductDAOImpl implements ProductDAO {
 		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Product> findByIphone(int pageNo) {
+		String hql = "SELECT p FROM Product p WHERE p.category = 1008 ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+
+//
+//	@Override
+//	public Product findByIphone() {
+//		String hql = "SELECT p FROM Product p WHERE p.category = 1008 ORDER BY p.id Desc ";	
+//		Session session = factory.getCurrentSession();
+//		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+//	}
 
 
 	

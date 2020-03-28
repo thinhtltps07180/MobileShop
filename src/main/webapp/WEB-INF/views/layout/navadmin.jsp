@@ -49,10 +49,18 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../../pages/charts/chartjs.html">
-                <span class="menu-title">Charts</span>
-                <i class="mdi mdi-chart-bar menu-icon"></i>
+              <a class="nav-link" data-toggle="collapse" href="#general-chart" aria-expanded="false" aria-controls="general-chart">
+                <span class="menu-title"> Chart</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>
+              <div class="collapse" id="general-chart">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="/admin/revenueByDate"> Revenue By Date </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/users">Revenue By Month</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/products"> Revenue By Year </a></li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">

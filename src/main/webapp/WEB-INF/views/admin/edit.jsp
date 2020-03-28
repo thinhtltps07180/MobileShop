@@ -47,8 +47,8 @@ span[id*=errors] {
 						<p class="card-description">Basic form elements</p>
 						<h3>${message }</h3>
 
-						<form:form enctype="multipart/form-data" action="/admin/update"
-							modelAttribute="form" class="forms-sample">
+						<form:form modelAttribute="form" enctype="multipart/form-data"
+							action="/home/update">
 							<div class="form-group">
 								<label for="exampleInputName1"></label>
 								<form:input path="id" type="hidden" class="form-control"
