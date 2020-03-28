@@ -45,6 +45,7 @@
 											value="p.unitPrice" />
 										<td><fmt:formatNumber pattern="##,###,###.####"
 										value="${o.amount}" /></td>
+										<td>${o.status.name}</td>
 										<td><a href="/admin/edit/${p.id}">Edit</a></td>
 										<td><a href="/admin/delete/${p.id}">Delete</a></td>
 									</tr>

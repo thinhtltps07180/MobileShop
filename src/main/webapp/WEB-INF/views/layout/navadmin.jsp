@@ -5,78 +5,69 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="nav-profile-image">
-                  <img src="/static/admin/assets/images/faces/face1.jpg" alt="profile">
+                  <img src="/static/user/photo/${user.photo}" alt="profile">
                   <span class="login-status online"></span>
                   <!--change to offline or busy as needed-->
                 </div>
                 <div class="nav-profile-text d-flex flex-column">
-                  <span class="font-weight-bold mb-2">David Grey. H</span>
-                  <span class="text-secondary text-small">Project Manager</span>
+                  <span class="font-weight-bold mb-2">${user.name}</span>
+                  <span class="text-secondary text-small">Admin Manager</span>
                 </div>
                 <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
               </a>
             </li>
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/index">
                 <span class="menu-title">Dashboard</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-
+              <a class="nav-link" href="/admin/users">
+                <span class="menu-title">Users</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/products">
+                <span class="menu-title">Products</span>
+                <i class="mdi mdi-basket menu-icon"></i>
+              </a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Management Orders</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+              </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/order">Orders</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/orderStatus">Order Pending</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/isDelivery">Order Paid</a></li>
                 </ul>
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Table</span>
-                <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
-              </a>
-              <div class="collapse" id="general-pages">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="/admin/users">User</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/products"> Product </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404 </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500 </a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/forms/basic_elements.html">
-                <span class="menu-title">Forms</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/charts/chartjs.html">
+              <a class="nav-link" href="../../pages/charts/chartjs.html">
                 <span class="menu-title">Charts</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/tables/basic-table.html">
-                <span class="menu-title">Tables</span>
-                <i class="mdi mdi-table-large menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
-                <span class="menu-title">Sample Pages</span>
+                <span class="menu-title"> Pages</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-medical-bag menu-icon"></i>
               </a>
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/blog"> Blog </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> Order </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/index"> Dashboard </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/users"> User List </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/products"> Product List </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/order"> Orders List </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/orderStatus"> Orders List Pending </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/isDelivery"> Orders List Paid </a></li>
                 </ul>
               </div>
             </li>
