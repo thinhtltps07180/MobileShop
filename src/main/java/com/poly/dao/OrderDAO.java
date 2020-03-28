@@ -13,5 +13,7 @@ public interface OrderDAO {
 	void update(Order entity);
 	Order delete(Integer id);
 	void create(Order order, List<OrderDetail> orderDetails);
+	List<Order>findByStatus();
+	List<Order>findByIsDelivery();
 
 }

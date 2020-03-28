@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.RoleDAO;
+import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Order;
 import com.poly.entity.OrderDetail;
 import com.poly.entity.Product;
+import com.poly.entity.Status;
 import com.poly.entity.User;
 import com.poly.service.CartService;
 
@@ -53,6 +53,9 @@ public class CartController {
 	
 	@Autowired
 	RoleDAO roleDAO;
+	
+	@Autowired
+	StatusDAO statusDAO;
 
 	@Autowired
 	CartService cart;
@@ -112,6 +115,9 @@ public class CartController {
 		order.setAmount(cart.getAmount());
 		User user = (User) session.getAttribute("user");
 		order.setUser(user);
+		Status st = statusDAO.findById(1);
+		order.setStatus(st);
+
 
 		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		List<Product> list = cart.getItems();
@@ -136,7 +142,28 @@ public class CartController {
 
 		orderDao.create(order, orderDetails);
 
-		return "redirect:/cart/view";
+		return "redirect:/user/orderList";
 	}
+	
+	@RequestMapping("/user/orderList")
+	public String orderList(Model model) {
+		List<Order> listOrDer = orderDao.findAllByUser();
+		model.addAttribute("listDetailByUser", listOrDer);
+	
+		return "user/orderList";
+	}
+	
+	@RequestMapping("/user/orderDetail/{orderId}/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
+		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
+		Order order = orderDao.findById(orderId);
+		System.out.println(order.getId());
+		model.addAttribute("order", order);
+		model.addAttribute("listDetail", list);
+
+		return "user/orderDetail";
+	}
+	
+
 
 }

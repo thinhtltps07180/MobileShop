@@ -1,6 +1,7 @@
 package com.poly.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +22,8 @@ public class OrderDetail {
 	String image;
 	Boolean status;
 	
-	@ManyToOne
-	@JoinColumn(name="orderId")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn( name="orderId")
 	Order order;
 	
 	@ManyToOne

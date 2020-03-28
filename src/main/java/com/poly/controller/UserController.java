@@ -38,6 +38,7 @@ import com.poly.entity.Review;
 import com.poly.entity.Role;
 import com.poly.entity.User;
 
+
 @Controller
 public class UserController {
 
@@ -98,6 +99,7 @@ public class UserController {
 		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
+
 		return "user/category";
 	}
 	
@@ -192,6 +194,11 @@ public class UserController {
 		return "user/confirmation";
 	}
 	
+	@GetMapping("/user/logout")
+	public String logout() {
+		session.removeAttribute("user");
+		return "user/index";
+	}
 
 
 	@GetMapping("/user/blog")
