@@ -55,7 +55,7 @@ img#cartImg {
 					<div class="head">Browse Categories</div>
 					<ul class="main-categories">
 						<li class="common-filter"><c:forEach var="c"
-								items="${categoryList}">
+								items="${categoryListSS}">
 								<form action="#">
 									<ul>
 										<a href="user/${c.name}"><li class="filter-list"><input

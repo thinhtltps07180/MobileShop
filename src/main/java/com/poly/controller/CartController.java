@@ -67,6 +67,15 @@ public class CartController {
 		return redirect;
 	}
 	
+	@RequestMapping("/cart/add/{id}")
+	public String addCartSingle(@PathVariable("id") Integer id ) {
+		cart.add(id);
+//		String redirect = "redirect:/user/singleproduct/"+id;
+//		return redirect;
+		return "redirect:/cart/view";
+
+	}
+	
 	@RequestMapping("/cart/addAsc/{pageNo}/{id}")
 	public String addSortAsc(@PathVariable("id") Integer id , @PathVariable("pageNo") Integer pageNo) {
 		cart.add(id);

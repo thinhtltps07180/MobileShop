@@ -50,13 +50,13 @@ img#bestId {
 			<img id="dt" src="/static/admin/product/iphone.png" alt=""
 				class="img-fluid"> <a href="/user/categoryByIphone/0"
 				class="hero-carousel__slideOverlay">
-				<h3>xiaomi redmi note 8</h3>
-				<p>XIAOMI</p>
+				<h3>Điện thoại iPhone 11 64GB</h3>
+				<p>Ihphone</p>
 			</a>
 		</div>
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/XAM.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryByXiaomi/0"
 				class="hero-carousel__slideOverlay">
 				<h3>xiaomi redmi note 8</h3>
 				<p>XIAOMI</p>
@@ -64,7 +64,7 @@ img#bestId {
 		</div>
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/SS.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryBySamSung/0"
 				class="hero-carousel__slideOverlay">
 				<h3>samsung galaxy note</h3>
 				<p>SAMSUM</p>
@@ -93,7 +93,7 @@ img#bestId {
 										<i class="ti-search"></i>
 									</button></li>
 								<li><button>
-										<i class="ti-shopping-cart"></i>
+										<a href="/user/singleproduct/${n.id}"><i class="ti-shopping-cart"></i></a>
 									</button></li>
 								<li><button>
 										<i class="ti-heart"></i>
@@ -161,7 +161,7 @@ img#bestId {
 										<i class="ti-search"></i>
 									</button></li>
 								<li><button>
-										<i class="ti-shopping-cart"></i>
+										<a href="/user/singleproduct/${n.id}"><i class="ti-shopping-cart"></i></a>
 									</button></li>
 								<li><button>
 										<i class="ti-heart"></i>

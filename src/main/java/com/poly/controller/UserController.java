@@ -73,8 +73,6 @@ public class UserController {
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
 		List<Product> trendList = productDao.findTrend();
-		List<Product> iphoneList = productDao.findTrend();
-		model.addAttribute("iphoneList", iphoneList);
 		model.addAttribute("newList", newList);
 		model.addAttribute("trendList", trendList);
 		return "user/index";
@@ -146,13 +144,10 @@ public class UserController {
 		}else if(pageNo < 0) {
 			pageNo = productDao.getPageCount() - 1;
 		}
-		
-
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
 		List<Product> list = productDao.findByIphone(pageNo);
-		List<Category> listCategory = categoryDao.findByIphone();
-		
+		List<Category> listCategory = categoryDao.findAll();
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 
@@ -170,8 +165,8 @@ public class UserController {
 
 		model.addAttribute("pageNo", pageNo);
 		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
-		List<Product> list = productDao.findByIphone(pageNo);
-		List<Category> listCategory = categoryDao.findBySamSung();
+		List<Product> list = productDao.findBySamSung(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
 		
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
@@ -179,22 +174,27 @@ public class UserController {
 		return "user/category";
 	}
 	
-	@GetMapping("/user/url/{url}")
-	public String url(Model model , @PathVariable("url") String url) {
-		List<User> checkUser =dao.findByEmail(url);
-		if(checkUser == null) {
-			User u = new User();
-			u.setEmail(url);
-			model.addAttribute("usergg", u);
-			return "user/AccountGG";
+	@GetMapping("/user/categoryByXiaomi/{pageNo}")
+	public String categoryByXiaoMi(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
 		}
-
 		
 
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findByXiaoMi(pageNo);
+		List<Category> listCategory = categoryDao.findAll();
 		
-		return "user/index";
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+
+		return "user/category";
 	}
 	
+
 
 
 	@GetMapping("/user/cart")

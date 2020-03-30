@@ -13,6 +13,8 @@ public interface ProductDAO {
 	List<Product>findAllNew();
 	List<Product>findTrend();
 	List<Product>findByIphone(int pageNo);
+	List<Product>findBySamSung(int pageNo);
+	List<Product>findByXiaoMi(int pageNo);
 	Product create(Product entity);
 	void update(Product entity);
 	Product delete(Integer id);
