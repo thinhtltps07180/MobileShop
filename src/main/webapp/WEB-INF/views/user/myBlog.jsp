@@ -6,6 +6,9 @@ img#imgTB {
 	width: 510px;
 	height: 255px;
 }
+section.blog_area {
+    padding: 50px;
+}
 
 
 
@@ -40,36 +43,6 @@ div#overflow {
 							</a>
 							<div class="border_line"></div>
 							<p>Enjoy your social life together</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="categories_post">
-					<img class="card-img rounded-0"
-						src="/static/user/img/blog/cat-post/cat-post-2.jpg" alt="post">
-					<div class="categories_details">
-						<div class="categories_text">
-							<a href="single-blog.html">
-								<h5>Politics</h5>
-							</a>
-							<div class="border_line"></div>
-							<p>Be a part of politics</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="categories_post">
-					<img class="card-img rounded-0"
-						src="/static/user/img/blog/cat-post/cat-post-1.jpg" alt="post">
-					<div class="categories_details">
-						<div class="categories_text">
-							<a href="single-blog.html">
-								<h5>Food</h5>
-							</a>
-							<div class="border_line"></div>
-							<p>Let the food be finished</p>
 						</div>
 					</div>
 				</div>
@@ -120,6 +93,8 @@ div#overflow {
 										</div>
 										<a class="button button-blog" href="/user/singleblog/${r.id}">View
 											More</a>
+										<a class="button button-blog" href="/user/updateNews/${r.id}">Edit
+											Review</a>
 									</div>
 								</div>
 							</div>

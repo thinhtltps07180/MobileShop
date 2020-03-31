@@ -73,6 +73,8 @@ public class UserController {
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
 		List<Product> trendList = productDao.findTrend();
+		List<Review> listReview = reviewDAO.findAll();	
+		model.addAttribute("reviewList" ,listReview );
 		model.addAttribute("newList", newList);
 		model.addAttribute("trendList", trendList);
 		return "user/index";
@@ -243,8 +245,7 @@ public class UserController {
 
 	@GetMapping("/user/blog")
 	public String blog(Model model) {
-		List<Review> listReview = reviewDAO.findAll();
-		
+		List<Review> listReview = reviewDAO.findAll();	
 		model.addAttribute("reviewList" ,listReview );
 		return "user/blog";
 	}
@@ -375,16 +376,58 @@ public class UserController {
 	
 
 	
-	
-	
-	
-	
 	@GetMapping("/user/createNews")
 	public String createNews(Model model) {
 		model.addAttribute("news", new Review());
 		// tao object moi
 		return "user/createNews";
 	}
+	
+	@RequestMapping("/user/updateNews/{id}")
+	public String updateNews(Model model, @PathVariable("id") Integer id) {
+		Review news = reviewDAO.findById(id);
+		model.addAttribute("updateNews", news);
+		return "user/updateNews";
+	}
+	
+	@PostMapping("/user/updateNews")
+	public String updateNews(Model model,@Valid @ModelAttribute("updateNews") Review review,  BindingResult errors ,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			review.setThumbnail(review.getThumbnail());
+		} else {
+			review.setThumbnail(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/news/" + review.getThumbnail());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+
+			return "user/updateNews";	
+		}else {
+			try {
+				User user = (User) session.getAttribute("user");// lay cai thang login vao
+				review.setUser(user);// set cai thang do vao 
+				review.setCreateDate(new Date());
+				reviewDAO.update(review);
+				model.addAttribute("message", "Tạo bài viết thành công!");
+			} catch (Exception e) {
+				model.addAttribute("message", "Tạo bài viết  thất bại!");
+				
+			}
+		}
+		
+
+		// model.addAttribute("form" , user);
+
+		return "redirect:/user/myBlog";
+	}
+	
+	
 	
 	@PostMapping("/user/createNews")
 	public String register(Model model,@Valid @ModelAttribute("news") Review review,  BindingResult errors ,
@@ -410,7 +453,6 @@ public class UserController {
 				review.setUser(user);// set cai thang do vao 
 				review.setStatus(false);
 				review.setCreateDate(new Date());
-				review.setCountViewer(0);
 				reviewDAO.create(review);
 				model.addAttribute("message", "Tạo bài viết thành công!");
 			} catch (Exception e) {
@@ -424,6 +466,9 @@ public class UserController {
 
 		return "redirect:/user/blog";
 	}
+	
+	
+
 	
 	@GetMapping("/user/forget")
 	public String forget() {
