@@ -19,8 +19,24 @@ img#bestId {
 }
 
 img.card-img.rounded-0 {
-    height: 243px;
-    width: 350px;
+	height: 243px;
+	width: 350px;
+}
+
+img.card-img-top {
+	height: 191px;
+}
+
+h5.card-title {
+	height: 80px;
+}
+
+img.card-img-top {
+	padding-top: 10px;
+}
+
+a#buttonSSS {
+    margin-bottom: 20px;
 }
 </style>
 
@@ -208,26 +224,23 @@ img.card-img.rounded-0 {
 
 		<div class="row">
 			<c:forEach var="r" items="${reviewList}">
-				<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-					<div class="card card-blog">
-						<div class="card-blog__img">
-							<img class="card-img rounded-0"
-								src="/static/user/news/${r.thumbnail}" alt="">
-						</div>
-						<div class="card-body" id="cart-body-new">
-							<ul class="card-blog__info">
-								<li><a href="#">${r.user.id}</a></li>
-								<li><a href="#"><i class="ti-comments-smiley"></i> 
-										Comments</a></li>
-							</ul>
-							<h4 class="card-blog__title">
-								<a href="single-blog.html">${r.title}</a>
-							</h4>
-							<p>${r.description}.</p>
-							<a class="button button--active mt-3 mt-xl-4" href="#">Read More <i
-								class="ti-arrow-right"></i></a>
-						</div>
+				<div class="card col-md-4" style="width: 18rem;">
+
+					<a href="/user/singleblog/${r.id}"><img class="card-img-top"
+						src="/static/user/news/${r.thumbnail}" alt="Card image cap">
+					</a>
+
+					<div class="card-body">
+						<ul class="card-blog__info">
+							<li><a href="#">${r.user.id}</a></li>
+							<li><a href="#"><i class="ti-comments-smiley"></i>
+									Comments</a></li>
+						</ul>
+						<h5 class="card-title">${r.title}</h5>
+						<p class="card-text">${r.description}</p>
 					</div>
+					<a id="buttonSSS" href="/user/singleblog/${r.id}" class="btn btn-primary">Read
+						More</a>
 				</div>
 			</c:forEach>
 

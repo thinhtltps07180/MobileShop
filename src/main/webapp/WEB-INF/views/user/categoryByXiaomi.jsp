@@ -1,8 +1,4 @@
 
-<%@page import="com.poly.dao.ProductDAOImpl"%>
-<%@page import="com.poly.dao.ProductDAO"%>
-<%@page import="com.poly.entity.Product"%>
-<%@page import="java.util.List"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -202,7 +198,9 @@ img#cartImg {
 							</div>
 						</c:forEach>
 
-						<nav id="pagerId" aria-label="Page navigation example">
+
+					</div>
+					<nav id="pagerId" aria-label="Page navigation example">
 							<ul class="pagination">
 								<li class="page-item"><a class="page-link"
 									href="/user/category/0">First</a></li>
@@ -214,7 +212,6 @@ img#cartImg {
 									href="/user/category/${lastPageCount}">Last</a></li>
 							</ul>
 						</nav>
-					</div>
 				</section>
 				<!-- End Best Seller -->
 			</div>

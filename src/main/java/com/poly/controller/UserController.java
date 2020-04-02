@@ -153,7 +153,7 @@ public class UserController {
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 
-		return "user/category";
+		return "user/categoryByIphone";
 	}
 	
 	@GetMapping("/user/categoryBySamSung/{pageNo}")
@@ -173,7 +173,7 @@ public class UserController {
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 
-		return "user/category";
+		return "user/categoryBySamSung";
 	}
 	
 	@GetMapping("/user/categoryByXiaomi/{pageNo}")
@@ -193,7 +193,7 @@ public class UserController {
 		model.addAttribute("categoryList" ,listCategory );
 		model.addAttribute("productList", list);
 
-		return "user/category";
+		return "user/categoryByXiaomi";
 	}
 	
 
