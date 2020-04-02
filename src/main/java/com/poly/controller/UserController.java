@@ -139,6 +139,27 @@ public class UserController {
 		return "user/categorySortDesc";
 	}
 	
+	
+	@GetMapping("/user/category/{pageNo}/{categoryId}")
+	public String getProductByCategory(Model model , @PathVariable( name ="pageNo") int pageNo , @PathVariable( name ="categoryId") int categoryId) {
+		if(pageNo >= productDao.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = productDao.getPageCount() - 1;
+		}
+		
+
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", productDao.getPageCount() - 1);
+		List<Product> list = productDao.findProductByCategory(pageNo,categoryId);
+		List<Category> listCategory = categoryDao.findAll();
+		
+		model.addAttribute("categoryList" ,listCategory );
+		model.addAttribute("productList", list);
+
+		return "user/productByCategory";
+	}
+	
 	@GetMapping("/user/categoryByIphone/{pageNo}")
 	public String categoryByIphone(Model model , @PathVariable( name ="pageNo") int pageNo) {
 		if(pageNo >= productDao.getPageCount()) {

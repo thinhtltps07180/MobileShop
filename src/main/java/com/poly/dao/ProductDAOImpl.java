@@ -148,6 +148,19 @@ public class ProductDAOImpl implements ProductDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Product> findProductByCategory(int pageNo , int category) {
+		int categoryId = category;
+		String hql = "SELECT p FROM Product p WHERE p.category.id = :id ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setParameter("id", categoryId);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+
+	}
+
 
 
 

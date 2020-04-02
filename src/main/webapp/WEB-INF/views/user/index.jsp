@@ -70,7 +70,7 @@ a#buttonSSS {
 			<img id="dt" src="/static/admin/product/iphone.png" alt=""
 				class="img-fluid"> <a href="/user/categoryByIphone/0"
 				class="hero-carousel__slideOverlay">
-				<h3>Điện thoại iPhone 11 64GB</h3>
+				<h3> IPhone 11 64GB</h3>
 				<p>Ihphone</p>
 			</a>
 		</div>

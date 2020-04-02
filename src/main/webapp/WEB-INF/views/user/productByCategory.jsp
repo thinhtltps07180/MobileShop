@@ -168,7 +168,9 @@ img#cartImg {
 							</div>
 						</c:forEach>
 
-						<nav id="pagerId" aria-label="Page navigation example">
+						
+					</div>
+					<nav id="pagerId" aria-label="Page navigation example">
 							<ul class="pagination">
 								<li class="page-item"><a class="page-link"
 									href="/user/category/0">First</a></li>
@@ -180,7 +182,6 @@ img#cartImg {
 									href="/user/category/${lastPageCount}">Last</a></li>
 							</ul>
 						</nav>
-					</div>
 				</section>
 				<!-- End Best Seller -->
 			</div>

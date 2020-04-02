@@ -58,7 +58,7 @@ img#cartImg {
 								items="${categoryListSS}">
 								<form action="#">
 									<ul>
-										<a href="user/${c.name}"><li class="filter-list"><input
+										<a href="/user/category/0/${c.id}"><li class="filter-list"><input
 												class="pixel-radio" id="men" name="brand"><label>${c.name}<span></span></label></li></a>
 									</ul>
 								</form>
