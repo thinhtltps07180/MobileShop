@@ -13,33 +13,34 @@ img.author_img.rounded-circle {
 }
 
 img#cmtPhoto {
-    width: 60px;
-    height: 60px;
+	width: 60px;
+	height: 60px;
 }
 
 img#cmtPhotoRep {
-    width: 60px;
-    height: 60px;
+	width: 60px;
+	height: 60px;
 }
 
-
-
 .comment-list.left-padding {
-    border-style: inset;
-    width: 663px;
-    
+	border-style: inset;
+	width: 663px;
 }
 
 .single-comment.justify-content-between.d-flex {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
-
 a#rp {
-    width: 68px;
+	width: 68px;
 }
 
 .khung {
+	margin: 10px;
+}
+
+
+img.author_img.rounded-circle {
     margin: 10px;
 }
 </style>
@@ -109,22 +110,23 @@ a#rp {
 
 								<ul>
 									<li ng-repeat="(key , value) in messages">
-									<div class="khung">
-									<div class="thumb">
-											<img id="cmtPhoto" src="/static/user/photo/{{value.photo}}" alt="">
+										<div class="khung">
+											<div class="thumb">
+												<img id="cmtPhoto" src="/static/user/photo/{{value.photo}}"
+													alt="">
+											</div>
+											<div class="desc">
+												<h5>
+													<a href="#">{{value.author}}</a>
+												</h5>
+												<p class="date">{{value.posted|date}}</p>
+												<p class="comment">{{value.text}}!</p>
+											</div>
+											<div class="reply-btn">
+												<a id="rp" ng-click="reply(key)" href=""
+													class="btn-reply text-uppercase">reply</a>
+											</div>
 										</div>
-										<div class="desc">
-											<h5>
-												<a href="#">{{value.author}}</a>
-											</h5>
-											<p class="date">{{value.posted|date}}</p>
-											<p class="comment">{{value.text}}!</p>
-										</div>
-										<div class="reply-btn">
-											<a id="rp" ng-click="reply(key)" href=""
-												class="btn-reply text-uppercase">reply</a>
-										</div>
-									</div>
 
 										<div class="comment-list left-padding">
 											<div class="single-comment justify-content-between d-flex">
@@ -132,7 +134,8 @@ a#rp {
 													<ul>
 														<li ng-repeat="(key , value) in value.replies">
 															<div class="thumb">
-																<img id="cmtPhotoRep" src="/static/user/photo/{{value.photoRep}}" alt="">
+																<img id="cmtPhotoRep"
+																	src="/static/user/photo/{{value.photoRep}}" alt="">
 															</div>
 															<div class="desc">
 																<h5>
@@ -190,129 +193,26 @@ a#rp {
 							boot camp when you can get. Boot camps have itssuppor ters andits
 							detractors.</p>
 						<div class="br"></div>
+						<aside class="single_sidebar_widget author_widget">
+									<img class="author_img rounded-circle"
+										src="/static/Panel/scrape.png" alt="">
+								</aside>
+								<aside class="single_sidebar_widget ads_widget">
+									<a href="#"> <img class="img-fluid"
+										src="/static/user/img/blog/add.jpg" alt="">
+									</a>
+									<div class="br"></div>
+								</aside>
+								<aside class="single_sidebar_widget ads_widget">
+									<a href="#"> <img class="img-fluid"
+										src="/static/user/img/blog/add.jpg" alt="">
+									</a>
+									<div class="br"></div>
+								</aside>
+
 					</aside>
-					<aside class="single_sidebar_widget popular_post_widget">
-						<h3 class="widget_title">Popular Posts</h3>
-						<div class="media post_item">
-							<img src="/static/user/img/blog/popular-post/post1.jpg"
-								alt="post">
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Space The Final Frontier</h3>
-								</a>
-								<p>02 Hours ago</p>
-							</div>
-						</div>
-						<div class="media post_item">
-							<img src="/static/user/img/blog/popular-post/post2.jpg"
-								alt="post">
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>The Amazing Hubble</h3>
-								</a>
-								<p>02 Hours ago</p>
-							</div>
-						</div>
-						<div class="media post_item">
-							<img src="/static/user/img/blog/popular-post/post3.jpg"
-								alt="post">
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Astronomy Or Astrology</h3>
-								</a>
-								<p>03 Hours ago</p>
-							</div>
-						</div>
-						<div class="media post_item">
-							<img src="/static/user/img/blog/popular-post/post4.jpg"
-								alt="post">
-							<div class="media-body">
-								<a href="blog-details.html">
-									<h3>Asteroids telescope</h3>
-								</a>
-								<p>01 Hours ago</p>
-							</div>
-						</div>
-						<div class="br"></div>
-					</aside>
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"> <img class="img-fluid"
-							src="/static/user/img/blog/add.jpg" alt="">
-						</a>
-						<div class="br"></div>
-					</aside>
-					<aside class="single_sidebar_widget post_category_widget">
-						<h4 class="widget_title">Post Catgories</h4>
-						<ul class="list cat-list">
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Technology</p>
-									<p>37</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Lifestyle</p>
-									<p>24</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Fashion</p>
-									<p>59</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Art</p>
-									<p>29</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Food</p>
-									<p>15</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Architecture</p>
-									<p>09</p>
-							</a></li>
-							<li><a href="#" class="d-flex justify-content-between">
-									<p>Adventure</p>
-									<p>44</p>
-							</a></li>
-						</ul>
-						<div class="br"></div>
-					</aside>
-					<aside class="single-sidebar-widget newsletter_widget">
-						<h4 class="widget_title">Newsletter</h4>
-						<p>Here, I focus on a range of items and features that we use
-							in life without giving them a second thought.</p>
-						<div class="form-group d-flex flex-row">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<div class="input-group-text">
-										<i class="fa fa-envelope" aria-hidden="true"></i>
-									</div>
-								</div>
-								<input type="text" class="form-control"
-									id="inlineFormInputGroup" placeholder="Enter email address"
-									onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Enter email'">
-							</div>
-							<a href="#" class="bbtns">Subcribe</a>
-						</div>
-						<p class="text-bottom">You can unsubscribe at any time</p>
-						<div class="br"></div>
-					</aside>
-					<aside class="single-sidebar-widget tag_cloud_widget">
-						<h4 class="widget_title">Tag Clouds</h4>
-						<ul class="list">
-							<li><a href="#">Technology</a></li>
-							<li><a href="#">Fashion</a></li>
-							<li><a href="#">Architecture</a></li>
-							<li><a href="#">Fashion</a></li>
-							<li><a href="#">Food</a></li>
-							<li><a href="#">Technology</a></li>
-							<li><a href="#">Lifestyle</a></li>
-							<li><a href="#">Art</a></li>
-							<li><a href="#">Adventure</a></li>
-							<li><a href="#">Food</a></li>
-							<li><a href="#">Lifestyle</a></li>
-							<li><a href="#">Adventure</a></li>
-						</ul>
-					</aside>
+
+
 				</div>
 			</div>
 		</div>

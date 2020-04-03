@@ -1,4 +1,12 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
+<style>
+span.nav-shop__circle {
+    height: 16px;
+    margin: -10px;
+    width: 44px;
+}
+</style>
 <header class="header_area">
 	<div class="main_menu">
 		<nav class="navbar navbar-expand-lg navbar-light">
@@ -32,15 +40,13 @@
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="/user/blog">Reviews</a></li>
 								<c:if test="${sessionScope.user != null}">
-  							 	<li class="nav-item"><a class="nav-link"
-									href="/user/createNews">Create Reviews</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/myBlog">My Reviews</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/user/createNews">Create Reviews</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/user/myBlog">My Reviews</a></li>
 								</c:if>
 
 								<div class="product_count">
-
-								
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">About</a></li>
@@ -60,13 +66,8 @@
 						<li class="nav-item"><button>
 								<i class="ti-search"></i>
 							</button></li>
-						<li class="nav-item">
-							<button>
-								<a class="nav-link" href="/user/cart"> <i
-									class="ti-shopping-cart"></i> <span class="nav-shop__circle">
-								</span></a>
-							</button>
-						</li>
+						<a href="/user/cart"><li class="nav-item"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">${sessionScope['scopedTarget.cartService'].count} items</span></button> </li></a>
+					
 						<li class="nav-item"><a class="button button-header"
 							href="/user/category/0">Buy Now</a></li>
 						<li><a href="/user/login"> <%

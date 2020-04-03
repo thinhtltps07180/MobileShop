@@ -9,11 +9,11 @@
 
 
 <style>
-
 img.author_img.rounded-circle {
-    width: 200px;
-    height: 150px;
+	width: 200px;
+	height: 150px;
 }
+
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
@@ -28,22 +28,7 @@ img#cartImg {
 }
 </style>
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Shop Category</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Shop
-							Category</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+
 <!-- ================ end banner area ================= -->
 
 
@@ -55,8 +40,7 @@ img#cartImg {
 				<div class="sidebar-categories">
 					<div class="head">Browse Categories</div>
 					<ul class="main-categories">
-						<li class="common-filter">
-						<c:forEach var="c"
+						<li class="common-filter"><c:forEach var="c"
 								items="${categoryList}">
 								<form action="#">
 									<ul>
@@ -64,29 +48,29 @@ img#cartImg {
 												class="pixel-radio" id="men" name="brand"><label>${c.name}<span></span></label></li></a>
 									</ul>
 								</form>
-					</c:forEach></li>
+							</c:forEach></li>
 					</ul>
 					<div class="blog_right_sidebar">
-					<aside class="single_sidebar_widget author_widget">
-						<img class="author_img rounded-circle"
-							src="/static/Panel/scrape.png" alt="">
-					</aside>
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"> <img class="img-fluid"
-							src="/static/user/img/blog/add.jpg" alt="">
-						</a>
-						<div class="br"></div>
-					</aside>
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"> <img class="img-fluid"
-							src="/static/user/img/blog/add.jpg" alt="">
-						</a>
-						<div class="br"></div>
-					</aside>
+						<aside class="single_sidebar_widget author_widget">
+							<img class="author_img rounded-circle"
+								src="/static/Panel/scrape.png" alt="">
+						</aside>
+						<aside class="single_sidebar_widget ads_widget">
+							<a href="#"> <img class="img-fluid"
+								src="/static/user/img/blog/add.jpg" alt="">
+							</a>
+							<div class="br"></div>
+						</aside>
+						<aside class="single_sidebar_widget ads_widget">
+							<a href="#"> <img class="img-fluid"
+								src="/static/user/img/blog/add.jpg" alt="">
+							</a>
+							<div class="br"></div>
+						</aside>
 
 
 
-				</div>
+					</div>
 				</div>
 			</div>
 			<div class="col-xl-9 col-lg-8 col-md-7">
@@ -131,9 +115,18 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/add/${pageNo}/${p.id}"><button>
-															<i class="ti-shopping-cart"></i>
+												<c:set var="quantity" scope="session" value="${p.quantity}" />
+												<c:if test="${quantity > 0}">
+
+												<li><a href="/cart/add/${pageNo}/${p.id}"><button >
+															<i class="ti-shopping-cart "></i>
 														</button></a></li>
+												</c:if>
+												<c:if test="${quantity <= 0}">
+
+												</c:if>
+
+
 												<li><button>
 														<i class="ti-heart"></i>
 													</button></li>
@@ -168,20 +161,20 @@ img#cartImg {
 							</div>
 						</c:forEach>
 
-						
+
 					</div>
 					<nav id="pagerId" aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link"
-									href="/user/category/0">First</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${pageNo -1}">Previous</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${pageNo +1}">Next</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${lastPageCount}">Last</a></li>
-							</ul>
-						</nav>
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link"
+								href="/user/category/0">First</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${pageNo -1}">Previous</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${pageNo +1}">Next</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${lastPageCount}">Last</a></li>
+						</ul>
+					</nav>
 				</section>
 				<!-- End Best Seller -->
 			</div>

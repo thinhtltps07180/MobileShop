@@ -9,6 +9,11 @@
 
 
 <style>
+img.author_img.rounded-circle {
+	width: 200px;
+	height: 150px;
+}
+
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
@@ -23,22 +28,7 @@ img#cartImg {
 }
 </style>
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Shop Category</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Shop
-							Category</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+
 <!-- ================ end banner area ================= -->
 
 
@@ -60,62 +50,26 @@ img#cartImg {
 								</form>
 							</c:forEach></li>
 					</ul>
-				</div>
-				<div class="sidebar-filter">
-					<div class="top-filter-head">Product Filters</div>
-					<div class="common-filter">
-						<div class="head">Brands</div>
-						<form action="#">
-							<ul>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="apple" name="brand"><label for="apple">Apple<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="asus" name="brand"><label for="asus">Asus<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="gionee" name="brand"><label
-									for="gionee">Gionee<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="micromax" name="brand"><label
-									for="micromax">Micromax<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="samsung" name="brand"><label
-									for="samsung">Samsung<span>(19)</span></label></li>
-							</ul>
-						</form>
-					</div>
-					<div class="common-filter">
-						<div class="head">Color</div>
-						<form action="#">
-							<ul>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="black" name="color"><label for="black">Black<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="balckleather" name="color"><label
-									for="balckleather">Black Leather<span>(29)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="blackred" name="color"><label
-									for="blackred">Black with red<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="gold" name="color"><label for="gold">Gold<span>(19)</span></label></li>
-								<li class="filter-list"><input class="pixel-radio"
-									type="radio" id="spacegrey" name="color"><label
-									for="spacegrey">Spacegrey<span>(19)</span></label></li>
-							</ul>
-						</form>
-					</div>
-					<div class="common-filter">
-						<div class="head">Price</div>
-						<div class="price-range-area">
-							<div id="price-range"></div>
-							<div class="value-wrapper d-flex">
-								<div class="price">Price:</div>
-								<span>$</span>
-								<div id="lower-value"></div>
-								<div class="to">to</div>
-								<span>$</span>
-								<div id="upper-value"></div>
-							</div>
-						</div>
+					<div class="blog_right_sidebar">
+						<aside class="single_sidebar_widget author_widget">
+							<img class="author_img rounded-circle"
+								src="/static/Panel/scrape.png" alt="">
+						</aside>
+						<aside class="single_sidebar_widget ads_widget">
+							<a href="#"> <img class="img-fluid"
+								src="/static/user/img/blog/add.jpg" alt="">
+							</a>
+							<div class="br"></div>
+						</aside>
+						<aside class="single_sidebar_widget ads_widget">
+							<a href="#"> <img class="img-fluid"
+								src="/static/user/img/blog/add.jpg" alt="">
+							</a>
+							<div class="br"></div>
+						</aside>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -161,9 +115,18 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/add/${pageNo}/${p.id}"><button>
+												<c:set var="quantity" scope="session" value="${p.quantity}" />
+												<c:if test="${quantity > 0}">
+
+												<li><a href="/cart/add/${pageNo}/${p.id}"><button >
 															<i class="ti-shopping-cart"></i>
 														</button></a></li>
+												</c:if>
+												<c:if test="${quantity <= 0}">
+
+												</c:if>
+
+
 												<li><button>
 														<i class="ti-heart"></i>
 													</button></li>
@@ -198,19 +161,20 @@ img#cartImg {
 							</div>
 						</c:forEach>
 
-						<nav id="pagerId" aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link"
-									href="/user/category/0">First</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${pageNo -1}">Previous</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${pageNo +1}">Next</a></li>
-								<li class="page-item"><a class="page-link"
-									href="/user/category/${lastPageCount}">Last</a></li>
-							</ul>
-						</nav>
+
 					</div>
+					<nav id="pagerId" aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link"
+								href="/user/category/0">First</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${pageNo -1}">Previous</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${pageNo +1}">Next</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/category/${lastPageCount}">Last</a></li>
+						</ul>
+					</nav>
 				</section>
 				<!-- End Best Seller -->
 			</div>
@@ -220,133 +184,7 @@ img#cartImg {
 <!-- ================ category section end ================= -->
 
 <!-- ================ top product area start ================= -->
-<section class="related-product-area">
-	<div class="container">
-		<div class="section-intro pb-60px">
-			<p>Popular Item in the market</p>
-			<h2>
-				Top <span class="section-intro__style">Product</span>
-			</h2>
-		</div>
-		<div class="row mt-30">
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-1.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-2.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-3.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
 
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div id="box" class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-4.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-5.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-6.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-7.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-8.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-9.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-1.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-2.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-3.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 <!-- ================ top product area end ================= -->
 
 <!-- ================ Subscribe section start ================= -->
