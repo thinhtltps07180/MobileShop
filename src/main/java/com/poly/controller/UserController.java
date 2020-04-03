@@ -27,15 +27,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.dao.CategoryDAO;
+import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.ReviewDAO;
 import com.poly.dao.RoleDAO;
+import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
+import com.poly.entity.Order;
 import com.poly.entity.Product;
 import com.poly.entity.Review;
 import com.poly.entity.Role;
+import com.poly.entity.Status;
 import com.poly.entity.User;
 
 
@@ -52,6 +56,9 @@ public class UserController {
 	UserDAO dao;
 	
 	@Autowired
+	StatusDAO statusDao;
+	
+	@Autowired
 	CategoryDAO  categoryDao;
 	
 	@Autowired
@@ -59,6 +66,9 @@ public class UserController {
 	
 	@Autowired
 	OrderDetailDAO orderDetailDao;
+	
+	@Autowired
+	OrderDAO orderDao;
 	
 	@Autowired
 	ReviewDAO reviewDAO;
@@ -486,6 +496,15 @@ public class UserController {
 		// model.addAttribute("form" , user);
 
 		return "redirect:/user/blog";
+	}
+	
+	@RequestMapping("/user/cancle/{index}/{id}")
+	public String clear(Model model , @PathVariable("id") Integer id) {
+		Order order = orderDao.findById(id);
+		Status st = statusDao.findById(4);
+		order.setStatus(st);
+		orderDao.update(order);
+		return "redirect:/user/orderList";
 	}
 	
 	

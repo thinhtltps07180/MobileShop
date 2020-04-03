@@ -31,8 +31,10 @@ span.nav-shop__circle {
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
 									href="/user/category/0">Shop Category</a></li>
-
-								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
+								<c:if test="${sessionScope.user != null}">
+									<li class="nav-item"><a class="nav-link"
+										href="/user/orderList">Order</a></li>
+								</c:if>
 							</ul></li>
 						<li class="nav-item submenu dropdown"><a href="/user/blog"
 							class="nav-link dropdown-toggle" data-toggle="dropdown"

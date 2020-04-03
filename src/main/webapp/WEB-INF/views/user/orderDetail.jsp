@@ -45,7 +45,10 @@
 						</tr>
 						<tr>
 							<td>Total</td>
-							<td>: ${order.amount}</td>
+							<c:set var="basecost"
+							value="order.amount" />
+							<td><fmt:formatNumber pattern="##,###,###.####"
+							value="${order.amount}" /></td>
 						</tr>
 						<tr>
 							<td>OrderBy</td>
@@ -64,8 +67,8 @@
 							<td>: ${order.user.address}</td>
 						</tr>
 						<tr>
-							<td>Receiver</td>
-							<td>: ${order.user.name}</td>
+							<td>Status</td>
+							<td>: ${order.status.name}</td>
 						</tr>
 						<tr>
 							<td>Phone Number</td>

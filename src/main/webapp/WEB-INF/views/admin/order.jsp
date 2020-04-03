@@ -1,6 +1,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
 <!-- Body -->
@@ -69,3 +73,41 @@
 			</span>
 		</div>
 	</footer>
+	
+	
+	 <script>
+  
+$( "a.check-list" ).click(function( event ) {
+	 var myId = $(this).attr('id');
+	
+  event.preventDefault();
+  Swal.fire({
+	  title: 'Are you sure?',
+	  text: "You won't be able to revert this!",
+	  icon: 'warning',
+	  showCancelButton: true,
+	  confirmButtonColor: '#3085d6',
+	  cancelButtonColor: '#d33',
+	  confirmButtonText: 'Yes, confirm it!',
+	}).then((result) => {
+	  if (result.value) {
+	    Swal.fire(
+	      'Congratulations!',
+	      'Your file has been changed.',
+	      'success'    
+	    ).then(function() {
+			let getId = myId;
+	/* 		alert(getId); */
+			var href = $("#"+getId).attr("href")
+		/* 	alert(href) */
+	    	window.location.href = href  
+		})
+	   
+	  }
+	 
+	})
+	
+	return false;	
+});
+
+</script>
