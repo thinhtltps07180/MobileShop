@@ -119,40 +119,51 @@ public class CartController {
 	
 	@RequestMapping("/cart/accept")
 	public String accept(Model model, HttpServletRequest request) {
-		Order order = new Order();
-		order.setOrderDate(new Date());
-		order.setAmount(cart.getAmount());
-		User user = (User) session.getAttribute("user");
-		order.setUser(user);
-		Status st = statusDAO.findById(1);
-		order.setStatus(st);
+		if(session.getAttribute("user")== null) {
+			
+			model.addAttribute("message", "Vui lòng login trước khi thanh toán");
+			return "user/cart";
+		}else {
+			Order order = new Order();
+			order.setOrderDate(new Date());
+			order.setAmount(cart.getAmount());
+			User user = (User) session.getAttribute("user");
+			order.setUser(user);
+			Status st = statusDAO.findById(1);
+			order.setStatus(st);
 
 
-		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-		List<Product> list = cart.getItems();
-		for (Product p : list) {
-			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setUnitPrice(cart.getAmount());
-			orderDetail.setQuantity(p.getQuantity());
-			orderDetail.setImage(p.getImage());
-			orderDetail.setStatus(false);
-			orderDetail.setOrder(order);
-			orderDetail.setProduct(p);
-//			orderDetail.setImage(image);
-			orderDetails.add(orderDetail);
-			Product product = productDao.findById(p.getId());
-			int a = product.getQuantity();
-			System.out.println(a);		
-			product.setQuantity(a - p.getQuantity());
-			productDao.update(product);
-			System.out.println(product.getQuantity());	
+			List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+			List<Product> list = cart.getItems();
+			for (Product p : list) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setUnitPrice(cart.getAmount());
+				orderDetail.setQuantity(p.getQuantity());
+				orderDetail.setImage(p.getImage());
+				orderDetail.setStatus(false);
+				orderDetail.setOrder(order);
+				orderDetail.setProduct(p);
+				orderDetail.setCreateDate(new Date());
+//				orderDetail.setImage(image);
+				orderDetails.add(orderDetail);
+				Product product = productDao.findById(p.getId());
+				int a = product.getQuantity();
+				System.out.println(a);		
+				product.setQuantity(a - p.getQuantity());
+				productDao.update(product);
+				System.out.println(product.getQuantity());	
+			}
+
+
+			orderDao.create(order, orderDetails);
+			this.clear();
 		}
-
-
-		orderDao.create(order, orderDetails);
+		
 
 		return "redirect:/user/orderList";
 	}
+	
+
 	
 	@RequestMapping("/user/orderList")
 	public String orderList(Model model) {
