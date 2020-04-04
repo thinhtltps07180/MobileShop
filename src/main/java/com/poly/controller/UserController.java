@@ -304,10 +304,15 @@ public class UserController {
 		} else if (!pw.equals(user.getPassword())) {
 			model.addAttribute("message", "Invalid password!");
 		} else {
+
 			session.setAttribute("user", user);
 			model.addAttribute("userInfor", user);
 
 			if (user.getRole().getName().equals("admin")) {
+//				String url = (String) session.getAttribute("back-url");
+//				if(url != null) {
+//					return "redirect:"+url;
+//				}
 				return "redirect:/admin/index";
 			} else if (user.getRole().getName().equals("user")) {
 				return "redirect:/user/index";

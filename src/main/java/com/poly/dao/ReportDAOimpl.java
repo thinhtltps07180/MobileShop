@@ -59,8 +59,7 @@ public class ReportDAOimpl implements ReportDAO {
 				+ "SUM(d.quantity), " 
 				+ "SUM(d.quantity * d.unitPrice),"
 				+ "MIN(d.unitPrice)," 
-				+ "MAX(d.unitPrice)," 
-				+ "AVG(d.unitPrice)"
+				+ "MAX(d.unitPrice)" 
 				+ "FROM OrderDetail d "
 				+ "WHERE day(d.createDate) =:day "
 				+ "GROUP BY d.product.category.name";

@@ -37,7 +37,7 @@
 											href="/user/cancle/${loopCounter.count}/${ldt.id}"
 											id="${loopCounter.count}"><button
 													style="font-size: 24px; color: red">
-													<i <i class="far fa-trash-alt"></i></i>
+													<i class="far fa-trash-alt"></i>
 										</button></a> </td>
 							</c:if>
 							<c:if test="${st > 1}">

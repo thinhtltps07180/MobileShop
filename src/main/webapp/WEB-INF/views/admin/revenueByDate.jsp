@@ -50,7 +50,6 @@
 									<th>Revenue</th>
 									<th>Min (Product price)</th>
 									<th>Max (Product price)</th>
-									<th>Average (Product price)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -64,12 +63,13 @@
 												value="${array[3]}" /> VND</td>
 										<td><fmt:formatNumber pattern="##,###,###.####"
 												value="${array[4]}" /> VND</td>
-										<td><fmt:formatNumber pattern="##,###,###.####"
-												value="${array[5]}" /> VND</td>
 									</tr>
+									
 								</c:forEach>
+								<a href="/admin/export">Export</a>
 							</tbody>
 						</table>
+						
 					</div>
 				</div>
 			</div>
