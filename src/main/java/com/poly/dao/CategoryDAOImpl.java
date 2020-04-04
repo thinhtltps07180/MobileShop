@@ -55,6 +55,30 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return entity;
 	}
 
+	@Override
+	public List<Category> findByIphone() {
+		String hql = "FROM Category c WHERE c.id = 1008 ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Category> query = session.createQuery(hql, Category.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Category> findBySamSung() {
+		String hql = "FROM Category c WHERE c.id = 1009 ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Category> query = session.createQuery(hql, Category.class);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Category> findByXiaomi() {
+		String hql = "FROM Category c WHERE c.id = 1011 ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Category> query = session.createQuery(hql, Category.class);
+		return query.getResultList();
+	}
+
 
 
 	

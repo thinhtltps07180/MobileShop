@@ -1,22 +1,42 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<script ssrc="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	ssrc="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <style>
 img#dt {
 	height: 499px;
-
 }
+
 img#newId {
-    background-color: #f2f2f2;
-}
-img#bestId {
-    height: 269px;
-    background-color: #f2f2f2;
+	background-color: #f2f2f2;
 }
 
 img#bestId {
+	height: 269px;
+	background-color: #f2f2f2;
+}
+
+img.card-img.rounded-0 {
+	height: 243px;
+	width: 350px;
+}
+
+img.card-img-top {
+	height: 191px;
+}
+
+h5.card-title {
+	height: 80px;
+}
+
+img.card-img-top {
+	padding-top: 10px;
+}
+
+a#buttonSSS {
+    margin-bottom: 20px;
 }
 </style>
 
@@ -48,15 +68,15 @@ img#bestId {
 	<div class="owl-carousel owl-theme hero-carousel">
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/iphone.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryByIphone/0"
 				class="hero-carousel__slideOverlay">
-				<h3>xiaomi redmi note 8</h3>
-				<p>XIAOMI</p>
+				<h3> IPhone 11 64GB</h3>
+				<p>Ihphone</p>
 			</a>
 		</div>
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/XAM.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryByXiaomi/0"
 				class="hero-carousel__slideOverlay">
 				<h3>xiaomi redmi note 8</h3>
 				<p>XIAOMI</p>
@@ -64,7 +84,7 @@ img#bestId {
 		</div>
 		<div class="hero-carousel__slide">
 			<img id="dt" src="/static/admin/product/SS.png" alt=""
-				class="img-fluid"> <a href="#"
+				class="img-fluid"> <a href="/user/categoryBySamSung/0"
 				class="hero-carousel__slideOverlay">
 				<h3>samsung galaxy note</h3>
 				<p>SAMSUM</p>
@@ -86,14 +106,15 @@ img#bestId {
 				<div class="col-md-6 col-lg-4 col-xl-3">
 					<div class="card text-center card-product">
 						<div class="card-product__img">
-							<img id="newId" class="card-img" src="/static/admin/product/${n.image }"
-								alt="">
+							<img id="newId" class="card-img"
+								src="/static/admin/product/${n.image }" alt="">
 							<ul class="card-product__imgOverlay">
 								<li><button>
 										<i class="ti-search"></i>
 									</button></li>
 								<li><button>
-										<i class="ti-shopping-cart"></i>
+										<a href="/user/singleproduct/${n.id}"><i
+											class="ti-shopping-cart"></i></a>
 									</button></li>
 								<li><button>
 										<i class="ti-heart"></i>
@@ -147,44 +168,46 @@ img#bestId {
 				Best <span class="section-intro__style">Sellers</span>
 			</h2>
 		</div>
-		<<div class="container">
+		<
+		<div class="container">
 
-		<div class="row">
-			<c:forEach var="n" items="${trendList}">
-				<div class="col-md-6 col-lg-4 col-xl-3">
-					<div class="card text-center card-product">
-						<div class="card-product__img">
-							<img id="bestId" class="card-img" src="/static/admin/product/${n.image }"
-								alt="">
-							<ul class="card-product__imgOverlay">
-								<li><button>
-										<i class="ti-search"></i>
-									</button></li>
-								<li><button>
-										<i class="ti-shopping-cart"></i>
-									</button></li>
-								<li><button>
-										<i class="ti-heart"></i>
-									</button></li>
-							</ul>
-						</div>
-						<div class="card-body">
-							<p>${n.category.name}</p>
-							<h4 class="card-product__title">
-								<a href="single-product.html">${n.name}</a>
-							</h4>
-							<c:set var="basecost" value="p.unitPrice" />
-							<p class="card-product__price">
-								<fmt:formatNumber pattern="##,###,###.####"
-									value="${n.unitPrice}" />
-							</p>
+			<div class="row">
+				<c:forEach var="n" items="${trendList}">
+					<div class="col-md-6 col-lg-4 col-xl-3">
+						<div class="card text-center card-product">
+							<div class="card-product__img">
+								<img id="bestId" class="card-img"
+									src="/static/admin/product/${n.image }" alt="">
+								<ul class="card-product__imgOverlay">
+									<li><button>
+											<i class="ti-search"></i>
+										</button></li>
+									<li><button>
+											<a href="/user/singleproduct/${n.id}"><i
+												class="ti-shopping-cart"></i></a>
+										</button></li>
+									<li><button>
+											<i class="ti-heart"></i>
+										</button></li>
+								</ul>
+							</div>
+							<div class="card-body">
+								<p>${n.category.name}</p>
+								<h4 class="card-product__title">
+									<a href="single-product.html">${n.name}</a>
+								</h4>
+								<c:set var="basecost" value="p.unitPrice" />
+								<p class="card-product__price">
+									<fmt:formatNumber pattern="##,###,###.####"
+										value="${n.unitPrice}" />
+								</p>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+				</c:forEach>
 
+			</div>
 		</div>
-	</div>
 	</div>
 </section>
 <!-- ================ Best Selling item  carousel end ================= -->
@@ -200,77 +223,29 @@ img#bestId {
 		</div>
 
 		<div class="row">
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/static/user/img/blog/blog1.png" alt="">
-					</div>
-					<div class="card-body">
-						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
-									Comments</a></li>
-						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">The Richland Center Shooping News
-								and weekly shooper</a>
-						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
-					</div>
-				</div>
-			</div>
+			<c:forEach var="r" items="${reviewList}">
+				<div class="card col-md-4" style="width: 18rem;">
 
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/static/user/img/blog/blog2.png" alt="">
-					</div>
-					<div class="card-body">
-						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
-									Comments</a></li>
-						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">The Shopping News also offers
-								top-quality printing services</a>
-						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
-					</div>
-				</div>
-			</div>
+					<a href="/user/singleblog/${r.id}"><img class="card-img-top"
+						src="/static/user/news/${r.thumbnail}" alt="Card image cap">
+					</a>
 
-			<div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
-				<div class="card card-blog">
-					<div class="card-blog__img">
-						<img class="card-img rounded-0"
-							src="/static/user/img/blog/blog3.png" alt="">
-					</div>
 					<div class="card-body">
 						<ul class="card-blog__info">
-							<li><a href="#">By Admin</a></li>
-							<li><a href="#"><i class="ti-comments-smiley"></i> 2
+							<li><a href="#">${r.user.id}</a></li>
+							<li><a href="#"><i class="ti-comments-smiley"></i>
 									Comments</a></li>
 						</ul>
-						<h4 class="card-blog__title">
-							<a href="single-blog.html">Professional design staff and
-								efficient equipment you’ll find we offer</a>
-						</h4>
-						<p>Let one fifth i bring fly to divided face for bearing
-							divide unto seed. Winged divided light Forth.</p>
-						<a class="card-blog__link" href="#">Read More <i
-							class="ti-arrow-right"></i></a>
+						<h5 class="card-title">${r.title}</h5>
+						<p class="card-text">${r.description}</p>
 					</div>
+					<a id="buttonSSS" href="/user/singleblog/${r.id}" class="btn btn-primary">Read
+						More</a>
 				</div>
-			</div>
+			</c:forEach>
+
+
+
 		</div>
 	</div>
 </section>

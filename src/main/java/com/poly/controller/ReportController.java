@@ -12,17 +12,13 @@ public class ReportController {
 	@Autowired
 	ReportDAO dao;
 	
-	@RequestMapping("admin/inventoryreport")
+	@RequestMapping("admin/revenueByDate")
 	public String inventoryByCategory(Model model) {
-		model.addAttribute("data",dao.inventoryByCategory());
-		return "admin/inventoryreport";
+		model.addAttribute("data",dao.revenueByDate());
+		return "admin/revenueByDate";
 	}
 	
-	@RequestMapping("admin/revenuereport")
-	public String revenueByCategory(Model model) {
-		model.addAttribute("data",dao.revenueByCategory());
-		return "admin/revenuereport";
-	}
+
 	
 	@RequestMapping("admin/report")
 	public String revenueByCustomer(Model model) {

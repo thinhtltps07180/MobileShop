@@ -34,7 +34,6 @@ public class Review {
 	Date createDate;
 	Boolean status;
 //	Integer CategoryId;
-	Integer countViewer;
 
 	
 	@ManyToOne
@@ -101,13 +100,6 @@ public class Review {
 		this.content = content;
 	}
 
-	public Integer getCountViewer() {
-		return countViewer;
-	}
-
-	public void setCountViewer(Integer countViewer) {
-		this.countViewer = countViewer;
-	}
 
 	public User getUser() {
 		return user;

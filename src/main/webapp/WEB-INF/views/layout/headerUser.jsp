@@ -22,8 +22,8 @@
 							role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link"
-									href="/user/category/0">Shop Category</a></li>								
-								
+									href="/user/category/0">Shop Category</a></li>
+
 								<li class="nav-item"><a class="nav-link" href="/user/login">Login</a></li>
 							</ul></li>
 						<li class="nav-item submenu dropdown"><a href="/user/blog"
@@ -31,10 +31,16 @@
 							role="button" aria-haspopup="true" aria-expanded="false">Reviews</a>
 							<ul class="dropdown-menu">
 								<li class="nav-item"><a class="nav-link" href="/user/blog">Reviews</a></li>
+								<c:if test="${sessionScope.user != null}">
+  							 	<li class="nav-item"><a class="nav-link"
+									href="/user/createNews">Create Reviews</a></li>
 								<li class="nav-item"><a class="nav-link"
-									href="/user/createNews">Create Reviews</a></li>								
-								<li class="nav-item"><a class="nav-link"
-									href="/user/myreview/${user.id}">My Reviews</a></li>
+									href="/user/myBlog">My Reviews</a></li>
+								</c:if>
+
+								<div class="product_count">
+
+								
 							</ul></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">Contact</a></li>
 						<li class="nav-item"><a class="nav-link" href="/user/contact">About</a></li>
@@ -57,38 +63,30 @@
 						<li class="nav-item">
 							<button>
 								<a class="nav-link" href="/user/cart"> <i
-									class="ti-shopping-cart"></i> <span class="nav-shop__circle">3</span></a>
+									class="ti-shopping-cart"></i> <span class="nav-shop__circle">
+								</span></a>
 							</button>
 						</li>
-						<li class="nav-item"><a class="button button-header" href="#">Buy
-								Now</a></li>
-						<li><a href="/user/login"><%if(session.getAttribute("user") == null) { 
-						out.print("Login"); 
-						} 
-						 %>
+						<li class="nav-item"><a class="button button-header"
+							href="/user/category/0">Buy Now</a></li>
+						<li><a href="/user/login"> <%
+ 	if (session.getAttribute("user") == null) {
+ 		out.print("Login");
+ 	}
+ %>
 						</a>
-						
-						<li class="nav-item submenu dropdown"><a href="#"
-							class="nav-link dropdown-toggle" data-toggle="dropdown"
-							role="button" aria-haspopup="true" aria-expanded="false">${user.id}</a>
-							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link"
-									href="/user/checkout"></a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/confirmation">Confirmation</a></li>
-								<li class="nav-item"><a class="nav-link" href="/user/cart">t</a></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/user/trackingorder"></a></li>
-							</ul></li>
-					
-						</li>
-						<li><a href="/user/logout">
-						<%if(session.getAttribute("user") != null) { 
-						out.print("Logout"); 
-						} 
-						 %>
-						</a>
-						</li>
+						<li><a href="/user/logout"> <%
+ 	if (session.getAttribute("user") != null) {
+ 		out.print("Logout");
+ 	}
+ %>
+						</a></li>
+						<li><a href="/user/edit"> <%
+ 	if (session.getAttribute("user") != null) {
+ 		out.print("My Profile");
+ 	}
+ %>
+						</a></li>
 					</ul>
 				</div>
 			</div>

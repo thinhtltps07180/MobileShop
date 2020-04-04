@@ -41,9 +41,7 @@
 	<script type="text/javascript">
     var mydata = [
     	['Product', 'Revenue'],
-    	<c:forEach var="array" items="${data}">
-        ["${array[0]}", ${array[2]}],
-        </c:forEach>
+
       ];
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);

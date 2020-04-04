@@ -1,6 +1,5 @@
 
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -8,14 +7,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
+
 <style>
 img#cartImg {
 	height: 255px;
 	width: 271.48px;
 }
+
 nav#pagerId {
-    padding-left: 311px;
+	padding-left: 311px;
 }
+
 img#cartImg {
 	background-color: #f2f2f2;
 }
@@ -122,9 +124,11 @@ img#cartImg {
 				<div class="filter-bar d-flex flex-wrap align-items-center">
 					<div class="sorting">
 						<select onChange="window.location.href=this.value">
-							<option value="/user/category/0">Default sorting</option>
-							<option value="/user/categorySortDesc/0"><a>DESC sorting</a></option>
-							<option value="/user/categorySortAsc/0"selected="selected">ASC sorting</option>
+							<option value="/user/category/0" selected="selected">Default
+								sorting</option>
+							<option value="/user/categorySortDesc/0"><a>DESC
+									sorting</a></option>
+							<option value="/user/categorySortAsc/0">ASC sorting</option>
 						</select>
 					</div>
 					<div>
@@ -145,6 +149,7 @@ img#cartImg {
 				<hr>
 				<section class="lattest-product-area pb-40 category-list">
 					<div class="row" id="parent">
+
 						<c:forEach var="p" items="${productList}">
 							<div class="col-md-6 box col-lg-4">
 								<div class="card text-center card-product">
@@ -156,7 +161,7 @@ img#cartImg {
 												<li><button>
 														<i class="ti-search"></i>
 													</button></li>
-												<li><a href="/cart/addAsc/${pageNo}/${p.id}"><button>
+												<li><a href="/cart/add/${pageNo}/${p.id}"><button>
 															<i class="ti-shopping-cart"></i>
 														</button></a></li>
 												<li><button>
@@ -166,6 +171,19 @@ img#cartImg {
 									</div>
 									<div class="card-body">
 										<p id="name">${p.category.name}</p>
+										<c:set var="quantity" scope="session" value="${p.quantity}" />
+										<c:if test="${quantity > 0}">
+											<p>
+												Status:
+												<c:out value="Available" />
+											<p>
+										</c:if>
+										<c:if test="${quantity <= 0}">
+											<p>
+												Status:
+												<c:out value="Unvailable" />
+											<p>
+										</c:if>
 										<h4 class="card-product__title">
 											<a href="#">${p.name}</a>
 										</h4>
@@ -174,17 +192,22 @@ img#cartImg {
 											<fmt:formatNumber pattern="##,###,###.####"
 												value="${p.unitPrice}" />
 										</p>
+
 									</div>
 								</div>
 							</div>
 						</c:forEach>
-						
+
 						<nav id="pagerId" aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="/user/categorySortAsc/0">First</a></li>
-								<li class="page-item"><a class="page-link" href="/user/categorySortAsc/${pageNo -1}">Previous</a></li>
-								<li class="page-item"><a class="page-link" href="/user/categorySortAsc/${pageNo +1}">Next</a></li>		
-								<li class="page-item"><a class="page-link" href="/user/categorySortAsc/${lastPageCount}">Last</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/user/category/0">First</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/user/category/${pageNo -1}">Previous</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/user/category/${pageNo +1}">Next</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/user/category/${lastPageCount}">Last</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -364,9 +387,4 @@ img#cartImg {
 			return matcher.test($(this).find('#name').text())
 		}).hide();
 	})
-</script><script type="text/javascript">
-function handleSelect(elm)
-{
-window.location = elm.value;
-}
 </script>

@@ -3,6 +3,7 @@ package com.poly.dao;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -11,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.poly.entity.Review;
+import com.poly.entity.User;
 
 @Transactional
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	SessionFactory factory;
+	
+	@Autowired
+	HttpSession session;
 
 	@Override
 	public Review findById(Integer id) {
@@ -26,9 +31,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public List<Review> findAll() {
-		String hql = "FROM Review";
+		String hql = "FROM Review r ORDER BY r.id DESC";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		query.setFirstResult(0);
+		query.setMaxResults(3);
 		return query.getResultList();
 		
 	}
@@ -56,14 +63,12 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<Review> findBycreateBy(String createBy) {
-		String hql = "FROM Review r where r.user.id =:createBy";
+	public List<Review> findByUserId() {
+		User user = (User) session.getAttribute("user");
+		String hql = "FROM Review n WHERE n.user.id =:id  ";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Review> query = session.createQuery(hql, Review.class);
-		query.setParameter("createBy", createBy);
-		if(query.getResultList().isEmpty()) {
-			return null;
-		}
+		query.setParameter("id", user.getId());
 		return query.getResultList();
 	}
 

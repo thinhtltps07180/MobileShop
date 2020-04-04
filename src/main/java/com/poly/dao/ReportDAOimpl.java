@@ -1,5 +1,6 @@
 package com.poly.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -18,8 +19,12 @@ public class ReportDAOimpl implements ReportDAO {
 
 	@Override
 	public List<Object[]> inventoryByCategory() {
-		String hql = "SELECT p.category.name," + "SUM(p.quantity), " + "SUM(p.quantity * p.unitPrice),"
-				+ "MIN(p.unitPrice), " + "MAX(p.unitPrice), " + "AVG(p.unitPrice) "
+		String hql = "SELECT p.category.name," 
+				+ "SUM(p.quantity), " 
+				+ "SUM(p.quantity * p.unitPrice),"
+				+ "MIN(p.unitPrice), " 
+				+ "MAX(p.unitPrice), " 
+				+ "AVG(p.unitPrice) "
 				+ "FROM Product p GROUP BY p.category.name";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
@@ -27,11 +32,18 @@ public class ReportDAOimpl implements ReportDAO {
 		return list;
 	}
 
+
+
+
 	@Override
-	public List<Object[]> revenueByCategory() {
-		String hql = "SELECT d.product.category.name," + "SUM(d.quantity), " + "SUM(d.quantity * d.unitPrice),"
-				+ "MIN(d.unitPrice), " + "MAX(d.unitPrice), " + "AVG(d.unitPrice) "
-				+ "FROM OrderDetail d GROUP BY d.product.category.name";
+	public List<Object[]> revenueByCustomer() {
+		String hql = "SELECT d.order.user.id," 
+				+ "SUM(d.quantity), " 
+				+ "SUM(d.quantity * d.unitPrice),"
+				+ "MIN(d.unitPrice), " 
+				+ "MAX(d.unitPrice), " 
+				+ "AVG(d.unitPrice) "
+				+ "FROM OrderDetail d GROUP BY d.order.user.id ORDER BY SUM(d.quantity * d.unitPrice) DESC";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
 		List<Object[]> list = query.getResultList();
@@ -39,13 +51,24 @@ public class ReportDAOimpl implements ReportDAO {
 	}
 
 	@Override
-	public List<Object[]> revenueByCustomer() {
-		String hql = "SELECT d.order.user.id," + "SUM(d.quantity), " + "SUM(d.quantity * d.unitPrice),"
-				+ "MIN(d.unitPrice), " + "MAX(d.unitPrice), " + "AVG(d.unitPrice) "
-				+ "FROM OrderDetail d GROUP BY d.order.user.id ORDER BY SUM(d.quantity * d.unitPrice) DESC";
+	public List<Object[]> revenueByDate() {	
+		LocalDate today = LocalDate.now();
+		int day = today.getDayOfMonth();
+		System.out.println(day);
+		String hql = "SELECT d.product.category.name," 
+				+ "SUM(d.quantity), " 
+				+ "SUM(d.quantity * d.unitPrice),"
+				+ "MIN(d.unitPrice)," 
+				+ "MAX(d.unitPrice)," 
+				+ "AVG(d.unitPrice)"
+				+ "FROM OrderDetail d "
+				+ "WHERE day(d.createDate) =:day "
+				+ "GROUP BY d.product.category.name";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("day", day);
 		List<Object[]> list = query.getResultList();
+		
 		return list;
 	}
 
