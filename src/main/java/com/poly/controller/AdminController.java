@@ -46,7 +46,7 @@ public class AdminController {
 
 	@Autowired
 	UserDAO userDao;
-	
+
 	@Autowired
 	PromotionDAO promotionDao;
 
@@ -64,21 +64,18 @@ public class AdminController {
 
 	@Autowired
 	CategoryDAO categoryDao;
-	
+
 	@Autowired
 	ReviewDAO reviewDao;
-	
+
 	@Autowired
 	StatusDAO statusDAO;
-	
 
 	@Autowired
 	ReportDAO reportDao;
 
 	@Autowired
 	ServletContext app;
-	
-	
 
 	@ResponseBody
 	@RequestMapping("/test/query")
@@ -92,8 +89,6 @@ public class AdminController {
 		return "admin/index";
 	}
 
-
-	
 	@GetMapping("/admin/products")
 	public String productList(Model model) {
 		List<Product> list = productDao.findAll();
@@ -189,20 +184,20 @@ public class AdminController {
 			return "redirect:/admin/products";
 		}
 	}
-	
+
 	@GetMapping("/admin/users")
 	public String adminList(Model model) {
 		List<User> list = userDao.findAll();
 		model.addAttribute("listUsers", list);
 		return "admin/users";
 	}
-	
+
 	@RequestMapping("/admin/delete/{id}")
-	public String delete(Model model, @PathVariable("id") Integer id) {	
+	public String delete(Model model, @PathVariable("id") Integer id) {
 		productDao.delete(id);
 		return "redirect:/admin/products";
 	}
-	
+
 	@RequestMapping("/admin/editUser/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
 		User user = userDao.findById(id);
@@ -210,8 +205,7 @@ public class AdminController {
 		model.addAttribute("userEdit", user);
 		return "admin/userEdit";
 	}
-	
-	
+
 	@PostMapping("/admin/updateUser")
 	public String register(Model model, @Validated @ModelAttribute("userEdit") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -236,64 +230,119 @@ public class AdminController {
 				user.setRole(role);
 				userDao.update(user);
 			} catch (Exception e) {
-				return "redirect:/admin/userEdit";		
+				return "redirect:/admin/userEdit";
 			}
 		}
 
 //		model.addAttribute("form" , user);
 		return "redirect:/admin/users";
 	}
-	
+
 	@GetMapping("/admin/blog")
 	public String blog(Model model) {
 		List<Review> listReview = reviewDao.findAll();
-		model.addAttribute("reviewList" ,listReview );
+		model.addAttribute("reviewList", listReview);
 		return "admin/blog";
 	}
-	
+
 	@GetMapping("/admin/order")
 	public String order(Model model) {
 		List<Order> listOrder = orderDao.findAll();
-		model.addAttribute("listOrder" ,listOrder );
+		model.addAttribute("listOrder", listOrder);
 		return "admin/order";
 	}
-	
+
 	@GetMapping("/admin/orderStatus")
 	public String orderStatus(Model model) {
 		List<Order> st = orderDao.findByStatus();
-		model.addAttribute("st" ,st );
+		model.addAttribute("st", st);
 		return "admin/orderStatus";
 	}
-	
+
 	@RequestMapping("/admin/checkOrders/{value}/{id}")
-	public String checkOrders(Model model , @PathVariable("id") Integer id) {
+	public String checkOrders(Model model, @PathVariable("id") Integer id) {
 		Order order = orderDao.findById(id);
 		Status st = statusDAO.findById(2);
 		order.setStatus(st);
-		orderDao.update(order);;
+		orderDao.update(order);
+		;
 		return "redirect:/admin/orderStatus";
 	}
-	
+
 	@GetMapping("/admin/isDelivery")
 	public String isDelivery(Model model) {
 		List<Order> st = orderDao.findByIsDelivery();
-		model.addAttribute("st" ,st );
+		model.addAttribute("st", st);
 		return "admin/isDelivery";
 	}
-	
+
 	@RequestMapping("/admin/isDelivery/{value}/{id}")
-	public String checkOrdersisDelivery(Model model , @PathVariable("id") Integer id) {
+	public String checkOrdersisDelivery(Model model, @PathVariable("id") Integer id) {
 		Order order = orderDao.findById(id);
 		Status st = statusDAO.findById(3);
 		order.setStatus(st);
-		orderDao.update(order);;
+		orderDao.update(order);
+		;
 		return "redirect:/admin/order";
 	}
+
+	@GetMapping("/admin/Category")
+	public String Category(Model model) {
+		List<Category> list = categoryDao.findAll();
+		model.addAttribute("list", list);
+		return "admin/Category";
+	}
 	
+	@GetMapping("/admin/NewCategory")
+	public String NewCategory(Model model) {
+		model.addAttribute("category", new Category());
+		return "admin/NewCategory";
+	}
+
+	@PostMapping("/admin/NewCategory")
+	public String NewCategory(Model model, @Valid @ModelAttribute("category") Category category, BindingResult errors) {
+
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "redirect:/admin/NewCategory";
+		} else {
+			try {
+		
+				categoryDao.create(category);
+			} catch (Exception e) {
+				return "redirect:/admin/NewCategory";
+			}
+		}
+		return "redirect:/admin/Category";
+	}
 	
+	@GetMapping("/admin/editCategory/{id}")
+	public String editCategory(Model model, @PathVariable("id") Integer id) {
+		Category cate = categoryDao.findById(id);
+		model.addAttribute("editCategory", cate);
+		return "admin/editCategory";
+	}
+	@PostMapping("/admin/UpdateCategory")
+	public String UpdateCategory(Model model, @Valid @ModelAttribute("editCategory") Category category, BindingResult errors) {
+
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "redirect:/admin/editCategory";
+		} else {
+			try {
+			
+				categoryDao.update(category);
+			} catch (Exception e) {
+				return "redirect:/admin/editCategory";
+			}
+		}
+		return "redirect:/admin/Category";
+	}
 	
+	@RequestMapping("/admin/deleteCategory/{id}")
+	public String deleteCategory(Model model, @PathVariable("id") Integer id) {
+		categoryDao.delete(id);
+		return "redirect:/admin/Category";
+	}
 
 }
-
-
-
