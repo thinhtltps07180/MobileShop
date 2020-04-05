@@ -45,7 +45,10 @@
 						</tr>
 						<tr>
 							<td>Total</td>
-							<td>: ${order.amount}</td>
+							<c:set var="basecost"
+							value="order.amount" />
+							<td><fmt:formatNumber pattern="##,###,###.####"
+							value="${order.amount}" /></td>
 						</tr>
 						<tr>
 							<td>OrderBy</td>
@@ -64,8 +67,8 @@
 							<td>: ${order.user.address}</td>
 						</tr>
 						<tr>
-							<td>Receiver</td>
-							<td>: ${order.user.name}</td>
+							<td>Status</td>
+							<td>: ${order.status.name}</td>
 						</tr>
 						<tr>
 							<td>Phone Number</td>
@@ -97,9 +100,13 @@
 							<tr>
 								<td>${ldt.product.name}</td>
 								<td>${ldt.quantity}</td>
-								<td>${ldt.product.unitPrice}</td>
+								<c:set var="basecost" value="ldt.product.unitPrice" />
+								<td><fmt:formatNumber pattern="##,###,###.####"
+								value="${ldt.product.unitPrice}" /></td>
 								<td>${ldt.product.promotion.name}</td>
-								<td>${ltd.product.unitPrice * ltd.quantity}</td>
+								<c:set var="basecost" value="ldt.product.unitPrice" />
+								<td><fmt:formatNumber pattern="##,###,###.####"
+								value="${(ldt.product.unitPrice-(ldt.product.unitPrice/100*ldt.product.promotion.discount))*ldt.quantity}" /></td>
 							</tr>
 
 						</c:forEach>

@@ -1,6 +1,9 @@
 package com.poly.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,13 +23,14 @@ public class OrderDetail {
 	Integer quantity;
 	String image;
 	Boolean status;
+	Date createDate;
 	
-	@ManyToOne
-	@JoinColumn(name="orderId")
+
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn( name="orderId")
 	Order order;
 	
-
-
 	@ManyToOne
 	@JoinColumn(name="productId")
 	Product product;
@@ -91,6 +95,14 @@ public class OrderDetail {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+	
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
 	

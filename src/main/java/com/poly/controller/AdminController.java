@@ -19,20 +19,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poly.dao.CategoryDAO;
 import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
-import com.poly.dao.ProductDAOImpl;
 import com.poly.dao.PromotionDAO;
+import com.poly.dao.ReportDAO;
+import com.poly.dao.ReviewDAO;
 import com.poly.dao.RoleDAO;
+import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
+import com.poly.entity.Order;
 import com.poly.entity.Product;
 import com.poly.entity.Promotion;
+import com.poly.entity.Review;
 import com.poly.entity.Role;
+import com.poly.entity.Status;
 import com.poly.entity.User;
 
 @Controller
@@ -58,9 +64,21 @@ public class AdminController {
 
 	@Autowired
 	CategoryDAO categoryDao;
+	
+	@Autowired
+	ReviewDAO reviewDao;
+	
+	@Autowired
+	StatusDAO statusDAO;
+	
+
+	@Autowired
+	ReportDAO reportDao;
 
 	@Autowired
 	ServletContext app;
+	
+	
 
 	@ResponseBody
 	@RequestMapping("/test/query")
@@ -69,12 +87,13 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/index")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("data", reportDao.revenueByDate());
 		return "admin/index";
 	}
 
 
-
+	
 	@GetMapping("/admin/products")
 	public String productList(Model model) {
 		List<Product> list = productDao.findAll();
@@ -224,5 +243,57 @@ public class AdminController {
 //		model.addAttribute("form" , user);
 		return "redirect:/admin/users";
 	}
+	
+	@GetMapping("/admin/blog")
+	public String blog(Model model) {
+		List<Review> listReview = reviewDao.findAll();
+		model.addAttribute("reviewList" ,listReview );
+		return "admin/blog";
+	}
+	
+	@GetMapping("/admin/order")
+	public String order(Model model) {
+		List<Order> listOrder = orderDao.findAll();
+		model.addAttribute("listOrder" ,listOrder );
+		return "admin/order";
+	}
+	
+	@GetMapping("/admin/orderStatus")
+	public String orderStatus(Model model) {
+		List<Order> st = orderDao.findByStatus();
+		model.addAttribute("st" ,st );
+		return "admin/orderStatus";
+	}
+	
+	@RequestMapping("/admin/checkOrders/{value}/{id}")
+	public String checkOrders(Model model , @PathVariable("id") Integer id) {
+		Order order = orderDao.findById(id);
+		Status st = statusDAO.findById(2);
+		order.setStatus(st);
+		orderDao.update(order);;
+		return "redirect:/admin/orderStatus";
+	}
+	
+	@GetMapping("/admin/isDelivery")
+	public String isDelivery(Model model) {
+		List<Order> st = orderDao.findByIsDelivery();
+		model.addAttribute("st" ,st );
+		return "admin/isDelivery";
+	}
+	
+	@RequestMapping("/admin/isDelivery/{value}/{id}")
+	public String checkOrdersisDelivery(Model model , @PathVariable("id") Integer id) {
+		Order order = orderDao.findById(id);
+		Status st = statusDAO.findById(3);
+		order.setStatus(st);
+		orderDao.update(order);;
+		return "redirect:/admin/order";
+	}
+	
+	
+	
 
 }
+
+
+

@@ -22,7 +22,8 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
 //		session.setAttribute("back-url", request.getRequestURI());
-			response.sendRedirect("/user/login");
+		session.setAttribute("alert", "Vui long dang nhap");
+		response.sendRedirect("/user/login");
 			return false;
 		} else {
 			String url = request.getRequestURI();

@@ -15,7 +15,6 @@ import javax.persistence.Table;
 public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	
 	Integer id;
 	String name;
 

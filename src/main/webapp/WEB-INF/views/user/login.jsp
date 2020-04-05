@@ -2,21 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!-- ================ start banner area ================= -->
 
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Login / Register</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Login/Register</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
+
 <!-- ================ end banner area ================= -->
 
 <!--================Login Box Area =================-->
@@ -36,6 +22,9 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="login_form_inner">
+					<div class="alert alert-primary" role="alert">
+						<c:out value="${sessionScope.alert}" />
+					</div>
 					<h3>Log in to enter</h3>
 					<form method="post" class="row login_form" action="/user/login"
 						id="contactForm">

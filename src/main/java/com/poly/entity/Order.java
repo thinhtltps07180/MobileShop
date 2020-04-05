@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,10 +27,14 @@ public class Order {
 	Double amount;
 	
 	@ManyToOne
+	@JoinColumn(name = "statusId")
+	Status status;
+	
+	@ManyToOne()
 	@JoinColumn(name="orderBy")
 	User user;
 	
-	@OneToMany(mappedBy="order" )
+	@OneToMany(mappedBy="order" , fetch = FetchType.EAGER )
 	List<OrderDetail> orderDetails;
 
 	public Integer getId() {
@@ -49,6 +54,14 @@ public class Order {
 	}
 
 
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public Double getAmount() {
 		return amount;
