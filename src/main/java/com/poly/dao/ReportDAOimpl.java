@@ -71,4 +71,19 @@ public class ReportDAOimpl implements ReportDAO {
 		return list;
 	}
 
+
+
+
+	@Override
+	public List<Object[]> revenueByDay() {
+		String hql = "SELECT o.orderDate," 
+				+ "SUM(o.amount) "
+				+ "FROM Order o "
+				+ "GROUP BY o.orderDate";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		List<Object[]> list = query.getResultList();
+		return list;
+	}
+
 }

@@ -27,6 +27,7 @@ import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.PromotionDAO;
+import com.poly.dao.ReportDAO;
 import com.poly.dao.ReviewDAO;
 import com.poly.dao.RoleDAO;
 import com.poly.dao.StatusDAO;
@@ -69,6 +70,10 @@ public class AdminController {
 	
 	@Autowired
 	StatusDAO statusDAO;
+	
+
+	@Autowired
+	ReportDAO reportDao;
 
 	@Autowired
 	ServletContext app;
@@ -82,7 +87,8 @@ public class AdminController {
 	}
 
 	@GetMapping("/admin/index")
-	public String index() {
+	public String index(Model model) {
+		model.addAttribute("data", reportDao.revenueByDate());
 		return "admin/index";
 	}
 
