@@ -1,6 +1,8 @@
 package com.poly.controller;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Date;
 import java.util.List;
 
@@ -88,6 +90,14 @@ public class AdminController {
 
 	@GetMapping("/admin/index")
 	public String index(Model model) {
+		List<Order> listOrder = orderDao.findAll();
+		model.addAttribute("listOrder" ,listOrder );
+		model.addAttribute("rnvDay", reportDao.revenueByDay());
+		model.addAttribute("sumOrder", reportDao.sumOrderofDay());
+		LocalDate today = LocalDate.now();
+		Month month = today.getMonth();
+		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
+		model.addAttribute("monthNow", month);
 		model.addAttribute("data", reportDao.revenueByDate());
 		return "admin/index";
 	}

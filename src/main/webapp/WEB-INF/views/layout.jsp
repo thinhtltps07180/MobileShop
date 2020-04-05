@@ -5,11 +5,11 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" type="text/javascript"></script>
 <!-- Load thư viện flatform -->
 <script
 	src="https://apis.google.com/js/client:platform.js?onload=renderButton"
-	async defer></script>
+	async defer type="text/javascript"></script>
 
 <!-- Gọi client_id -->
 <meta name="google-signin-client_id"
