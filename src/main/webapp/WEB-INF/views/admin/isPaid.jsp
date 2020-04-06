@@ -70,12 +70,12 @@ td#cf {
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="page-header">
-			<h3 class="page-title">Orders have status Pending</h3>
+			<h3 class="page-title">Orders have status Paid</h3>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Tables</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Orders
-						have status Pending</li>
+						have status Paid</li>
 				</ol>
 			</nav>
 		</div>
@@ -122,7 +122,7 @@ td#cf {
 													class="badge badge-gradient-warning">${o.status.name}</label>
 											</c:if>
 											<td id="cf"><a class="check-list"
-												href="/admin/checkOrders/${loopCounter.count}/${o.id}"
+												href="/admin/isPaid/${loopCounter.count}/${o.id}"
 												id="${loopCounter.count}"><button
 														style="font-size: 24px; color: red; margin-left: 33px;">
 														<i class="fa fa-check"></i>
@@ -166,8 +166,7 @@ $( "a.check-list" ).click(function( event ) {
 	  confirmButtonColor: '#3085d6',
 	  cancelButtonColor: '#d33',
 	  confirmButtonText: 'Yes, confirm it!',
-	}).then((result) => 
-	{
+	}).then((result) => {
 	  if (result.value) {
 	    Swal.fire(
 	      'Congratulations!',

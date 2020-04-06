@@ -24,16 +24,6 @@
     <script src = "https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js" defer ></script>
     
     
-		
-		
-		
-		
-		
-		
-	
-	
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -179,7 +169,7 @@ $(document).ready(function() {
 			<div class="col-12 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Recent Tickets</h4>
+						<h4 class="card-title">Recent Orders</h4>
 						<div class="table-responsive">
 							<table id="example" class="table">
 								<thead>
@@ -196,13 +186,30 @@ $(document).ready(function() {
 									<tr>
 										<td><img
 											src="/static/user/photo/${o.user.photo}"
-											class="mr-2" alt="image"> David Grey</td>
+											class="mr-2" alt="image">${o.user.name}</td>
 										<td>${o.orderDate}</td>
-										<td><label class="badge badge-gradient-success">DONE</label>
+										<td>
+								<c:if test="${o.status.id == 1}">
+									<label style="width:70px;" class="badge badge-gradient-success">${o.status.name}</label>
+								</c:if>
+								<c:if test="${o.status.id == 2}">
+									<label style="width:70px;" class="badge badge-gradient-primary">${o.status.name}</label>
+								</c:if>
+								<c:if test="${o.status.id == 3}">
+									<label style="width:70px;" class="badge badge-gradient-info">${o.status.name}</label>
+								</c:if>
+								<c:if test="${o.status.id == 4}">
+									<label style="width:70px;" class="badge badge-gradient-danger">${o.status.name}</label>
+								</c:if>
+								<c:if test="${o.status.id == 5}">
+									<label style="width:70px;" class="badge badge-gradient-warning">${o.status.name}</label>
+								</c:if>
+								
+								
 										</td>
 										<td><fmt:formatNumber pattern="##,###,###.####"
 										value="${o.amount}" /></td>
-										<td>WD-12345</td>
+										<td><a href="/admin/orderDetail/${o.id}/${o.id}">Detail</a></td>
 									</tr>
 								</c:forEach>
 								</tbody>

@@ -36,6 +36,7 @@ import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Category;
 import com.poly.entity.Order;
+import com.poly.entity.OrderDetail;
 import com.poly.entity.Product;
 import com.poly.entity.Promotion;
 import com.poly.entity.Review;
@@ -268,6 +269,16 @@ public class AdminController {
 		return "admin/order";
 	}
 	
+	@RequestMapping("/admin/orderDetail/{orderId}/{id}")
+	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
+		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
+		Order order = orderDao.findById(orderId);
+		model.addAttribute("order", order);
+		model.addAttribute("listDetail", list);
+
+		return "admin/orderDetail";
+	}
+	
 	@GetMapping("/admin/orderStatus")
 	public String orderStatus(Model model) {
 		List<Order> st = orderDao.findByStatus();
@@ -281,7 +292,7 @@ public class AdminController {
 		Status st = statusDAO.findById(2);
 		order.setStatus(st);
 		orderDao.update(order);;
-		return "redirect:/admin/orderStatus";
+		return "redirect:/admin/isDelivery";
 	}
 	
 	@GetMapping("/admin/isDelivery")
@@ -297,8 +308,26 @@ public class AdminController {
 		Status st = statusDAO.findById(3);
 		order.setStatus(st);
 		orderDao.update(order);;
+		return "redirect:/admin/isPaid";
+	}
+	
+	@GetMapping("/admin/isPaid")
+	public String isisPaid(Model model) {
+		List<Order> st = orderDao.findByIsPaid();
+		model.addAttribute("st" ,st );
+		return "admin/isPaid";
+	}
+	
+	@RequestMapping("/admin/isPaid/{value}/{id}")
+	public String checkOrdersisPaid(Model model , @PathVariable("id") Integer id) {
+		Order order = orderDao.findById(id);
+		Status st = statusDAO.findById(5);
+		order.setStatus(st);
+		orderDao.update(order);;
 		return "redirect:/admin/order";
 	}
+	
+
 	
 	
 	
