@@ -328,7 +328,11 @@ public class AdminController {
 		return "admin/Category";
 	}
 	
-
+	@GetMapping("/admin/NewCategory")
+	public String NewCategory(Model model) {
+		model.addAttribute("category", new Category());
+		return "admin/NewCategory";
+	}
 	
 	
 	
