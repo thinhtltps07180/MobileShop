@@ -76,13 +76,76 @@ public class ReportDAOimpl implements ReportDAO {
 
 	@Override
 	public List<Object[]> revenueByDay() {
-		String hql = "SELECT o.orderDate," 
-				+ "SUM(o.amount) "
-				+ "FROM Order o "
-				+ "GROUP BY o.orderDate";
+		LocalDate today = LocalDate.now();
+		int day = today.getDayOfMonth();
+		String hql = "SELECT od.orderDate, " 
+				+ "SUM(od.amount) "
+				+ "FROM Order od "
+				+ "WHERE day(od.orderDate) =:day "
+				+ "GROUP BY od.orderDate";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
-		List<Object[]> list = query.getResultList();
+		query.setParameter("day", day);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<Object[]> sumOrderofDay() {
+		LocalDate today = LocalDate.now();
+		int day = today.getDayOfMonth();
+		String hql = "SELECT od.orderDate, " 
+				+ "COUNT(od.id) "
+				+ "FROM Order od "
+				+ "WHERE day(od.orderDate) =:day "
+				+ "GROUP BY od.orderDate";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("day", day);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<Object[]> revenueByMonth() {
+		LocalDate today = LocalDate.now();
+		int day = today.getDayOfMonth();
+		String hql = "SELECT od.orderDate, " 
+				+ "COUNT(od.id) "
+				+ "FROM Order od "
+				+ "WHERE day(od.orderDate) =:day "
+				+ "GROUP BY od.orderDate";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("day", day);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<Object[]> sumOrderofMonth() {
+		LocalDate today = LocalDate.now();
+		int year = today.getYear();
+		int month = today.getMonthValue();
+		String hql = "SELECT month(od.orderDate), " 
+				+ "COUNT(od.id) "
+				+ "FROM Order od "
+				+ "WHERE month(od.orderDate) =:month AND year(od.orderDate)= :year "
+				+ "GROUP BY month(od.orderDate)";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("month", month);
+		query.setParameter("year", year);
+		List<Object[]> list = query.getResultList();	
 		return list;
 	}
 

@@ -15,5 +15,6 @@ public interface OrderDAO {
 	void create(Order order, List<OrderDetail> orderDetails);
 	List<Order>findByStatus();
 	List<Order>findByIsDelivery();
+	List<Order>findByIsPaid();
 
 }

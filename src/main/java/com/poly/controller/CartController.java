@@ -177,7 +177,6 @@ public class CartController {
 	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
 		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
 		Order order = orderDao.findById(orderId);
-		System.out.println(order.getId());
 		model.addAttribute("order", order);
 		model.addAttribute("listDetail", list);
 
