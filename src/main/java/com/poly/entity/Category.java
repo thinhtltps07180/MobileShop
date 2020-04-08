@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="Categories")
@@ -16,6 +17,7 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
+	@NotBlank(message = "Không được để trống tên category")
 	String name;
 
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)
