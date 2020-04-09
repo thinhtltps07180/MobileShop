@@ -10,4 +10,10 @@ public interface ReportDAO {
 	List<Object[]>sumOrderofMonth();
 	List<Object[]>revenueByMonth();
 	List<Object[]>revenueByCustomer();
+	List<Object[]>totalMonth();
+	List<Object[]>totalYear();
+	List<Object[]>sumOrderofYear();
+
+
+
 }

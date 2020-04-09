@@ -32,6 +32,10 @@ public class ReportController {
 		model.addAttribute("data", dao.revenueByDate());
 		return "admin/revenueByDate";
 	}
+	
+
+	
+	
 
 	@RequestMapping("admin/export")
 	public String export(Model model) throws IOException {

@@ -3,12 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- partial -->
 <style>
 span[id*=errors] {
 	color: red;
 	font-style: italic;
+
 }
 </style>
 <script>
@@ -29,12 +31,12 @@ span[id*=errors] {
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="page-header">
-			<h3 class="page-title">Form elements</h3>
+			<h3 class="page-title">Create New User</h3>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Forms</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Form
-						elements</li>
+						User</li>
 				</ol>
 			</nav>
 		</div>
@@ -42,14 +44,16 @@ span[id*=errors] {
 			<div class="col-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">User form elements</h4>
+						<h4 class="card-title">User form</h4>
 						<p class="card-description">User form elements</p>
 						<h3>${message }</h3>
 
-						<form:form enctype="multipart/form-data" action="/admin/updateUser"
-							modelAttribute="userEdit" class="forms-sample">
+						<form:form enctype="multipart/form-data"
+							action="/admin/addNewUser" modelAttribute="formUser"
+							class="forms-sample">
 							<div class="form-group">
-								<form:input path="id" type="hidden" class="form-control"
+								<label for="exampleInputName1">User name</label>
+								<form:input path="id" type="text" class="form-control"
 									id="exampleInputName1" placeholder="Name" />
 								<form:errors path="id" />
 							</div>
@@ -61,7 +65,7 @@ span[id*=errors] {
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword4">Password</label>
-								<form:input path="password" type="text" class="form-control"
+								<form:input path="password" type="password" class="form-control"
 									id="password" placeholder="password" />
 								<form:errors path="password" />
 							</div>
@@ -79,7 +83,7 @@ span[id*=errors] {
 							</div>
 							<div class="form-group">
 								<label for="exampleInputName2">Phone Number</label>
-								<form:input path="phoneNumber" type="number" class="form-control"
+								<form:input path="phoneNumber" type="text" class="form-control"
 									id="exampleInputName4" placeholder="phoneNumber" />
 								<form:errors path="phoneNumber" />
 							</div>
@@ -88,7 +92,8 @@ span[id*=errors] {
 								<form:select path="role.id">
 									<form:option value="" label="--Please Select"></form:option>
 									<!-- <option selected="selected" value="">--Please Select</option> -->
-									<form:options items="${listRole}" itemValue="id" itemLabel="name" />
+									<form:options items="${listRole}" itemValue="id"
+										itemLabel="name" />
 								</form:select>
 								<form:errors path="role.id" />
 							</div>
@@ -104,7 +109,8 @@ span[id*=errors] {
 								<div id="anh"></div>
 
 							</div>
-							<button type="submit" class="btn btn-gradient-primary mr-2 	">Submit</button>
+							<button type="submit"
+								class="btn btn-gradient-primary mr-2 ">Submit</button>
 							<button class="btn btn-light">Cancel</button>
 						</form:form>
 					</div>
@@ -135,4 +141,4 @@ span[id*=errors] {
 				editor = CKEDITOR.replace('description');
 			});
 		</script>
-	
+		

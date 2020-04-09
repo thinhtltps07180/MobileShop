@@ -246,6 +246,14 @@ i.fas.fa-trash {
 			<c:if test="${order.status.id == 4}">
 			<div class="step cancel"> <span class="icon"> <i class="fas fa-trash"></i> </span> <span class="text">Cancel order</span> </div>
 			</c:if>
+			
+			            <c:if test="${order.status.id == 5}">
+			<div class="step active"> <span class="icon"> <i class="fa fa-shopping-cart"></i> </span> <span class="text">Order</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fa fa-check"></i> </span> <span class="text">Order confirmed</span> </div>
+                <div class="step active "> <span class="icon"> <i class="fa fa-truck"></i> </span> <span class="text"> delivery</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fab fa-amazon-pay"></i> </span> <span class="text">Paid</span> </div>
+                <div class="step active"> <span class="icon"> <i class="fas fa-handshake"></i> </span> <span class="text">Done</span> </div>
+			</c:if>
 
 
 

@@ -3,6 +3,7 @@ package com.poly.controller;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 import java.util.Date;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class AdminController {
 
 	@Autowired
 	UserDAO userDao;
-	
+
 	@Autowired
 	PromotionDAO promotionDao;
 
@@ -67,21 +68,18 @@ public class AdminController {
 
 	@Autowired
 	CategoryDAO categoryDao;
-	
+
 	@Autowired
 	ReviewDAO reviewDao;
-	
+
 	@Autowired
 	StatusDAO statusDAO;
-	
 
 	@Autowired
 	ReportDAO reportDao;
 
 	@Autowired
 	ServletContext app;
-	
-	
 
 	@ResponseBody
 	@RequestMapping("/test/query")
@@ -92,19 +90,23 @@ public class AdminController {
 	@GetMapping("/admin/index")
 	public String index(Model model) {
 		List<Order> listOrder = orderDao.findAll();
-		model.addAttribute("listOrder" ,listOrder );
+		model.addAttribute("listOrder", listOrder);
 		model.addAttribute("rnvDay", reportDao.revenueByDay());
 		model.addAttribute("sumOrder", reportDao.sumOrderofDay());
+		model.addAttribute("sumOrderYear", reportDao.sumOrderofYear());
 		LocalDate today = LocalDate.now();
 		Month month = today.getMonth();
+		int year  = today.getYear();
+		System.out.println(year);
 		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
 		model.addAttribute("monthNow", month);
+		model.addAttribute("yearNow", year);
 		model.addAttribute("data", reportDao.revenueByDate());
+		model.addAttribute("rnvMonth", reportDao.totalMonth());
+		model.addAttribute("rnvYear", reportDao.totalYear());
 		return "admin/index";
 	}
 
-
-	
 	@GetMapping("/admin/products")
 	public String productList(Model model) {
 		List<Product> list = productDao.findAll();
@@ -116,6 +118,8 @@ public class AdminController {
 	public String register(Model model) {
 		List<Category> list = categoryDao.findAll();
 		model.addAttribute("form", new Product());
+		List<Promotion> listPromotion = promotionDao.findAll();
+		model.addAttribute("listPromotion", listPromotion);
 		model.addAttribute("list", list);
 		return "admin/create";
 	}
@@ -136,17 +140,39 @@ public class AdminController {
 		}
 		if (errors.hasErrors()) {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			List<Category> list = categoryDao.findAll();
+			model.addAttribute("list", list);
+			List<Promotion> listPromotion = promotionDao.findAll();
+			model.addAttribute("listPromotion", listPromotion);
 			return "admin/create";
 		} else {
 			try {
 				Category category = new Category();
 				category.setId(product.getCategory().getId());
 				product.setCategory(category);
+				if (product.getCategory().getId() == null) {
+					List<Category> list = categoryDao.findAll();
+					model.addAttribute("list", list);
+					model.addAttribute("messageCategory", "Vui lòng chọn loại sản phẩm");
+					List<Promotion> listPromotion = promotionDao.findAll();
+					model.addAttribute("listPromotion", listPromotion);
+					return "admin/create";
+
+				}
+				if (product.getPromotion().getId() == null) {
+					List<Category> list = categoryDao.findAll();
+					model.addAttribute("list", list);
+					model.addAttribute("messagePromotion", "Vui lòng chọn khuyến mãi cho sản phẩm");
+					List<Promotion> listPromotion = promotionDao.findAll();
+					model.addAttribute("listPromotion", listPromotion);
+					return "admin/create";
+
+				}
 				product.setCreateDate(new Date());
 				productDao.create(product);
 
 			} catch (Exception e) {
-				return "redirect:/admin/create";
+				return "admin/create";
 			}
 		}
 
@@ -182,12 +208,32 @@ public class AdminController {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
 			List<Category> list = categoryDao.findAll();
 			model.addAttribute("list", list);
+			List<Promotion> listPromotion = promotionDao.findAll();
+			model.addAttribute("listPromotion", listPromotion);
 			return "admin/edit";
 		} else {
 			try {
 				Category category = new Category();
 				category.setId(product.getCategory().getId());
 				product.setCategory(category);
+				if (product.getCategory().getId() == null) {
+					List<Category> list = categoryDao.findAll();
+					model.addAttribute("list", list);
+					model.addAttribute("messageCategory", "Vui lòng chọn loại sản phẩm");
+					List<Promotion> listPromotion = promotionDao.findAll();
+					model.addAttribute("listPromotion", listPromotion);
+					return "admin/create";
+
+				}
+				if (product.getPromotion().getId() == null) {
+					List<Category> list = categoryDao.findAll();
+					model.addAttribute("list", list);
+					model.addAttribute("messagePromotion", "Vui lòng chọn khuyến mãi cho sản phẩm");
+					List<Promotion> listPromotion = promotionDao.findAll();
+					model.addAttribute("listPromotion", listPromotion);
+					return "admin/create";
+
+				}
 				product.setCreateDate(new Date());
 				productDao.update(product);
 				model.addAttribute("message", "Update thành công!");
@@ -200,20 +246,60 @@ public class AdminController {
 			return "redirect:/admin/products";
 		}
 	}
-	
+
 	@GetMapping("/admin/users")
 	public String adminList(Model model) {
 		List<User> list = userDao.findAll();
 		model.addAttribute("listUsers", list);
 		return "admin/users";
 	}
-	
+
 	@RequestMapping("/admin/delete/{id}")
-	public String delete(Model model, @PathVariable("id") Integer id) {	
+	public String delete(Model model, @PathVariable("id") Integer id) {
 		productDao.delete(id);
 		return "redirect:/admin/products";
 	}
-	
+
+	@GetMapping("/admin/addUser")
+	public String getFormUser(Model model) {
+		model.addAttribute("formUser", new User());
+		model.addAttribute("listRole", roleDao.findAll());
+		return "admin/createUser";
+	}
+
+	@PostMapping("/admin/addNewUser")
+	public String formUser(Model model, @Validated @ModelAttribute("formUser") User user, BindingResult errors,
+			@RequestParam("up_photo") MultipartFile file) {
+		if (file.isEmpty()) {
+			user.setPhoto(user.getPhoto());
+		} else {
+			user.setPhoto(file.getOriginalFilename());
+			try {
+				String path = app.getRealPath("/static/user/photo/" + user.getPhoto());
+				file.transferTo(new File(path));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			model.addAttribute("listRole", roleDao.findAll());
+			return "admin/createUser";
+		} else {
+			try {
+				Role role = new Role();
+				role.setId(user.getRole().getId());
+				user.setRole(role);
+				userDao.create(user);
+			} catch (Exception e) {
+				return "admin/createUser";
+			}
+		}
+
+//		model.addAttribute("form" , user);
+		return "redirect:/admin/users";
+	}
+
 	@RequestMapping("/admin/editUser/{id}")
 	public String edit(Model model, @PathVariable("id") String id) {
 		User user = userDao.findById(id);
@@ -221,8 +307,7 @@ public class AdminController {
 		model.addAttribute("userEdit", user);
 		return "admin/userEdit";
 	}
-	
-	
+
 	@PostMapping("/admin/updateUser")
 	public String register(Model model, @Validated @ModelAttribute("userEdit") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -239,7 +324,8 @@ public class AdminController {
 		}
 		if (errors.hasErrors()) {
 			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
-			return "redirect:/admin/userEdit";
+			model.addAttribute("listRole", roleDao.findAll());
+			return "admin/userEdit";
 		} else {
 			try {
 				Role role = new Role();
@@ -247,30 +333,30 @@ public class AdminController {
 				user.setRole(role);
 				userDao.update(user);
 			} catch (Exception e) {
-				return "redirect:/admin/userEdit";		
+				return "admin/userEdit";
 			}
 		}
 
 //		model.addAttribute("form" , user);
 		return "redirect:/admin/users";
 	}
-	
+
 	@GetMapping("/admin/blog")
 	public String blog(Model model) {
 		List<Review> listReview = reviewDao.findAll();
-		model.addAttribute("reviewList" ,listReview );
+		model.addAttribute("reviewList", listReview);
 		return "admin/blog";
 	}
-	
+
 	@GetMapping("/admin/order")
 	public String order(Model model) {
 		List<Order> listOrder = orderDao.findAll();
-		model.addAttribute("listOrder" ,listOrder );
+		model.addAttribute("listOrder", listOrder);
 		return "admin/order";
 	}
-	
+
 	@RequestMapping("/admin/orderDetail/{orderId}/{id}")
-	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
+	public String detail(Model model, @PathVariable("id") Integer id, @PathVariable("orderId") Integer orderId) {
 		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
 		Order order = orderDao.findById(orderId);
 		model.addAttribute("order", order);
@@ -278,61 +364,56 @@ public class AdminController {
 
 		return "admin/orderDetail";
 	}
-	
+
 	@GetMapping("/admin/orderStatus")
 	public String orderStatus(Model model) {
 		List<Order> st = orderDao.findByStatus();
-		model.addAttribute("st" ,st );
+		model.addAttribute("st", st);
 		return "admin/orderStatus";
 	}
-	
+
 	@RequestMapping("/admin/checkOrders/{value}/{id}")
-	public String checkOrders(Model model , @PathVariable("id") Integer id) {
+	public String checkOrders(Model model, @PathVariable("id") Integer id) {
 		Order order = orderDao.findById(id);
 		Status st = statusDAO.findById(2);
 		order.setStatus(st);
-		orderDao.update(order);;
+		orderDao.update(order);
+		;
 		return "redirect:/admin/isDelivery";
 	}
-	
+
 	@GetMapping("/admin/isDelivery")
 	public String isDelivery(Model model) {
 		List<Order> st = orderDao.findByIsDelivery();
-		model.addAttribute("st" ,st );
+		model.addAttribute("st", st);
 		return "admin/isDelivery";
 	}
-	
+
 	@RequestMapping("/admin/isDelivery/{value}/{id}")
-	public String checkOrdersisDelivery(Model model , @PathVariable("id") Integer id) {
+	public String checkOrdersisDelivery(Model model, @PathVariable("id") Integer id) {
 		Order order = orderDao.findById(id);
 		Status st = statusDAO.findById(3);
 		order.setStatus(st);
-		orderDao.update(order);;
+		orderDao.update(order);
+		;
 		return "redirect:/admin/isPaid";
 	}
-	
+
 	@GetMapping("/admin/isPaid")
 	public String isisPaid(Model model) {
 		List<Order> st = orderDao.findByIsPaid();
-		model.addAttribute("st" ,st );
+		model.addAttribute("st", st);
 		return "admin/isPaid";
 	}
-	
+
 	@RequestMapping("/admin/isPaid/{value}/{id}")
-	public String checkOrdersisPaid(Model model , @PathVariable("id") Integer id) {
+	public String checkOrdersisPaid(Model model, @PathVariable("id") Integer id) {
 		Order order = orderDao.findById(id);
 		Status st = statusDAO.findById(5);
 		order.setStatus(st);
-		orderDao.update(order);;
+		orderDao.update(order);
+		;
 		return "redirect:/admin/order";
 	}
-	
-
-	
-	
-	
 
 }
-
-
-

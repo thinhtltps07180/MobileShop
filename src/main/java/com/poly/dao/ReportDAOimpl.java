@@ -149,4 +149,65 @@ public class ReportDAOimpl implements ReportDAO {
 		return list;
 	}
 
+
+
+
+
+
+
+
+	@Override
+	public List<Object[]> totalMonth() {
+		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
+		String hql = "SELECT month(od.orderDate), " 
+				+ "SUM(od.amount) "
+				+ "FROM Order od "
+				+ "WHERE month(od.orderDate) =:month "
+				+ "GROUP BY month(od.orderDate)";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("month", month);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<Object[]> totalYear() {
+		LocalDate today = LocalDate.now();
+		int year = today.getYear();
+		String hql = "SELECT year(od.orderDate), " 
+				+ "SUM(od.amount) "
+				+ "FROM Order od "
+				+ "WHERE year(od.orderDate) =:year "
+				+ "GROUP BY year(od.orderDate)";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("year", year);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
+
+
+
+	@Override
+	public List<Object[]> sumOrderofYear() {
+		LocalDate today = LocalDate.now();
+		int year = today.getYear();
+		String hql = "SELECT year(od.orderDate), " 
+				+ "COUNT(od.id) "
+				+ "FROM Order od "
+				+ "WHERE year(od.orderDate) =:year "
+				+ "GROUP BY year(od.orderDate)";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("year", year);
+		List<Object[]> list = query.getResultList();	
+		return list;
+	}
+
 }

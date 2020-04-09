@@ -77,6 +77,7 @@
                   <li class="nav-item"> <a class="nav-link" href="/admin/order"> Orders List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/orderStatus"> Orders List Pending </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/isDelivery"> Orders List Paid </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/isPaid"> Orders List Done </a></li>
                 </ul>
               </div>
             </li>

@@ -28,7 +28,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> findAll() {
-		String hql = "FROM Product";
+		String hql = "SELECT p FROM Product p  ORDER BY p.id DESC";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Product> query = session.createQuery(hql, Product.class);
 		return query.getResultList();
