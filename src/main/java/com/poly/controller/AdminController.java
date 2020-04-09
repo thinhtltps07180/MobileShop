@@ -91,19 +91,29 @@ public class AdminController {
 	public String index(Model model) {
 		List<Order> listOrder = orderDao.findAll();
 		model.addAttribute("listOrder", listOrder);
-		model.addAttribute("rnvDay", reportDao.revenueByDay());
-		model.addAttribute("sumOrder", reportDao.sumOrderofDay());
-		model.addAttribute("sumOrderYear", reportDao.sumOrderofYear());
-		LocalDate today = LocalDate.now();
-		Month month = today.getMonth();
-		int year  = today.getYear();
-		System.out.println(year);
-		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
-		model.addAttribute("monthNow", month);
-		model.addAttribute("yearNow", year);
+		
 		model.addAttribute("data", reportDao.revenueByDate());
+		model.addAttribute("rnvDay", reportDao.revenueByDay());
 		model.addAttribute("rnvMonth", reportDao.totalMonth());
 		model.addAttribute("rnvYear", reportDao.totalYear());
+		model.addAttribute("rnvCus", reportDao.revenueByCustomer());
+		model.addAttribute("sumOrder", reportDao.sumOrderofDay());
+		model.addAttribute("sumOrderYear", reportDao.sumOrderofYear());
+		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
+		model.addAttribute("rnvCusMonth", reportDao.revenueByCustomerMonth());
+		
+		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
+		int year  = today.getYear();
+		int day = today.getDayOfMonth();
+
+		model.addAttribute("dayNow", day);
+		model.addAttribute("monthNow", month);
+		model.addAttribute("yearNow", year);
+		
+
+
+
 		return "admin/index";
 	}
 

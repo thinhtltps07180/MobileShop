@@ -36,7 +36,7 @@ public class Product {
 	@NotNull(message = "Không được để trống giá sản phẩm")
 	@DecimalMin(value = "1000.0" , message = "Giá của sản phẩm tối thiểu là 1000 vnđ ")
 	@DecimalMax(value = "100000000.0" , message = "Giá của sản phẩm tối đa phải nhỏ hơn là 100.000.000 vnđ  ")
-	@NumberFormat(pattern = "#,###,###,###.##")
+	@NumberFormat(pattern = "#,######,###.##")
 	Double unitPrice;
 	@NotNull(message = "Không được để trống số lượng sản phẩm")
 	@Min(value = 1 , message = "Số lượng tối thiểu là 1" )

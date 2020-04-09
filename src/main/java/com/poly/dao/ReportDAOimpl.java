@@ -37,15 +37,39 @@ public class ReportDAOimpl implements ReportDAO {
 
 	@Override
 	public List<Object[]> revenueByCustomer() {
+		LocalDate today = LocalDate.now();
+		int day = today.getDayOfMonth();
 		String hql = "SELECT d.order.user.id," 
 				+ "SUM(d.quantity), " 
-				+ "SUM(d.quantity * d.unitPrice),"
-				+ "MIN(d.unitPrice), " 
-				+ "MAX(d.unitPrice), " 
-				+ "AVG(d.unitPrice) "
-				+ "FROM OrderDetail d GROUP BY d.order.user.id ORDER BY SUM(d.quantity * d.unitPrice) DESC";
+				+ "SUM(d.unitPrice),"
+				+ "MIN(d.unitPrice)," 
+				+ "MAX(d.unitPrice)" 
+				+ "FROM OrderDetail d "
+				+ "WHERE day(d.createDate) =:day "
+				+ "GROUP BY d.order.user.id";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("day", day);
+		List<Object[]> list = query.getResultList();
+		
+		return list;
+	}
+	
+	@Override
+	public List<Object[]> revenueByCustomerMonth() {
+		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
+		String hql = "SELECT d.order.user.id," 
+				+ "SUM(d.quantity), " 
+				+ "SUM(d.unitPrice),"
+				+ "MIN(d.unitPrice)," 
+				+ "MAX(d.unitPrice)" 
+				+ "FROM OrderDetail d "
+				+ "WHERE month(d.createDate) =:month "
+				+ "GROUP BY d.order.user.id";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
+		query.setParameter("month", month);
 		List<Object[]> list = query.getResultList();
 		return list;
 	}
@@ -54,7 +78,6 @@ public class ReportDAOimpl implements ReportDAO {
 	public List<Object[]> revenueByDate() {	
 		LocalDate today = LocalDate.now();
 		int day = today.getDayOfMonth();
-		System.out.println(day);
 		String hql = "SELECT d.product.category.name," 
 				+ "SUM(d.quantity), " 
 				+ "SUM(d.quantity * d.unitPrice),"
@@ -209,5 +232,19 @@ public class ReportDAOimpl implements ReportDAO {
 		List<Object[]> list = query.getResultList();	
 		return list;
 	}
+
+
+
+
+	@Override
+	public List<Object[]> totalAllMonth() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+
 
 }
