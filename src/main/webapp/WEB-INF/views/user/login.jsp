@@ -12,10 +12,10 @@
 			<div class="col-lg-6">
 				<div class="login_box_img">
 					<div class="hover">
-						<h4>New to our website?</h4>
-						<p>There are advances being made in science and technology
-							everyday, and a good example of this is the</p>
-						<a class="button button-account" href="register.html">Create
+						<h4>If you do not already have an account?</h4>
+						<p>You can click on the button below to  </p>
+						<p>create an account for yourself</p>
+						<a class="button button-account" href="/user/register">Create
 							an Account</a>
 					</div>
 				</div>

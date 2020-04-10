@@ -76,6 +76,8 @@ public class UserController {
 	@Autowired
 	RoleDAO roleDAO;
 	
+
+	
 	@Autowired
 	public JavaMailSender emailSender;
 
@@ -544,6 +546,31 @@ public class UserController {
 		}
 		return "user/forget";
 	}
+	
+	@PostMapping("/user/contact")
+	public String contact(Model model, @RequestParam("id") String id, @RequestParam("email") String email) {
+		User user = dao.findById(id);
+		if (user == null) {
+			model.addAttribute("message", "Invalid username!");
+
+		} else if (!email.equals(user.getEmail())) {
+			model.addAttribute("message", "Invalid email!");
+
+		} else {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(user.getEmail());
+			message.setSubject("Your password");
+			message.setText("Welcome to the shop, we are very happy that you have trusted our store\r\n"
+					+ "Here is your account and password:\r\n" + "Your account id is: " + user.getId() + "\r\n"
+					+ "Your password is: " + user.getPassword() + "\r\n" + "Thanks and warm regards");
+			this.emailSender.send(message);
+			
+			model.addAttribute("message", "Success, please check you email!");
+			return "redirect:/user/indext";
+			
+		}
+		return "user/contact";
+	}
 
 	@Bean
 	public JavaMailSender getJavaMailSender() {
@@ -551,8 +578,8 @@ public class UserController {
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 
-		mailSender.setUsername("dquangcuong1505@gmail.com");
-		mailSender.setPassword("mingtyno0");
+		mailSender.setUsername("tranlethanhthinh@gmail.com");
+		mailSender.setPassword("60ansuong");
 
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
@@ -561,5 +588,15 @@ public class UserController {
 		props.put("mail.debug", "true");
 
 		return mailSender;
+	}
+	
+	@RequestMapping("/user/rejectOrder/{value}/{id}")
+	public String checkOrders(Model model, @PathVariable("id") Integer id) {
+		Order order = orderDao.findById(id);
+		Status st = statusDao.findById(4);
+		order.setStatus(st);
+		orderDao.update(order);
+		;
+		return "redirect:/user/orderList";
 	}
 }

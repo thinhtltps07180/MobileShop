@@ -10,6 +10,7 @@ img#dt {
 }
 
 img#newId {
+	height: 269px;
 	background-color: #f2f2f2;
 }
 
@@ -36,7 +37,7 @@ img.card-img-top {
 }
 
 a#buttonSSS {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 </style>
 
@@ -70,7 +71,7 @@ a#buttonSSS {
 			<img id="dt" src="/static/admin/product/iphone.png" alt=""
 				class="img-fluid"> <a href="/user/categoryByIphone/0"
 				class="hero-carousel__slideOverlay">
-				<h3> IPhone 11 64GB</h3>
+				<h3>IPhone 11 64GB</h3>
 				<p>Ihphone</p>
 			</a>
 		</div>
@@ -239,8 +240,8 @@ a#buttonSSS {
 						<h5 class="card-title">${r.title}</h5>
 						<p class="card-text">${r.description}</p>
 					</div>
-					<a id="buttonSSS" href="/user/singleblog/${r.id}" class="btn btn-primary">Read
-						More</a>
+					<a id="buttonSSS" href="/user/singleblog/${r.id}"
+						class="btn btn-primary">Read More</a>
 				</div>
 			</c:forEach>
 

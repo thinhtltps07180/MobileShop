@@ -25,21 +25,6 @@ span[id*=errors] {
 </script>
 
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Register</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Register</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
 <!-- ================ end banner area ================= -->
 
 <!--================Login Box Area =================-->
@@ -52,7 +37,7 @@ span[id*=errors] {
 						<h4>Already have an account?</h4>
 						<p>There are advances being made in science and technology
 							everyday, and a good example of this is the</p>
-						<a class="button button-account" href="login.html">Login Now</a>
+						<a class="button button-account" href="/user/login">Login Now</a>
 					</div>
 				</div>
 			</div>
