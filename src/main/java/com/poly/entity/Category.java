@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Table(name="Categories")
@@ -16,6 +19,8 @@ public class Category {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
+	@NotBlank(message = "Không được để trống tên loại sản phẩm")// phải là chuỗi String
+	@Length(min=6 , message = "Tên loại sản phẩm phải có ít nhất 1 ký tự")
 	String name;
 
 	@OneToMany(mappedBy="category", fetch=FetchType.EAGER)

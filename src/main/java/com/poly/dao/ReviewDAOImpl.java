@@ -31,11 +31,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public List<Review> findAll() {
-		String hql = "FROM Review r ORDER BY r.id DESC";
+		String hql = "FROM Review r where r.status = false ";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Review> query = session.createQuery(hql, Review.class);
-		query.setFirstResult(0);
-		query.setMaxResults(3);
 		return query.getResultList();
 		
 	}

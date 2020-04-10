@@ -35,6 +35,19 @@
               </a>
             </li>
              <li class="nav-item">
+              <a class="nav-link" href="/admin/category">
+                <span class="menu-title">Category</span>
+                <i class="mdi mdi-clipboard-text menu-icon"></i>
+              </a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="/admin/review">
+                <span class="menu-title">Review</span>
+                <i class="mdi mdi-comment-processing menu-icon"></i>
+              </a>
+            </li>
+            
+             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                 <span class="menu-title">Management Orders</span>
                 <i class="menu-arrow"></i>
@@ -53,13 +66,11 @@
               <a class="nav-link" data-toggle="collapse" href="#general-chart" aria-expanded="false" aria-controls="general-chart">
                 <span class="menu-title"> Chart</span>
                 <i class="menu-arrow"></i>
-                <i class="mdi mdi-medical-bag menu-icon"></i>
+                <i class="mdi mdi-chart-bar"></i>
               </a>
               <div class="collapse" id="general-chart">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"> <a class="nav-link" href="/admin/revenueByDate"> Revenue By Date </a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/users">Revenue By Month</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="/admin/products"> Revenue By Year </a></li>
                 </ul>
               </div>
             </li>
@@ -74,6 +85,8 @@
                   <li class="nav-item"> <a class="nav-link" href="/admin/index"> Dashboard </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/users"> User List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/products"> Product List </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/category"> Category </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/review"> Review </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/order"> Orders List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/orderStatus"> Orders List Pending </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/isDelivery"> Orders List Paid </a></li>
@@ -84,16 +97,17 @@
             <li class="nav-item sidebar-actions">
               <span class="nav-link">
                 <div class="border-bottom">
-                  <h6 class="font-weight-normal mb-3">Projects</h6>
+                  <h6 class="font-weight-normal mb-3">Page</h6>
                 </div>
-                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
+                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add more Page</button>
                 <div class="mt-4">
                   <div class="border-bottom">
                     <p class="text-secondary">Categories</p>
                   </div>
                   <ul class="gradient-bullet-list mt-4">
-                    <li>Free</li>
-                    <li>Pro</li>
+                    <li>Table</li>
+                    <li>Grid</li>
+                    <li>Basic</li>
                   </ul>
                 </div>
               </span>

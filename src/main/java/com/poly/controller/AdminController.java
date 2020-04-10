@@ -91,7 +91,7 @@ public class AdminController {
 	public String index(Model model) {
 		List<Order> listOrder = orderDao.findAll();
 		model.addAttribute("listOrder", listOrder);
-		
+
 		model.addAttribute("data", reportDao.revenueByDate());
 		model.addAttribute("rnvDay", reportDao.revenueByDay());
 		model.addAttribute("rnvMonth", reportDao.totalMonth());
@@ -101,20 +101,44 @@ public class AdminController {
 		model.addAttribute("sumOrderYear", reportDao.sumOrderofYear());
 		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
 		model.addAttribute("rnvCusMonth", reportDao.revenueByCustomerMonth());
-		
+
 		LocalDate today = LocalDate.now();
 		int month = today.getMonthValue();
-		int year  = today.getYear();
+		int year = today.getYear();
 		int day = today.getDayOfMonth();
 
 		model.addAttribute("dayNow", day);
 		model.addAttribute("monthNow", month);
 		model.addAttribute("yearNow", year);
-		
-
-
 
 		return "admin/index";
+	}
+
+	@GetMapping("/admin/category")
+	public String category(Model model) {
+		List<Category> list = categoryDao.findAll();
+		model.addAttribute("categoryList", list);
+		return "admin/category";
+	}
+
+	@GetMapping("/admin/createCategory")
+	public String createCategory(Model model) {
+		model.addAttribute("form", new Category());
+		return "admin/createCategory";
+	}
+
+	@PostMapping("/admin/createCategory")
+	public String addCategory(Model model, @Validated @ModelAttribute("form") Category category, BindingResult errors) {
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "admin/createCategory";
+		} else {
+
+			categoryDao.create(category);
+		}
+
+		return "redirect:/admin/category";
+
 	}
 
 	@GetMapping("/admin/products")
@@ -351,11 +375,20 @@ public class AdminController {
 		return "redirect:/admin/users";
 	}
 
-	@GetMapping("/admin/blog")
+	@GetMapping("/admin/review")
 	public String blog(Model model) {
 		List<Review> listReview = reviewDao.findAll();
 		model.addAttribute("reviewList", listReview);
-		return "admin/blog";
+		return "admin/review";
+	}
+	
+	@RequestMapping("/admin/checkReview/{value}/{id}")
+	public String checkReview(Model model, @PathVariable("id") Integer id) {
+		Review rv = reviewDao.findById(id);
+		rv.setStatus(true);;
+		reviewDao.update(rv);
+		;
+		return "redirect:/admin/review";
 	}
 
 	@GetMapping("/admin/order")
