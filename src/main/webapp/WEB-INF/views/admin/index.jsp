@@ -89,7 +89,7 @@ $(document).ready(function() {
         buttons: [
             {
                 extend: 'print',
-                title: 'Recent Orders by Status '
+                title: 'Recent Orders by month '
             },
             'copy', 'csv', 'excel', 'pdf'
         ]
@@ -145,7 +145,7 @@ $(document).ready(function() {
 								VND
 							</h3>
 						</c:forEach>
-						<h6 class="card-text">Increased by 60%</h6>
+						<h6 class="card-text">Increased by 28%</h6>
 					</div>
 				</div>
 			</div>
@@ -171,7 +171,7 @@ $(document).ready(function() {
 								VND
 							</h3>
 						</c:forEach>
-						<h6 class="card-text">Increased by 60%</h6>
+						<h6 class="card-text">Increased by 38%</h6>
 					</div>
 				</div>
 			</div>
@@ -409,7 +409,7 @@ $(document).ready(function() {
           datasets: [
             {
               label: "Revenue By Date (vnd)",
-              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850,#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850,#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              backgroundColor: ["#FF0000", "#FE642E","#0000FF","#4B8A08","#2E2E2E", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
               data: [
                  
               	<c:forEach var="array" items="${data}">
@@ -445,7 +445,7 @@ $(document).ready(function() {
           datasets: [
             {
               label: "Revenue By Date (vnd)",
-              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850,#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850,#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              backgroundColor: ["#FF0000", "#FE642E","#0000FF","#4B8A08","#2E2E2E", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
               data: [
                  
               	<c:forEach var="array" items="${data}">
