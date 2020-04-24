@@ -55,7 +55,12 @@ $(document).ready(function() {
     $('#example1').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            {
+                extend: 'print',
+                title: 'Recent Orders by day '
+            },
+
+            'copy', 'csv', 'excel', 'pdf'
         ]
     } );
 } );
@@ -67,7 +72,11 @@ $(document).ready(function() {
     $('#example2').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            {
+                extend: 'print',
+                title: 'Recent Orders by month '
+            },
+            'copy', 'csv', 'excel', 'pdf'
         ]
     } );
 } );
@@ -78,7 +87,11 @@ $(document).ready(function() {
     $('#example').DataTable( {
         dom: 'Bfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            {
+                extend: 'print',
+                title: 'Recent Orders by Status '
+            },
+            'copy', 'csv', 'excel', 'pdf'
         ]
     } );
 } );
