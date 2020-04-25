@@ -32,12 +32,11 @@ a.post-img.top1 {
 							<a href="category.html">Lifestyle</a>
 						</div>
 						<h3 class="post-title title-lg">
-							<a href="blog-post.html">Postea senserit id eos, vivendo
-								periculis ei qui</a>
+							<a href="blog-post.html">${top1.title}</a>
 						</h3>
 						<ul class="post-meta">
-							<li><a href="author.html">John Doe</a></li>
-							<li>20 April 2018</li>
+							<li><a href="author.html">${top1.user.id}</a></li>
+							<li>${top1.createDate}</li>
 						</ul>
 					</div>
 				</div>
