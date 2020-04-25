@@ -102,7 +102,7 @@ $(document).ready(function() {
 		<div class="row" id="proBanner">
 			<div class="col-12">
 				<span class="d-flex align-items-center purchase-popup">
-					<p>Like what you see? Check out our premium version for more.</p> <i
+					<p>Revenue by day , month , year.</p> <i
 					class="mdi mdi-close" id="bannerClose"></i>
 				</span>
 			</div>

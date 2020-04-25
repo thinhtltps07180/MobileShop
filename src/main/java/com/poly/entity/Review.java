@@ -9,25 +9,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="Reviews")
 public class Review {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	Integer id;
-	/*
-	 * @NotBlank(message = "Không được để trống title")// phải là chuỗi String
-	 * 
-	 * @Length(min=6 , message = "title name phải có ít nhất 6 ký tự")
-	 */
+	@NotBlank(message = "Không được để trống tên tiêu đề bài viết")// phải là chuỗi String
+	@Length(min=6 , message = "tiêu đề bài viết phải có ít nhất 6 ký tự")
 	String title;
-	/*
-	 * @NotBlank(message = "Không được để trống description")// phải là chuỗi String
-	 * 
-	 * @Length(min=6 , message = "description name phải có ít nhất 6 ký tự")
-	 */
+	@NotBlank(message = "Không được để trống tên mô tả ngắn bài viết")// phải là chuỗi String
+	@Length(min=6 , message = " mô tả ngắn bài viết phải có ít nhất 6 ký tự")
 	String description;
-	/* @NotBlank(message = "Không được để trống content") */
+	@NotBlank(message = "Không được để trống nội dụng bài viết")// phải là chuỗi String
+	@Length(min=6 , message = " nội dụng bài viết phải có ít nhất 6 ký tự")
 	String content;
 	String thumbnail;	
 //	String CreateBy;	

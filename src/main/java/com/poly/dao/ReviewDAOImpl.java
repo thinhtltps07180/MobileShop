@@ -70,6 +70,35 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return query.getResultList();
 	}
 
+	@Override
+	public Review findByTop1News() {
+		String hql = "SELECT r FROM Review r WHERE r.status = true  ORDER BY r.id DESC ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql,Review.class);
+		query.setFirstResult(0);
+		query.setMaxResults(1);
+		Review result = query.getSingleResult();
+		return result;
+	}
+
+	@Override
+	public List<Review> findAllTop2() {
+		String hql = "FROM Review r  WHERE r.status = true ORDER BY r.id DESC";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		query.setFirstResult(1);
+		query.setMaxResults(2);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Review> findAllTrue() {
+		String hql = "FROM Review r where r.status = true ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		return query.getResultList();
+	}
+
 
 
 	

@@ -85,7 +85,7 @@ public class UserController {
 	public String index(Model model) {
 		List<Product> newList = productDao.findAllNew();
 		List<Product> trendList = productDao.findTrend();
-		List<Review> listReview = reviewDAO.findAll();	
+		List<Review> listReview = reviewDAO.findAllTrue();	
 		model.addAttribute("reviewList" ,listReview );
 		model.addAttribute("newList", newList);
 		model.addAttribute("trendList", trendList);
@@ -280,7 +280,9 @@ public class UserController {
 	public String blog(Model model) {
 		List<Review> listReview = reviewDAO.findAll();	
 		model.addAttribute("reviewList" ,listReview );
-		return "user/blog";
+		model.addAttribute("top1" ,reviewDAO.findByTop1News() );
+		model.addAttribute("top2" ,reviewDAO.findAllTop2() );
+		return "user/testReview";
 	}
 	
 	@GetMapping("/user/myBlog")
