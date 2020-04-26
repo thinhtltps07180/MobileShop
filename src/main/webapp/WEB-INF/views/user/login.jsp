@@ -6,6 +6,14 @@
 <!-- ================ end banner area ================= -->
 
 <!--================Login Box Area =================-->
+<style>
+span[id*=errors] {
+	color: red;
+	font-style: italic;
+}
+</style>
+
+
 <section class="login_box_area section-margin">
 	<div class="container">
 		<div class="row">
@@ -24,6 +32,7 @@
 				<div class="login_form_inner">
 					<div class="alert alert-danger" role="alert">${alert}</div>
 					<h3>Log in to enter</h3>
+					<span id="errors">${message }</span>
 					<form method="post" class="row login_form" action="/user/login"
 						id="contactForm">
 						<div class="col-md-12 form-group">
@@ -32,10 +41,11 @@
 								onblur="this.placeholder = 'Username'">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="password"
+							<input type="password" class="form-control" id="password"
 								name="password" placeholder="Password"
 								onfocus="this.placeholder = ''"
 								onblur="this.placeholder = 'Password'">
+
 						</div>
 						<div class="col-md-12 form-group">
 							<div class="creat_account">

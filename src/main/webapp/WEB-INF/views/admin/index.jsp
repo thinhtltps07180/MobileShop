@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -387,7 +390,7 @@ $(document).ready(function() {
 			class="d-sm-flex justify-content-center justify-content-sm-between">
 			<span
 				class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-				© 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>.
+				Â© 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>.
 				All rights reserved.
 			</span> <span
 				class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted

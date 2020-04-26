@@ -53,12 +53,10 @@ a#buttonSSS {
 			</div>
 			<div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
 				<div class="hero-banner__content">
-					<h4>Shop is fun</h4>
-					<h1>Browse Our Premium Product</h1>
-					<p>Us which over of signs divide dominion deep fill bring
-						they're meat beho upon own earth without morning over third. Their
-						male dry. They are great appear whose land fly grass.</p>
-					<a class="button button-hero" href="#">Browse Now</a>
+					<h4>welcome to ...</h4>
+					<h3>A few clicks is all it takes.</h1>
+					<p>Don'worry, we have it..</p>
+					<a class="button button-hero" href="#">Click Me!</a>
 				</div>
 			</div>
 		</div>
