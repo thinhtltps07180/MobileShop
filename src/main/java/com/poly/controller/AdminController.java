@@ -93,14 +93,17 @@ public class AdminController {
 		model.addAttribute("listOrder", listOrder);
 
 		model.addAttribute("data", reportDao.revenueByDate());
+		
 		model.addAttribute("rnvDay", reportDao.revenueByDay());
 		model.addAttribute("rnvMonth", reportDao.totalMonth());
 		model.addAttribute("rnvYear", reportDao.totalYear());
-		model.addAttribute("rnvCus", reportDao.revenueByCustomer());
+		
 		model.addAttribute("sumOrder", reportDao.sumOrderofDay());
 		model.addAttribute("sumOrderYear", reportDao.sumOrderofYear());
 		model.addAttribute("sumOrderM", reportDao.sumOrderofMonth());
+		
 		model.addAttribute("rnvCusMonth", reportDao.revenueByCustomerMonth());
+		model.addAttribute("rnvCus", reportDao.revenueByCustomer());
 
 		LocalDate today = LocalDate.now();
 		int month = today.getMonthValue();

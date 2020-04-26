@@ -291,7 +291,7 @@ $(document).ready(function() {
 						<div class="col-6 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Recent Orders</h4>
+						<h4 class="card-title">Recent Orders Day</h4>
 						<div class="table-responsive">
 							<table id="example2" class="table">
 								<thead>
@@ -333,7 +333,7 @@ $(document).ready(function() {
 			<div class="col-12 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Recent Orders</h4>
+						<h4 class="card-title">Recent Orders Month</h4>
 						<div class="table-responsive">
 							<table id="example" class="table">
 								<thead>
@@ -349,7 +349,7 @@ $(document).ready(function() {
 									<c:forEach var="o" items="${listOrder}">
 										<tr>
 											<td><img src="/static/user/photo/${o.user.photo}"
-												class="mr-2" alt="image">${o.user.name}</td>
+												class="mr-2" alt="image">${o.user.id}</td>
 											<td>${o.orderDate}</td>
 											<td><c:if test="${o.status.id == 1}">
 													<label style="width: 70px;"

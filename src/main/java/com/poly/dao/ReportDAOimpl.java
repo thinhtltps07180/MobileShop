@@ -38,6 +38,7 @@ public class ReportDAOimpl implements ReportDAO {
 	@Override
 	public List<Object[]> revenueByCustomer() {
 		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
 		int day = today.getDayOfMonth();
 		String hql = "SELECT d.order.user.id," 
 				+ "SUM(d.quantity), " 
@@ -45,11 +46,12 @@ public class ReportDAOimpl implements ReportDAO {
 				+ "MIN(d.unitPrice)," 
 				+ "MAX(d.unitPrice)" 
 				+ "FROM OrderDetail d "
-				+ "WHERE day(d.createDate) =:day "
+				+ "WHERE day(d.createDate) =:day AND month(d.createDate)= :month "
 				+ "GROUP BY d.order.user.id";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
 		query.setParameter("day", day);
+		query.setParameter("month", month);
 		List<Object[]> list = query.getResultList();
 		
 		return list;
@@ -60,7 +62,7 @@ public class ReportDAOimpl implements ReportDAO {
 		LocalDate today = LocalDate.now();
 		int month = today.getMonthValue();
 		String hql = "SELECT d.order.user.id," 
-				+ "SUM(d.quantity), " 
+				+ "SUM(d.quantity), "
 				+ "SUM(d.unitPrice),"
 				+ "MIN(d.unitPrice)," 
 				+ "MAX(d.unitPrice)" 
