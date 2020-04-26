@@ -61,6 +61,18 @@ $(document).ready(function() {
 } );
 
 </script>
+
+<script>
+$(document).ready(function() {
+    $('#example2').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+
+</script>
 <style>
 td#cf {
 	width: 14%;
@@ -128,6 +140,66 @@ border-top: 10px solid #FFFFFF;
 			</div>
 		</div>
 	</div>
+	
+	
+		<div class="content-wrapper">
+		<div class="page-header">
+			<h3 class="page-title">All review from user</h3>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#">Tables</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Check review</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="row">
+			<div class="col-12 grid-margin">
+				<div class="card">
+					<div class="card-body">
+						<h4 class="card-title">All Review </h4>
+						<div class="table-responsive">
+							<table id="example2" class="table">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Thumbnail</th>
+										<th>Title</th>
+										<th>Create Date</th>
+										<th>Create by</th>
+										<th>Delete Review</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="r" items="${reviewListTrue}"
+										varStatus="loopCounter">
+										<tr>
+											<td>${r.id}</td>
+											<td class="rtn"><img
+												src="/static/user/news/${r.thumbnail}" alt="image" /></td>
+											<td id="title">${r.title}</td>
+											<td>
+											<fmt:formatDate value="${r.createDate}" pattern="yyyy-MM-dd" />
+											</td>
+											<td>${r.user.id}</td>
+											
+											<td id="cf"><a class="check-list"
+												href="/admin/delete/review/${r.id}"
+												id="${loopCounter.count}"><button
+														style="font-size: 24px; color: red; margin-left: 33px;">
+														<i class="fa fa-remove"></i>
+											</button></a></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<footer class="footer">
 		<div
 			class="d-sm-flex justify-content-center justify-content-sm-between">

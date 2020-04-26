@@ -293,6 +293,12 @@ public class AdminController {
 		productDao.delete(id);
 		return "redirect:/admin/products";
 	}
+	
+	@RequestMapping("/admin/delete/review/{id}")
+	public String deleteReview(Model model, @PathVariable("id") Integer id) {
+		reviewDao.delete(id);
+		return "redirect:/admin/review";
+	}
 
 	@GetMapping("/admin/addUser")
 	public String getFormUser(Model model) {
@@ -378,6 +384,8 @@ public class AdminController {
 	@GetMapping("/admin/review")
 	public String blog(Model model) {
 		List<Review> listReview = reviewDao.findAll();
+		List<Review> listReviewTrue = reviewDao.findAllTrue();
+		model.addAttribute("reviewListTrue", listReviewTrue);
 		model.addAttribute("reviewList", listReview);
 		return "admin/review";
 	}

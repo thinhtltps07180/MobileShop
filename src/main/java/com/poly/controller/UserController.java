@@ -519,7 +519,7 @@ public class UserController {
 
 		// model.addAttribute("form" , user);
 
-		return "redirect:/user/blog";
+		return "redirect:/user/myBlog";
 	}
 	
 	@RequestMapping("/user/cancle/{index}/{id}")

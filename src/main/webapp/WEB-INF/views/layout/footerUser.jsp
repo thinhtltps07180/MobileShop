@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 	<footer class="footer">
 		<div class="footer-area">
 			<div class="container">
@@ -21,15 +24,15 @@
 								<li><a href="#">Home</a></li>
 								<li><a href="#">Shop</a></li>
 								<li><a href="#">Blog</a></li>
-								<li><a href="#">Product</a></li>
-								<li><a href="#">Brand</a></li>
 								<li><a href="#">Contact</a></li>
+								<li><a href="#">About</a></li>
+								<li><a href="#">Pages</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-lg-2 col-md-6 col-sm-6">
 						<div class="single-footer-widget instafeed">
-							<h4 class="footer_title">Gallery</h4>
+							<h4 class="footer_title">Member</h4>
 							<ul class="list instafeed d-flex flex-wrap">
 								<li><img src="/static/user/img/gallery/r1.jpg" alt=""></li>
 								<li><img src="/static/user/img/gallery/r2.jpg" alt=""></li>
@@ -48,15 +51,14 @@
 									<span class="fa fa-location-arrow"></span>
 									Head Office
 								</p>
-								<p>123, Main Street, Your City</p>
+								<p>391A Nam Kỳ Khởi Nghĩa, Phường 8, Quận 3, Hồ Chí Minh</p>
 	
 								<p class="sm-head">
 									<span class="fa fa-phone"></span>
 									Phone Number
 								</p>
 								<p>
-									+123 456 7890 <br>
-									+123 456 7890
+									+84 0337039857 <br>
 								</p>
 	
 								<p class="sm-head">
@@ -64,8 +66,8 @@
 									Email
 								</p>
 								<p>
-									free@infoexample.com <br>
-									www.infoexample.com
+									tranlethanhthinh@gmail.com <br>
+									https://www.facebook.com/thanhthinh.tranle
 								</p>
 							</div>
 						</div>
