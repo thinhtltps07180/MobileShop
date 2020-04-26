@@ -100,15 +100,17 @@ public class ReportDAOimpl implements ReportDAO {
 	@Override
 	public List<Object[]> revenueByDay() {
 		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
 		int day = today.getDayOfMonth();
-		String hql = "SELECT od.orderDate, " 
+		String hql = "SELECT day(od.orderDate), " 
 				+ "SUM(od.amount) "
 				+ "FROM Order od "
-				+ "WHERE day(od.orderDate) =:day "
-				+ "GROUP BY od.orderDate";
+				+ "WHERE day(od.orderDate) =:day AND month(od.orderDate)= :month "
+				+ "GROUP BY day(od.orderDate)";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
 		query.setParameter("day", day);
+		query.setParameter("month", month);
 		List<Object[]> list = query.getResultList();	
 		return list;
 	}
@@ -119,15 +121,17 @@ public class ReportDAOimpl implements ReportDAO {
 	@Override
 	public List<Object[]> sumOrderofDay() {
 		LocalDate today = LocalDate.now();
+		int month = today.getMonthValue();
 		int day = today.getDayOfMonth();
-		String hql = "SELECT od.orderDate, " 
+		String hql = "SELECT day(od.orderDate), " 
 				+ "COUNT(od.id) "
 				+ "FROM Order od "
-				+ "WHERE day(od.orderDate) =:day "
-				+ "GROUP BY od.orderDate";
+				+ "WHERE day(od.orderDate) =:day AND month(od.orderDate)= :month "
+				+ "GROUP BY day(od.orderDate)";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
 		query.setParameter("day", day);
+		query.setParameter("month", month);
 		List<Object[]> list = query.getResultList();	
 		return list;
 	}

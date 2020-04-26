@@ -139,8 +139,8 @@ $(document).ready(function() {
 							${dayNow}-${monthNow}-${yearNow} <i
 								class="mdi mdi-chart-bar mdi-24px float-right"></i>
 						</h4>
-						<c:forEach var="arr" items="${sumOrder}">
-							<h3 class="mb-5">${arr[1]} Order</h3>
+						<c:forEach var="array" items="${sumOrder}">
+							<h3 class="mb-5">${array[1]} Order</h3>
 						</c:forEach>
 						<c:forEach var="array" items="${rnvDay}">
 							<h3 class="mb-5">
@@ -158,11 +158,11 @@ $(document).ready(function() {
 						<img src="/static/admin/assets/images/dashboard/circle.svg"
 							class="card-img-absolute" alt="circle-image">
 						<h4 class="font-weight-normal mb-3">
-							Daily Sales By Day <i
+							Daily Sales By Month <i
 								class="mdi mdi-chart-line mdi-24px float-right"></i>
 						</h4>
 						<h4 class="font-weight-normal mb-3">
-							${dayNow}-${monthNow}-${yearNow} <i
+							${monthNow}-${yearNow} <i
 								class="mdi mdi-chart-bar mdi-24px float-right"></i>
 						</h4>
 						<c:forEach var="array" items="${sumOrderM}">
