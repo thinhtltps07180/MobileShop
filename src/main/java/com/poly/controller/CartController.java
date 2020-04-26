@@ -19,10 +19,12 @@ import com.poly.dao.OrderDAO;
 import com.poly.dao.OrderDetailDAO;
 import com.poly.dao.ProductDAO;
 import com.poly.dao.RoleDAO;
+import com.poly.dao.StatusDAO;
 import com.poly.dao.UserDAO;
 import com.poly.entity.Order;
 import com.poly.entity.OrderDetail;
 import com.poly.entity.Product;
+import com.poly.entity.Status;
 import com.poly.entity.User;
 import com.poly.service.CartService;
 
@@ -51,6 +53,9 @@ public class CartController {
 	
 	@Autowired
 	RoleDAO roleDAO;
+	
+	@Autowired
+	StatusDAO statusDAO;
 
 	@Autowired
 	CartService cart;
@@ -60,6 +65,15 @@ public class CartController {
 		cart.add(id);
 		String redirect = "redirect:/user/category/"+pageNo;
 		return redirect;
+	}
+	
+	@RequestMapping("/cart/add/{id}")
+	public String addCartSingle(@PathVariable("id") Integer id ) {
+		cart.add(id);
+//		String redirect = "redirect:/user/singleproduct/"+id;
+//		return redirect;
+		return "redirect:/cart/view";
+
 	}
 	
 	@RequestMapping("/cart/addAsc/{pageNo}/{id}")
@@ -105,37 +119,51 @@ public class CartController {
 	
 	@RequestMapping("/cart/accept")
 	public String accept(Model model, HttpServletRequest request) {
-		Order order = new Order();
-		order.setOrderDate(new Date());
-		order.setAmount(cart.getAmount());
-		User user = (User) session.getAttribute("user");
-		order.setUser(user);
+		if(session.getAttribute("user")== null) {
+			
+			model.addAttribute("message", "Vui lòng login trước khi thanh toán");
+			return "user/login";
+		}else {
+			Order order = new Order();
+			order.setOrderDate(new Date());
+			order.setAmount(cart.getAmount());
+			User user = (User) session.getAttribute("user");
+			order.setUser(user);
+			Status st = statusDAO.findById(1);
+			order.setStatus(st);
 
-		List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-		List<Product> list = cart.getItems();
-		for (Product p : list) {
-			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setUnitPrice(cart.getAmount());
-			orderDetail.setQuantity(p.getQuantity());
-			orderDetail.setImage(p.getImage());
-			orderDetail.setStatus(false);
-			orderDetail.setOrder(order);
-			orderDetail.setProduct(p);
-//			orderDetail.setImage(image);
-			orderDetails.add(orderDetail);
-			Product product = productDao.findById(p.getId());
-			int a = product.getQuantity();
-			System.out.println(a);		
-			product.setQuantity(a - p.getQuantity());
-			productDao.update(product);
-			System.out.println(product.getQuantity());	
+
+			List<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
+			List<Product> list = cart.getItems();
+			for (Product p : list) {
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setUnitPrice(cart.getAmount());
+				orderDetail.setQuantity(p.getQuantity());
+				orderDetail.setImage(p.getImage());
+				orderDetail.setStatus(false);
+				orderDetail.setOrder(order);
+				orderDetail.setProduct(p);
+				orderDetail.setCreateDate(new Date());
+//				orderDetail.setImage(image);
+				orderDetails.add(orderDetail);
+				Product product = productDao.findById(p.getId());
+				int a = product.getQuantity();
+				System.out.println(a);		
+				product.setQuantity(a - p.getQuantity());
+				productDao.update(product);
+				System.out.println(product.getQuantity());	
+			}
+
+
+			orderDao.create(order, orderDetails);
+			this.clear();
 		}
+		
 
-
-		orderDao.create(order, orderDetails);
-
-		return "redirect:/user/confirmation";
+		return "redirect:/user/orderList";
 	}
+	
+
 	
 	@RequestMapping("/user/orderList")
 	public String orderList(Model model) {
@@ -149,7 +177,6 @@ public class CartController {
 	public String detail(Model model, @PathVariable("id") Integer id , @PathVariable("orderId") Integer orderId) {
 		List<OrderDetail> list = orderDetailDao.findAllByOrderId(id);
 		Order order = orderDao.findById(orderId);
-		System.out.println(order.getId());
 		model.addAttribute("order", order);
 		model.addAttribute("listDetail", list);
 

@@ -32,7 +32,7 @@ public class OrDerDAOImpl implements OrderDAO {
 
 	@Override
 	public List<Order> findAll() {
-		String hql = "FROM Order";
+		String hql = "FROM Order o ORDER BY o.id DESC";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Order> query = session.createQuery(hql, Order.class);
 		return query.getResultList();
@@ -78,6 +78,30 @@ public class OrDerDAOImpl implements OrderDAO {
 		TypedQuery<Order> query = session.createQuery(hql, Order.class);
 		query.setParameter("id", user);
 		return query.getResultList();
+	}
+
+	@Override
+	public List<Order> findByStatus() {
+		String hql = "from Order o where o.status = 1 ";
+		Session session = factory.getCurrentSession(); 
+		TypedQuery<Order> query = session.createQuery(hql, Order.class);
+		return query.getResultList();	
+	}
+
+	@Override
+	public List<Order> findByIsDelivery() {
+		String hql = "from Order o where o.status = 2 ";
+		Session session = factory.getCurrentSession(); 
+		TypedQuery<Order> query = session.createQuery(hql, Order.class);
+		return query.getResultList();	
+	}
+
+	@Override
+	public List<Order> findByIsPaid() {
+		String hql = "from Order o where o.status = 3 ";
+		Session session = factory.getCurrentSession(); 
+		TypedQuery<Order> query = session.createQuery(hql, Order.class);
+		return query.getResultList();	
 	}
 
 	

@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -17,18 +18,28 @@ import org.hibernate.validator.constraints.Length;
 @Table(name = "Users")
 public class User {
 	@Id
-//	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
-//	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
+	@NotBlank(message = "Không được để trống username")// phải là chuỗi String
+	@Length(min=6 , message = "User name phải có ít nhất 6 ký tự")
 	String id;
-//	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
-//	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
+	@Length(min=6 , message = "Mật khẩu phải có ít nhất 6 ký tự")
+	@NotBlank(message = "Không được để trống password")// phải là chuỗi String
 	String password;
 	String photo;
-//	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
-//	@Email (message = "Định dạng email không đúng")
+	@NotBlank(message = "Không được để trống email")// phải là chuỗi String
+	@Email (message = "Định dạng email không đúng")
 	String email;
+	@NotBlank(message = "Không được để trống địa chỉ")// phải là chuỗi String
+	@Length(min=6 , message = "Địa chỉ  phải có ít nhất 6 ký tự")
 	String address;
-	Integer phoneNumber;
+	@Pattern(regexp = "(09|03|07|08|05)+([0-9]{8})", message = "Phone numbers của bạn phải bắt đầu bằng Viettel: 09, 03\r\n" + 
+			"MobiFone: 09, 07\r\n" + 
+			"VinaPhone: 09, 08\r\n" + 
+			"Vietnamobile và Gmobile: 09, 05"
+			+ "và có tối đa 10 số")
+	@NotBlank (message = "Không được để trống phone number")
+	String phoneNumber;
+	@NotBlank(message = "Không được để trống tên")// phải là chuỗi String
+	@Length(min=6 , message = "Tên  phải có ít nhất 6 ký tự")
 	String name;
 //	Integer roleId;
 
@@ -108,11 +119,13 @@ public class User {
 		this.address = address;
 	}
 
-	public Integer getPhoneNumber() {
+
+
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(Integer phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 

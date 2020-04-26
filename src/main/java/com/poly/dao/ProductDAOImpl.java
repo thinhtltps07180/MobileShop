@@ -1,6 +1,5 @@
 package com.poly.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -29,7 +28,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> findAll() {
-		String hql = "FROM Product";
+		String hql = "SELECT p FROM Product p  ORDER BY p.id DESC";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Product> query = session.createQuery(hql, Product.class);
 		return query.getResultList();
@@ -118,6 +117,52 @@ public class ProductDAOImpl implements ProductDAO {
 		query.setMaxResults(pageSize);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Product> findByIphone(int pageNo) {
+		String hql = "SELECT p FROM Product p WHERE p.category = 1008 ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findBySamSung(int pageNo) {
+		String hql = "SELECT p FROM Product p WHERE p.category = 1009 ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findByXiaoMi(int pageNo) {
+		String hql = "SELECT p FROM Product p WHERE p.category = 1011 ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Product> findProductByCategory(int pageNo , int category) {
+		int categoryId = category;
+		String hql = "SELECT p FROM Product p WHERE p.category.id = :id ORDER BY p.unitPrice Desc ";	
+		Session session = factory.getCurrentSession();
+		TypedQuery<Product> query = session.createQuery(hql, Product.class);
+		query.setParameter("id", categoryId);
+		query.setFirstResult(pageNo*pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+
+	}
+
+
+
 
 
 	

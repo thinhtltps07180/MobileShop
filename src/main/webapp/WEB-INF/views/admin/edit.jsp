@@ -1,15 +1,15 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<script type="text/javascript" src="/static/ckeditor/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <!-- partial -->
 <style>
 span[id*=errors] {
 	color: red;
 	font-style: italic;
-	background-image: url("/static/images/anifire.gif");
-	background-repeat: no-repeat;
-	padding-left: 25px;
+
 }
 </style>
 <script>
@@ -30,12 +30,12 @@ span[id*=errors] {
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="page-header">
-			<h3 class="page-title">Form elements</h3>
+			<h3 class="page-title">Form Create Product</h3>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Forms</a></li>
 					<li class="breadcrumb-item active" aria-current="page">Form
-						elements</li>
+						Product</li>
 				</ol>
 			</nav>
 		</div>
@@ -43,8 +43,7 @@ span[id*=errors] {
 			<div class="col-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Basic form elements</h4>
-						<p class="card-description">Basic form elements</p>
+						<h4 class="card-title">Product form elements</h4>
 						<h3>${message }</h3>
 
 						<form:form enctype="multipart/form-data" action="/admin/update"
@@ -53,7 +52,7 @@ span[id*=errors] {
 								<label for="exampleInputName1"></label>
 								<form:input path="id" type="hidden" class="form-control"
 									id="exampleInputName1" placeholder="Name" />
-								<form:errors path="name" />
+								<form:errors path="id" />
 							</div>
 							<div class="form-group">
 								<label for="exampleInputName1">Product name</label>
@@ -62,8 +61,8 @@ span[id*=errors] {
 								<form:errors path="name" />
 							</div>
 							<div class="form-group">
-								<label for="exampleInputPassword4">UnitPrice</label>
-								<form:input path="unitPrice" type="text" class="form-control"
+								<label for="exampleInputPassword4">Unit Price</label>
+								<form:input path="unitPrice" type="text"  class="form-control"
 									id="UnitPrice" placeholder="UnitPrice" />
 								<form:errors path="unitPrice" />
 							</div>
@@ -80,8 +79,8 @@ span[id*=errors] {
 									<!-- <option selected="selected" value="">--Please Select</option> -->
 									<form:options items="${list}" itemValue="id" itemLabel="name" />
 								</form:select>
-
-								<form:errors path="category.id" />
+								<br/>
+								<span id="errors">${messageCategory}</span>
 							</div>
 							<div class="form-group">
 								<form:select path="promotion.id">
@@ -89,9 +88,10 @@ span[id*=errors] {
 									<!-- <option selected="selected" value="">--Please Select</option> -->
 									<form:options items="${listPromotion}" itemValue="id" itemLabel="name" />
 								</form:select>
-
-								<form:errors path="promotion.id" />
+								<br/>
+								<span id="errors">${messagePromotion}</span>
 							</div>
+							
 
 							<div class="form-group area">
 								<form:textarea path="description" style=" height: 200px;"
@@ -135,6 +135,7 @@ span[id*=errors] {
 			<!-- partial -->
 		</div>
 		<!-- main-panel ends -->
+
 
 		<script type="text/javascript">
 			var editor = '';

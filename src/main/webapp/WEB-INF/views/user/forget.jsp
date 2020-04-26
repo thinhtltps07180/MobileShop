@@ -22,7 +22,7 @@
       <div class="container">
           <div class="tracking_box_inner">
               <p>forget password?</p>
-              <form class="row tracking_form" action="#" method="post" novalidate="novalidate" enctype="multipart/form-data">
+              <form class="row tracking_form" action="/user/forget" method="post" novalidate="novalidate" enctype="multipart/form-data">
                   <div class="col-md-12 form-group">
                       <input type="text" class="form-control" id="id" name="id" placeholder="Your ID" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your ID'">
                   </div>

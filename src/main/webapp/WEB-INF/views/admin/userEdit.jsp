@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
@@ -7,9 +9,6 @@
 span[id*=errors] {
 	color: red;
 	font-style: italic;
-	background-image: url("/static/images/anifire.gif");
-	background-repeat: no-repeat;
-	padding-left: 25px;
 }
 </style>
 <script>
@@ -43,15 +42,14 @@ span[id*=errors] {
 			<div class="col-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Basic form elements</h4>
-						<p class="card-description">Basic form elements</p>
+						<h4 class="card-title">User form elements</h4>
+						<p class="card-description">User form elements</p>
 						<h3>${message }</h3>
 
 						<form:form enctype="multipart/form-data" action="/admin/updateUser"
 							modelAttribute="userEdit" class="forms-sample">
 							<div class="form-group">
-								<label for="exampleInputName1">User name</label>
-								<form:input path="id" type="text" class="form-control"
+								<form:input path="id" type="hidden" class="form-control"
 									id="exampleInputName1" placeholder="Name" />
 								<form:errors path="id" />
 							</div>
@@ -81,7 +79,7 @@ span[id*=errors] {
 							</div>
 							<div class="form-group">
 								<label for="exampleInputName2">Phone Number</label>
-								<form:input path="phoneNumber" type="text" class="form-control"
+								<form:input path="phoneNumber" type="number" class="form-control"
 									id="exampleInputName4" placeholder="phoneNumber" />
 								<form:errors path="phoneNumber" />
 							</div>
@@ -106,7 +104,7 @@ span[id*=errors] {
 								<div id="anh"></div>
 
 							</div>
-							<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
+							<button type="submit" class="btn btn-gradient-primary mr-2 	">Submit</button>
 							<button class="btn btn-light">Cancel</button>
 						</form:form>
 					</div>
@@ -119,7 +117,7 @@ span[id*=errors] {
 					class="d-sm-flex justify-content-center justify-content-sm-between">
 					<span
 						class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright
-						© 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>.
+						Â© 2017 <a href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>.
 						All rights reserved.
 					</span> <span
 						class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted
@@ -137,3 +135,4 @@ span[id*=errors] {
 				editor = CKEDITOR.replace('description');
 			});
 		</script>
+	

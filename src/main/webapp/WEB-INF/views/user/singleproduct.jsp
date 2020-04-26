@@ -1,10 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase.js"></script>
+<style>
+img#cartImg {
+	height: 255px;
+	width: 271.48px;
+}
+
+nav#pagerId {
+	padding-left: 311px;
+}
+
+img#cartImg {
+	background-color: #f2f2f2;
+}
+</style>
 <script>
 	// Your web app's Firebase configuration
 	var firebaseConfig = {
@@ -20,6 +35,9 @@
 	// Initialize Firebase
 	firebase.initializeApp(firebaseConfig);
 </script>
+
+<style>
+</style>
 <!--================Single Product Area =================-->
 <div class="product_image_area">
 	<div class="container">
@@ -35,23 +53,40 @@
 			<div class="col-lg-5 offset-lg-1">
 				<div class="s_product_text">
 					<h3>${detail.name}</h3>
-					<h2>${detail.unitPrice}</h2>
+					<h2>
+						<c:set var="basecost" value="detail.unitPrice" />
+						<fmt:formatNumber pattern="##,###,###.####"
+							value="${detail.unitPrice}" />
+						VND
+					</h2>
 					<ul class="list">
 						<li><a class="active" href="#"><span>Category</span> :
 								${detail.category.name}</a></li>
-						<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+						<li><a href="#"><span>Quantity</span> :
+								${detail.quantity}</a></li>
 					</ul>
-					<p>${detail.description}</p>
-					<div class="product_count">
-						<label for="qty">Quantity:</label>
-						<button
-							onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							class="increase items-count" type="button"></button>
-						<input type="number" name="qty" id="sst" size="2" maxlength="12"
-							value="1" title="Quantity:" class="input-text qty">
-						<button class="reduced items-count" type="button"></button>
-						<a class="button primary-btn" href="#">Add to Cart</a>
-					</div>
+					<c:set var="quantity" scope="session" value="${detail.quantity}" />
+					<c:if test="${quantity > 0}">
+						<p>
+							Status:
+							<c:out value="Available" />
+						<p>
+						<div class="product_count">
+							<hr>
+							<jsp:include page="../cart/info.jsp"></jsp:include>
+							<hr>
+							<a class="button primary-btn" href="/cart/add/${detail.id}">Add
+								to Cart</a>
+						</div>
+
+					</c:if>
+					<c:if test="${quantity <= 0}">
+						<p>
+							Status:
+							<c:out value="Unvailable" />
+						<p>
+					</c:if>
+
 					<div class="card_area d-flex align-items-center">
 						<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 						<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a>
@@ -81,30 +116,7 @@
 		<div class="tab-content" id="myTabContent">
 			<div class="tab-pane fade" id="home" role="tabpanel"
 				aria-labelledby="home-tab">
-				<p>Beryl Cook is one of Britainâs most talented and amusing
-					artists .Berylâs pictures feature women of all shapes and sizes
-					enjoying themselves .Born between the two world wars, Beryl Cook
-					eventually left Kendrick School in Reading at the age of 15, where
-					she went to secretarial school and then into an insurance office.
-					After moving to London and then Hampton, she eventually married her
-					next door neighbour from Reading, John Cook. He was an officer in
-					the Merchant Navy and after he left the sea in 1956, they bought a
-					pub for a year before John took a job in Southern Rhodesia with a
-					motor company. Beryl bought their young son a box of watercolours,
-					and when showing him how to use it, she decided that she herself
-					quite enjoyed painting. John subsequently bought her a childâs
-					painting set for her birthday and it was with this that she
-					produced her first significant work, a half-length portrait of a
-					dark-skinned lady with a vacant expression and large drooping
-					breasts. It was aptly named âHangoverâ by Berylâs husband and</p>
-				<p>It is often frustrating to attempt to plan meals that are
-					designed for one. Despite this fact, we are seeing more and more
-					recipe books and Internet websites that are dedicated to the act of
-					cooking for one. Divorce and the death of spouses or grown children
-					leaving for college are all reasons that someone accustomed to
-					cooking for more than one would suddenly need to learn how to
-					adjust all the cooking practices utilized before into a streamlined
-					plan of cooking that is more efficient for one person creating less</p>
+				<p>${detail.description}</p>
 			</div>
 			<div class="tab-pane fade" id="profile" role="tabpanel"
 				aria-labelledby="profile-tab">
@@ -195,29 +207,30 @@
 												<div class="media-body">
 													<h4>{{value.author}}</h4>
 													<h5>{{value.posted|date}}</h5>
-													<a id="rp" ng-click="reply(key)" class="float-left" href="#">Reply</a>
+													<a id="rp" ng-click="reply(key)" class="float-left"
+														href="#">Reply</a>
 												</div>
 											</div>
 											<p>{{value.text}}</p>
 										</div>
 										<ul>
-										<li ng-repeat="(key , value) in value.replies">
-										<div class="review_item reply">
-											<div class="media">
-												<div class="d-flex">
-													<img src="/static/user/img/product/review-2.png" alt="">
+											<li ng-repeat="(key , value) in value.replies">
+												<div class="review_item reply">
+													<div class="media">
+														<div class="d-flex">
+															<img src="/static/user/img/product/review-2.png" alt="">
+														</div>
+														<div class="media-body">
+															<h4>Brake Ruiz</h4>
+															<h5>{{value.replied|date}}</h5>
+															<a class="float-left" href="#">Reply</a>
+														</div>
+													</div>
+													<p>{{value.text}}</p>
 												</div>
-												<div class="media-body">
-													<h4>Brake Ruiz</h4>
-													<h5>{{value.replied|date}}</h5>
-													<a class="float-left" href="#">Reply</a>
-												</div>
-											</div>
-											<p>{{value.text}}</p>
-										</div>
-										</li>
+											</li>
 										</ul>
-										
+
 									</div>
 								</div>
 							</li>
@@ -240,127 +253,60 @@
 		<div class="section-intro pb-60px">
 			<p>Popular Item in the market</p>
 			<h2>
-				Top <span class="section-intro__style">Product</span>
+				The<span class="section-intro__style">Product</span> of the same
+				type
 			</h2>
 		</div>
 		<div class="row mt-30">
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-1.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
+			<c:forEach var="p" items="${detail.category.products}">
+				<div class="col-md-6 box col-lg-4">
+					<div class="card text-center card-product">
+						<div class="card-product__img">
+							<a href="/user/singleproduct/${p.id}"> <img class="card-img"
+								id="cartImg" src="/static/admin/product/${p.image}" alt="">
+								<ul class="card-product__imgOverlay">
+									<li><button>
+											<i class="ti-search"></i>
+										</button></li>
+									<li><a href="/cart/add/${pageNo}/${p.id}"><button>
+												<i class="ti-shopping-cart"></i>
+											</button></a></li>
+									<li><button>
+											<i class="ti-heart"></i>
+										</button></li>
+								</ul></a>
 						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-2.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-3.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
+						<div class="card-body">
+							<p id="name">${p.category.name}</p>
+							<c:set var="quantity" scope="session" value="${p.quantity}" />
+							<c:if test="${quantity > 0}">
+								<p>
+									Status:
+									<c:out value="Available" />
+								<p>
+							</c:if>
+							<c:if test="${quantity <= 0}">
+								<p>
+									Status:
+									<c:out value="Unvailable" />
+								<p>
+							</c:if>
+							<h4 class="card-product__title">
+								<a href="#">${p.name}</a>
+							</h4>
+							<c:set var="basecost" value="p.unitPrice" />
+							<p class="card-product__price">
+								<fmt:formatNumber pattern="##,###,###.####"
+									value="${p.unitPrice}" />
+							</p>
 
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-4.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-5.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-6.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-7.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-8.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-9.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-				<div class="single-search-product-wrapper">
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-1.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-2.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-					<div class="single-search-product d-flex">
-						<a href="#"><img
-							src="/static/user/img/product/product-sm-3.png" alt=""></a>
-						<div class="desc">
-							<a href="#" class="title">Gray Coffee Cup</a>
-							<div class="price">$170.00</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
+
 </section>
 <!--================ end related Product area =================-->
 <script>

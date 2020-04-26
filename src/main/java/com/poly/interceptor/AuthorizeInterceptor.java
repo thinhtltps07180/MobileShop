@@ -20,8 +20,10 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		User user = (User) session.getAttribute("user");
+
 		if (user == null) {
-//		session.setAttribute("back-url", request.getRequestURI());
+			session.setAttribute("back-url", request.getRequestURI());
+			session.setAttribute("alert", "Vui long dang nhap");
 			response.sendRedirect("/user/login");
 			return false;
 		} else {
