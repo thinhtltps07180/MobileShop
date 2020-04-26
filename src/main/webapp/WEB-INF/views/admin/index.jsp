@@ -139,8 +139,8 @@ $(document).ready(function() {
 							${dayNow}-${monthNow}-${yearNow} <i
 								class="mdi mdi-chart-bar mdi-24px float-right"></i>
 						</h4>
-						<c:forEach var="array" items="${sumOrder}">
-							<h3 class="mb-5">${array[1]} Order</h3>
+						<c:forEach var="arr" items="${sumOrder}">
+							<h3 class="mb-5">${arr[1]} Order</h3>
 						</c:forEach>
 						<c:forEach var="array" items="${rnvDay}">
 							<h3 class="mb-5">
