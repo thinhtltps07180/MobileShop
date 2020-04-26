@@ -22,6 +22,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	
 	@Autowired
 	HttpSession session;
+	
+	int pageSize = 2;
 
 	@Override
 	public Review findById(Integer id) {
@@ -97,6 +99,27 @@ public class ReviewDAOImpl implements ReviewDAO {
 		Session session = factory.getCurrentSession();
 		TypedQuery<Review> query = session.createQuery(hql, Review.class);
 		return query.getResultList();
+	}
+
+	@Override
+	public List<Review> findPage(int pageNo) {
+		String hql = "FROM Review r  WHERE r.status = true ORDER BY r.id DESC";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		query.setFirstResult(pageNo * pageSize);
+		query.setMaxResults(pageSize);
+		return query.getResultList();
+	}
+
+	@Override
+	public int getPageCount() {
+		String hql = "SELECT count(r) FROM Review r  WHERE r.status = true ";
+		
+		Session session = factory.getCurrentSession();
+		TypedQuery<Long> query = session.createQuery(hql, Long.class);
+		long count = query.getSingleResult();
+		int pageCount = (int) Math.ceil(1.0 * count/pageSize);
+		return pageCount;
 	}
 
 

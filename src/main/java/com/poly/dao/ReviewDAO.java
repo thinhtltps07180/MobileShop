@@ -8,6 +8,8 @@ public interface ReviewDAO {
 	Review findById(Integer id);
 	Review findByTop1News();
 	List<Review> findAllTop2();
+	List<Review> findPage(int pageNo);
+	int getPageCount();
 	List<Review>findAll();
 	List<Review>findAllTrue();
 	List<Review>findByUserId();

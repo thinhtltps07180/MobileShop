@@ -1,135 +1,205 @@
 
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<!-- ================ start banner area ================= -->
+
+
+<!-- Font Awesome Icon -->
+<link rel="stylesheet" href="/static/review/css/font-awesome.min.css">
+
+<!-- Custom stlylesheet -->
+<link type="text/css" rel="stylesheet"
+	href="/static/review/css/style.css" />
+
 <style>
-img#imgTB {
-	width: 510px;
-	height: 255px;
+a.post-img.top1 {
+	height: 417px;
 }
 
-section.blog_area {
-    padding: 50px;
-}
-img.author_img.rounded-circle {
-    width: 315px;
-    height: 252px;
+a.primary-button {
+	color: white;
 }
 
-img.author_img.rounded-circle {
-    margin: 10px;
-}
-
-
-
-div#overflow {
-	width: 500px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	line-height: 25px;
-	-webkit-line-clamp: 3;
-	height: 75px;
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
+img.listImg {
+	height: 205px;
 }
 </style>
 
-<!-- ================ end banner area ================= -->
 
 
-<!--================Blog Categorie Area =================-->
-
-<!--================Blog Categorie Area =================-->
-
-<!--================Blog Area =================-->
-<section class="blog_area">
+<div class="section">
+	<!-- container -->
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-8">
-				<div class="blog_left_sidebar">
-					<c:forEach var="r" items="${reviewList}">
-						<article class="row blog_item">
-							<div class="col-md-12">
-								<div class="blog_post">
-									<img id="imgTB" src="/static/user/news/${r.thumbnail}" alt="">
-									
-									<div class="blog_details">
-									<p>Author: ${r.user.id}</p>
-										<a href="/user/singleblog/${r.id}">
-											<h2>${r.title }</h2>
-										</a>
-										<p>${r.description }</p>
-										<a class="button button-blog" href="/user/singleblog/${r.id}">View
-											More</a>
-									</div>
-								</div>
+		<div class="section-title">
+			<h2 class="title">New Review</h2>
+			<!-- row -->
+			<div id="hot-post" class="row hot-post">
+				<div class="col-md-8 hot-post-left">
+					<!-- post -->
+					<div class="post post-thumb">
+						<a class="post-img top1" href="/user/singleblog/${top1.id}"><img
+							src="/static/user/news/${top1.thumbnail}" alt=""></a>
+						<div class="post-body">
+							<div class="post-category">
+								<a class="primary-button" href="category.html">Review</a>
 							</div>
-						</article>
+							<h3 class="post-title title-lg">
+								<a href="/user/singleblog/${top1.id}">${top1.title}</a>
+							</h3>
+							<ul class="post-meta">
+								<li><a href="author.html">${top1.user.id}</a></li>
+								<li>${top1.createDate}</li>
+							</ul>
+						</div>
+					</div>
+					<!-- /post -->
+				</div>
+				<div class="col-md-4 hot-post-right">
+					<!-- post -->
+					<c:forEach var="r" items="${top2}">
+						<div class="post post-thumb">
+							<a class="post-img" href="/user/singleblog/${r.id}"><img
+								src="/static/user/news/${r.thumbnail}" alt=""></a>
+							<div class="post-body">
+								<div class="post-category">
+									<a class="primary-button" href="category.html">Review</a>
+								</div>
+								<h3 class="post-title">
+									<a href="/user/singleblog/${r.id}">${r.title}</a>
+								</h3>
+								<ul class="post-meta">
+									<li><a href="author.html">${r.user.id}</a></li>
+									<li>${r.createDate}</li>
+								</ul>
+							</div>
+						</div>
 					</c:forEach>
-					<nav class="blog-pagination justify-content-center d-flex">
+					<!-- /post -->
+				</div>
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /SECTION -->
+
+	<!-- SECTION -->
+
+	<!-- /SECTION -->
+
+	<!-- SECTION -->
+
+	<!-- /SECTION -->
+
+	<!-- SECTION -->
+
+	<!-- /SECTION -->
+
+	<!-- SECTION -->
+
+
+	<!-- container -->
+	<div class="container">
+
+		<div class="section-title">
+			<h2 class="title">Last Review</h2>
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-8">
+					<!-- post -->
+					<c:forEach var="r" items="${listPage}">
+						<div class="post post-row">
+							<a class="post-img" href="/user/singleblog/${r.id}"><img
+								class="listImg" src="/static/user/news/${r.thumbnail}" alt=""></a>
+							<div class="post-body">
+								<div class="post-category">
+									<a class="primary-button" href="category.html">Review</a>
+								</div>
+								<h3 class="post-title">
+									<a href="/user/singleblog/${r.id}">${r.title}</a>
+								</h3>
+								<ul class="post-meta">
+									<li><a href="author.html">${r.user.id}</a></li>
+									<li>${r.createDate}</li>
+								</ul>
+								<p>${r.description}</p>
+							</div>
+						</div>
+					</c:forEach>
+					<nav id="pagerId" aria-label="Page navigation example">
 						<ul class="pagination">
-							<li class="page-item"><a href="#" class="page-link"
-								aria-label="Previous"> <span aria-hidden="true"> <span
-										class="lnr lnr-chevron-left"></span>
-								</span>
-							</a></li>
-							<li class="page-item"><a href="#" class="page-link">01</a></li>
-							<li class="page-item active"><a href="#" class="page-link">02</a>
-							</li>
-							<li class="page-item"><a href="#" class="page-link">03</a></li>
-							<li class="page-item"><a href="#" class="page-link">04</a></li>
-							<li class="page-item"><a href="#" class="page-link">09</a></li>
-							<li class="page-item"><a href="#" class="page-link"
-								aria-label="Next"> <span aria-hidden="true"> <span
-										class="lnr lnr-chevron-right"></span>
-								</span>
-							</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/0">First</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${pageNo -1}">Previous</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${pageNo +1}">Next</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${lastPageCount}">Last</a></li>
 						</ul>
 					</nav>
-				</div>
-			</div>
-			<div class="col-lg-4">
-				<div class="blog_right_sidebar">
-					<aside class="single_sidebar_widget author_widget">
-						<img class="author_img rounded-circle"
-							src="/static/Panel/scrape.png" alt="">
-					</aside>
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"> <img class="img-fluid"
-							src="/static/user/img/blog/add.jpg" alt="">
-						</a>
-						<div class="br"></div>
-					</aside>
-					<aside class="single_sidebar_widget ads_widget">
-						<a href="#"> <img class="img-fluid"
-							src="/static/user/img/blog/add.jpg" alt="">
-						</a>
-						<div class="br"></div>
-					</aside>
-					
-					
-					
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-<!--================Blog Area =================-->
+					<!-- /post -->
 
-<!--================Instagram Area =================-->
-<section class="instagram_area">
-	<div class="container box_1620">
-		<div class="insta_btn">
-			<a class="btn theme_btn" href="#">Follow us on instagram</a>
+					<!-- post -->
+
+					<!-- /post -->
+
+					<!-- post -->
+
+					<!-- /post -->
+
+					<!-- post -->
+
+					<!-- /post -->
+
+					<!-- post -->
+
+					<!-- /post -->
+
+					<div class="section-row loadmore text-center">
+						<a href="#" class="primary-button">Load More</a>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<!-- galery widget -->
+					<div class="aside-widget">
+						<div class="section-title">
+							<h2 class="title">Instagram</h2>
+						</div>
+						<div class="galery-widget">
+							<ul>
+								<li><a href="#"><img
+										src="/static/review/img/galery-1.jpg" alt=""></a></li>
+								<li><a href="#"><img
+										src="/static/review/img/galery-2.jpg" alt=""></a></li>
+								<li><a href="#"><img
+										src="/static/review/img/galery-3.jpg" alt=""></a></li>
+								<li><a href="#"><img
+										src="/static/review/img/galery-4.jpg" alt=""></a></li>
+								<li><a href="#"><img
+										src="/static/review/img/galery-5.jpg" alt=""></a></li>
+								<li><a href="#"><img
+										src="/static/review/img/galery-6.jpg" alt=""></a></li>
+							</ul>
+						</div>
+					</div>
+					<!-- /galery widget -->
+
+					<!-- Ad widget -->
+					<div class="aside-widget text-center">
+						<a href="#" style="display: inline-block; margin: auto;"> <img
+							class="img-responsive" src="/static/review/img/ad-1.jpg" alt="">
+						</a>
+					</div>
+					<!-- /Ad widget -->
+				</div>
+			</div>
+			<!-- /row -->
 		</div>
-		<div class="instagram_image row m0">
-			<a href="#"><img src="/static/user/img/instagram/ins-1.jpg"
-				alt=""></a> <a href="#"><img
-				src="/static/user/img/instagram/ins-2.jpg" alt=""></a> <a href="#"><img
-				src="/static/user/img/instagram/ins-3.jpg" alt=""></a> <a href="#"><img
-				src="/static/user/img/instagram/ins-4.jpg" alt=""></a> <a href="#"><img
-				src="/static/user/img/instagram/ins-5.jpg" alt=""></a> <a href="#"><img
-				src="/static/user/img/instagram/ins-6.jpg" alt=""></a>
-		</div>
+		<!-- /container -->
 	</div>
-</section>
-<!--================End Instagram Area =================-->
+
+
+
+	<script src="/static/review/js/jquery.min.js"></script>
+	<script src="/static/review/js/bootstrap.min.js"></script>
+	<script src="/static/review/js/jquery.stellar.min.js"></script>
+	<script src="/static/review/js/main.js"></script>

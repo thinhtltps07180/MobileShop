@@ -276,13 +276,24 @@ public class UserController {
 	}
 
 
-	@GetMapping("/user/blog")
-	public String blog(Model model) {
-		List<Review> listReview = reviewDAO.findAll();	
-		model.addAttribute("reviewList" ,listReview );
+	@GetMapping("/user/blog/{pageNo}")
+	public String blog(Model model , @PathVariable( name ="pageNo") int pageNo) {
+		if(pageNo >= reviewDAO.getPageCount()) {
+			pageNo = 0;
+		}else if(pageNo < 0) {
+			pageNo = reviewDAO.getPageCount() - 1;
+		}
+		
+
+		model.addAttribute("pageNo", pageNo);
+		model.addAttribute("lastPageCount", reviewDAO.getPageCount() - 1);
+		
+		List<Review> list = reviewDAO.findPage(pageNo);
+		
+		model.addAttribute("listPage" ,list );
 		model.addAttribute("top1" ,reviewDAO.findByTop1News() );
 		model.addAttribute("top2" ,reviewDAO.findAllTop2() );
-		return "user/testReview";
+		return "user/blog";
 	}
 	
 	@GetMapping("/user/myBlog")

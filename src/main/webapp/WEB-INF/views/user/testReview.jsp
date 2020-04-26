@@ -92,9 +92,10 @@ a.post-img.top1 {
 		<div class="row">
 			<div class="col-md-8">
 				<!-- post -->
+				<c:forEach var="r" items="${listPage}">
 				<div class="post post-row">
 					<a class="post-img" href="blog-post.html"><img
-						src="/static/review/img/post-13.jpg" alt=""></a>
+						src="/static/user/news/${r.thumbnail}" alt=""></a>
 					<div class="post-body">
 						<div class="post-category">
 							<a href="category.html">Travel</a> <a href="category.html">Lifestyle</a>
@@ -112,98 +113,35 @@ a.post-img.top1 {
 							aliqua. Ut enim ad minim veniam...</p>
 					</div>
 				</div>
+				</c:forEach>
+				<nav id="pagerId" aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/0">First</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${pageNo -1}">Previous</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${pageNo +1}">Next</a></li>
+							<li class="page-item"><a class="page-link"
+								href="/user/blog/${lastPageCount}">Last</a></li>
+						</ul>
+					</nav>
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="post post-row">
-					<a class="post-img" href="blog-post.html"><img
-						src="/static/review/img/post-1.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-category">
-							<a href="category.html">Travel</a>
-						</div>
-						<h3 class="post-title">
-							<a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-								natus error sit</a>
-						</h3>
-						<ul class="post-meta">
-							<li><a href="author.html">John Doe</a></li>
-							<li>20 April 2018</li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam...</p>
-					</div>
-				</div>
+
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="post post-row">
-					<a class="post-img" href="blog-post.html"><img
-						src="/static/review/img/post-5.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-category">
-							<a href="category.html">Lifestyle</a>
-						</div>
-						<h3 class="post-title">
-							<a href="blog-post.html">Postea senserit id eos, vivendo
-								periculis ei qui</a>
-						</h3>
-						<ul class="post-meta">
-							<li><a href="author.html">John Doe</a></li>
-							<li>20 April 2018</li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam...</p>
-					</div>
-				</div>
+
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="post post-row">
-					<a class="post-img" href="blog-post.html"><img
-						src="/static/review/img/post-6.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-category">
-							<a href="category.html">Fashion</a> <a href="category.html">Lifestyle</a>
-						</div>
-						<h3 class="post-title">
-							<a href="blog-post.html">Sed ut perspiciatis, unde omnis iste
-								natus error sit</a>
-						</h3>
-						<ul class="post-meta">
-							<li><a href="author.html">John Doe</a></li>
-							<li>20 April 2018</li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam...</p>
-					</div>
-				</div>
+
 				<!-- /post -->
 
 				<!-- post -->
-				<div class="post post-row">
-					<a class="post-img" href="blog-post.html"><img
-						src="/static/review/img/post-7.jpg" alt=""></a>
-					<div class="post-body">
-						<div class="post-category">
-							<a href="category.html">Health</a> <a href="category.html">Lifestyle</a>
-						</div>
-						<h3 class="post-title">
-							<a href="blog-post.html">Ne bonorum praesent cum, labitur
-								persequeris definitionem quo cu?</a>
-						</h3>
-						<ul class="post-meta">
-							<li><a href="author.html">John Doe</a></li>
-							<li>20 April 2018</li>
-						</ul>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam...</p>
-					</div>
-				</div>
+
 				<!-- /post -->
 
 				<div class="section-row loadmore text-center">
