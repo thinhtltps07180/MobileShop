@@ -122,7 +122,7 @@ public class CartController {
 		if(session.getAttribute("user")== null) {
 			
 			model.addAttribute("message", "Vui lòng login trước khi thanh toán");
-			return "user/cart";
+			return "user/login";
 		}else {
 			Order order = new Order();
 			order.setOrderDate(new Date());

@@ -10,9 +10,7 @@ img#cartImg {
 <!-- ================ start banner area ================= -->
 
 <!-- ================ end banner area ================= -->
-<div class="alert alert-danger" role="alert">
- ${message}
-</div>
+
 <section class="cart_area">
 	<div class="container">
 		<div class="cart_inner">

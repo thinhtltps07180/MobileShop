@@ -40,7 +40,7 @@ span.nav-shop__circle {
 							class="nav-link dropdown-toggle" data-toggle="dropdown"
 							role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
 							<ul class="dropdown-menu">
-								<li class="nav-item"><a class="nav-link" href="/user/blog">Reviews</a></li>
+								<li class="nav-item"><a class="nav-link" href="/user/blog/0">Reviews</a></li>
 								<c:if test="${sessionScope.user != null}">
 									<li class="nav-item"><a class="nav-link"
 										href="/user/createNews">Create Reviews</a></li>

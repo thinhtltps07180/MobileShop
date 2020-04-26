@@ -13,7 +13,7 @@
 				<div class="login_box_img">
 					<div class="hover">
 						<h4>If you do not already have an account?</h4>
-						<p>You can click on the button below to  </p>
+						<p>You can click on the button below to</p>
 						<p>create an account for yourself</p>
 						<a class="button button-account" href="/user/register">Create
 							an Account</a>
@@ -22,9 +22,7 @@
 			</div>
 			<div class="col-lg-6">
 				<div class="login_form_inner">
-					<div class="alert alert-primary" role="alert">
-						<c:out value="${sessionScope.alert}" />
-					</div>
+					<div class="alert alert-danger" role="alert">${alert}</div>
 					<h3>Log in to enter</h3>
 					<form method="post" class="row login_form" action="/user/login"
 						id="contactForm">
