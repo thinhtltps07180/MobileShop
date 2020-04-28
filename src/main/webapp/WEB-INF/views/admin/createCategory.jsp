@@ -49,8 +49,10 @@ span[id*=errors] {
 								<form:errors path="name" />
 							</div>			
 							<button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
-							<button class="btn btn-light">Cancel</button>
+							<a href="/admin/category"><button class="btn btn-light" type="button">Cancel</button></a>
+							
 						</form:form>
+						
 					</div>
 				</div>
 			</div>

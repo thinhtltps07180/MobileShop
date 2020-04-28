@@ -23,7 +23,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Autowired
 	HttpSession session;
 	
-	int pageSize = 2;
+	int pageSize = 5;
 
 	@Override
 	public Review findById(Integer id) {

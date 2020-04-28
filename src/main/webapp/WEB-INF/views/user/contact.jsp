@@ -6,7 +6,7 @@
 <section class="section-margin--small">
 	<div class="container">
 		<div class="d-none d-sm-block mb-5 pb-4">
-			<div id="map" style="height: 420px;"></div>
+			
 			<iframe
 				src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.266898219578!2d106.67997221474903!3d10.79085869231172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d35939c66f%3A0xe52e3ed732b15272!2sFPT%20Polytechnic%20HCM!5e0!3m2!1sen!2s!4v1586537586483!5m2!1sen!2s"
 				width="100%" height="450" frameborder="0" style="border: 0;"

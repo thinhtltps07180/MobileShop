@@ -101,9 +101,7 @@ img.listImg {
 
 					<!-- /post -->
 
-					<div class="section-row loadmore text-center">
-						<a href="#" class="primary-button">Load More</a>
-					</div>
+					
 				</div>
 				<div class="col-md-4">
 					<!-- galery widget -->

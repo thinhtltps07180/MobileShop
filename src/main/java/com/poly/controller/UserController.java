@@ -328,13 +328,13 @@ public class UserController {
 //				if(url != null) {
 //					return "redirect:"+url;
 //				}
-				return "redirect:/admin/index";
+				return "admin/index";
 			} else if (user.getRole().getName().equals("user")) {
 				String url = (String) session.getAttribute("back-url");
 				if(url != null) {
 					return "redirect:"+url;
 				}
-				return "redirect:/user/index";
+				return "user/index";
 			}
 			model.addAttribute("message", "Login successfully!");
 		}

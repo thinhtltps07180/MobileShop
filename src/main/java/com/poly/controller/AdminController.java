@@ -380,6 +380,7 @@ public class AdminController {
 		return "admin/createUser";
 	}
 
+	@SuppressWarnings("unused")
 	@PostMapping("/admin/addNewUser")
 	public String formUser(Model model, @Validated @ModelAttribute("formUser") User user, BindingResult errors,
 			@RequestParam("up_photo") MultipartFile file) {
@@ -400,8 +401,15 @@ public class AdminController {
 			return "admin/createUser";
 		} else {
 			try {
+				
 				Role role = new Role();
 				role.setId(user.getRole().getId());
+				if (user.getRole().getId() == null) {
+					List<Role> list = roleDao.findAll();
+					model.addAttribute("listRole", list);
+					model.addAttribute("message", "Vui lòng chọn role của user");				
+					return "admin/createUser";
+				}
 				user.setRole(role);
 				userDao.create(user);
 			} catch (Exception e) {
