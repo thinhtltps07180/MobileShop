@@ -129,6 +129,27 @@ public class AdminController {
 		model.addAttribute("form", new Category());
 		return "admin/createCategory";
 	}
+	
+	@GetMapping("/admin/updateCategory/{id}")
+	public String updateCategory(Model model , @PathVariable("id") Integer id) {
+		model.addAttribute("form", categoryDao.findById(id));
+		return "admin/updateCategory";
+	}
+	
+	@PostMapping("/admin/editCategory")
+	public String editCategory(Model model, @Validated @ModelAttribute("form") Category category, BindingResult errors) {
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "admin/createCategory";
+		} else {
+
+			categoryDao.update(category);
+		}
+
+		return "redirect:/admin/category";
+
+	}
+
 
 	@PostMapping("/admin/createCategory")
 	public String addCategory(Model model, @Validated @ModelAttribute("form") Category category, BindingResult errors) {
@@ -143,6 +164,55 @@ public class AdminController {
 		return "redirect:/admin/category";
 
 	}
+	
+	@GetMapping("/admin/promotion")
+	public String promotion(Model model) {
+		List<Promotion> list = promotionDao.findAll();
+		model.addAttribute("promotionList", list);
+		return "admin/promotion";
+	}
+
+	@GetMapping("/admin/createPromotion")
+	public String createPromotion(Model model) {
+		model.addAttribute("form", new Promotion());
+		return "admin/createPromotion";
+	}
+	
+	@GetMapping("/admin/updatePromotion/{id}")
+	public String updatePromotion(Model model , @PathVariable("id") Integer id) {
+		model.addAttribute("form", promotionDao.findById(id));
+		return "admin/updatePromotion";
+	}
+	
+	@PostMapping("/admin/editPromotion")
+	public String editPromotion(Model model, @Validated @ModelAttribute("form") Promotion promotion, BindingResult errors) {
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "admin/updatePromotion";
+		} else {
+
+			promotionDao.update(promotion);
+		}
+
+		return "redirect:/admin/promotion";
+
+	}
+
+
+	@PostMapping("/admin/createPromotion")
+	public String addPromotion(Model model, @Validated @ModelAttribute("form") Promotion promotion, BindingResult errors) {
+		if (errors.hasErrors()) {
+			model.addAttribute("message", "Vui lòng sửa các lỗi sau đây");
+			return "admin/createPromotion";
+		} else {
+
+			promotionDao.create(promotion);
+		}
+
+		return "redirect:/admin/promotion";
+
+	}
+
 
 	@GetMapping("/admin/products")
 	public String productList(Model model) {

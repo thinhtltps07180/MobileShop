@@ -137,7 +137,7 @@ public class CartController {
 			List<Product> list = cart.getItems();
 			for (Product p : list) {
 				OrderDetail orderDetail = new OrderDetail();
-				orderDetail.setUnitPrice(cart.getAmount());
+				orderDetail.setUnitPrice(p.getUnitPrice());
 				orderDetail.setQuantity(p.getQuantity());
 				orderDetail.setImage(p.getImage());
 				orderDetail.setStatus(false);

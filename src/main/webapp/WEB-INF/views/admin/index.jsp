@@ -412,7 +412,7 @@ $(document).ready(function() {
           datasets: [
             {
               label: "Revenue By Date (vnd)",
-              backgroundColor: ["#FF0000", "#FE642E","#0000FF","#4B8A08","#2E2E2E", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
+              backgroundColor: ["#FE93AB", "#71B9F3","#5DDAC9","#CBA5C9","#D18BB7", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
               data: [
                  
               	<c:forEach var="array" items="${data}">
@@ -448,7 +448,7 @@ $(document).ready(function() {
           datasets: [
             {
               label: "Revenue By Date (vnd)",
-              backgroundColor: ["#FF0000", "#FE642E","#0000FF","#4B8A08","#2E2E2E", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
+              backgroundColor: ["#FE93AB", "#71B9F3","#5DDAC9","#CBA5C9","#D18BB7", "#DF01A5","#F4FA58","#e8c3b9","#c45850,#3e95cd", "#8e5ea1","#3cba6f","#e8c3b1","#c45850"],
               data: [
                  
               	<c:forEach var="array" items="${data}">

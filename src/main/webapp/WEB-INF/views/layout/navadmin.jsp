@@ -40,6 +40,12 @@
                 <i class="mdi mdi-clipboard-text menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/promotion">
+                <span class="menu-title">Promotion</span>
+                <i class="mdi mdi-clipboard-text menu-icon"></i>
+              </a>
+            </li>
              <li class="nav-item">
               <a class="nav-link" href="/admin/review">
                 <span class="menu-title">Review</span>
@@ -86,6 +92,7 @@
                   <li class="nav-item"> <a class="nav-link" href="/admin/users"> User List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/products"> Product List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/category"> Category </a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/admin/promotion"> Promotion </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/review"> Review </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/order"> Orders List </a></li>
                   <li class="nav-item"> <a class="nav-link" href="/admin/orderStatus"> Orders List Pending </a></li>

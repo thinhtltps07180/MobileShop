@@ -30,11 +30,11 @@ $(document).ready(function() {
 <div class="main-panel">
 	<div class="content-wrapper">
 		<div class="page-header">
-			<h3 class="page-title">Category Tables</h3>
+			<h3 class="page-title">Promotion Tables</h3>
 			<nav aria-label="breadcrumb">
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="#">Tables</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Category
+					<li class="breadcrumb-item active" aria-current="page">Promotion
 						tables</li>
 				</ol>
 			</nav>
@@ -43,23 +43,25 @@ $(document).ready(function() {
 			<div class="col-lg-12 grid-margin stretch-card">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Category list</h4>
-						<a href="/admin/createCategory"><button type="submit" class="btn btn-gradient-primary mr-2">New Category</button></a>
+						<h4 class="card-title">Promotion list</h4>
+						<a href="/admin/createPromotion"><button type="submit" class="btn btn-gradient-primary mr-2">New Promotion</button></a>
 						<table id="example" class="table table-striped">
 							<thead>
 								<tr>
 									<th>#Id</th>
-									<th>Category Name</th>
+									<th>Promotion name</th>
+									<th>Discount</th>
 									<th></th>
 
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="c" items="${categoryList}">
+								<c:forEach var="c" items="${promotionList}">
 									<tr>
 										<td>${c.id}</td>
 										<td>${c.name}</td>
-										<td><a href="/admin/updateCategory/${c.id}">Edit</a></td>
+										<td>${c.discount}</td>
+										<td><a href="/admin/updatePromotion/${c.id}">Edit</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>

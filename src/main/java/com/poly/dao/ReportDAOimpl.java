@@ -42,7 +42,7 @@ public class ReportDAOimpl implements ReportDAO {
 		int day = today.getDayOfMonth();
 		String hql = "SELECT d.order.user.id," 
 				+ "SUM(d.quantity), " 
-				+ "SUM(d.unitPrice),"
+				+ "SUM(d.unitPrice * d.quantity),"
 				+ "MIN(d.unitPrice)," 
 				+ "MAX(d.unitPrice)" 
 				+ "FROM OrderDetail d "
@@ -63,7 +63,7 @@ public class ReportDAOimpl implements ReportDAO {
 		int month = today.getMonthValue();
 		String hql = "SELECT d.order.user.id," 
 				+ "SUM(d.quantity), "
-				+ "SUM(d.unitPrice),"
+				+ "SUM(d.unitPrice * d.quantity),"
 				+ "MIN(d.unitPrice)," 
 				+ "MAX(d.unitPrice)" 
 				+ "FROM OrderDetail d "
@@ -80,17 +80,19 @@ public class ReportDAOimpl implements ReportDAO {
 	public List<Object[]> revenueByDate() {	
 		LocalDate today = LocalDate.now();
 		int day = today.getDayOfMonth();
+		int month = today.getMonthValue();
 		String hql = "SELECT d.product.category.name," 
 				+ "SUM(d.quantity), " 
-				+ "SUM(d.quantity * d.unitPrice),"
+				+ "SUM(d.unitPrice),"
 				+ "MIN(d.unitPrice)," 
 				+ "MAX(d.unitPrice)" 
 				+ "FROM OrderDetail d "
-				+ "WHERE day(d.createDate) =:day "
+				+ "WHERE day(d.createDate) =:day AND month(d.createDate)= :month "
 				+ "GROUP BY d.product.category.name";
 		Session session = factory.getCurrentSession();
 		TypedQuery<Object[]> query = session.createQuery(hql, Object[].class);
 		query.setParameter("day", day);
+		query.setParameter("month", month);
 		List<Object[]> list = query.getResultList();
 		
 		return list;
