@@ -48,40 +48,40 @@ span[id*=errors] {
 					<form:form enctype="multipart/form-data" action="/user/register"
 						modelAttribute="form" class="row login_form" id="register_form">
 						<div class="col-md-12 form-group">
-							<input type="text" path="id" class="form-control" id="name"
+							<form:input type="text" path="id" class="form-control" id="name"
 								name="id" placeholder="Username" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Username'">
+								onblur="this.placeholder = 'Username'" />
 							<form:errors path="id" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input path="password" type="password" class="form-control"
+							<form:input path="password" type="password" class="form-control"
 								id="password" name="password" placeholder="Password"
 								onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Password'">
+								onblur="this.placeholder = 'Password'" />
 							<form:errors path="password" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input path="name" type="text" class="form-control" id="name"
+							<form:input path="name" type="text" class="form-control" id="name"
 								name="name" placeholder="Your Name" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Your Name'">
+								onblur="this.placeholder = 'Your Name'" />
 							<form:errors path="name" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input path="email" type="email" class="form-control" id="email"
+							<form:input path="email" type="email" class="form-control" id="email"
 								name="email" placeholder="Email" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Email'">
+								onblur="this.placeholder = 'Email'" />
 							<form:errors path="email" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input path="phoneNumber" type="number" class="form-control" id="phoneNumber"
+							<form:input path="phoneNumber" type="number" class="form-control" id="phoneNumber"
 								name="phoneNumber" placeholder="Your PhoneNumber" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Your PhoneNumber'">
+								onblur="this.placeholder = 'Your PhoneNumber'" />
 							<form:errors path="phoneNumber" />
 						</div>
 						<div class="col-md-12 form-group">
-							<input path="address" type="text" class="form-control" id="address"
+							<form:input path="address" type="text" class="form-control" id="address"
 								name="address" placeholder="Eddress" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Address'">
+								onblur="this.placeholder = 'Address'" />
 							<form:errors path="address" />
 						</div>
 

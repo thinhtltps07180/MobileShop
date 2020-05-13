@@ -30,7 +30,15 @@ span[id*=errors] {
 			</div>
 			<div class="col-lg-6">
 				<div class="login_form_inner">
-					<div class="alert alert-danger" role="alert">${alert}</div>
+					<c:set var="al" scope="session" value="${alert}" />
+					<c:if test="${al != null}">
+						<div class="alert alert-danger" role="alert">${alert}</div>
+					</c:if>
+					<c:set var="mess" scope="session" value="${msc}" />
+					<c:if test="${mess != null}">
+						<div class="alert alert-success" role="alert">${msc}</div>
+					</c:if>
+					
 					<h3>Log in to enter</h3>
 					<span id="errors">${message }</span>
 					<form method="post" class="row login_form" action="/user/login"

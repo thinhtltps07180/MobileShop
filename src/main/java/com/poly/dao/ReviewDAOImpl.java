@@ -122,6 +122,16 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return pageCount;
 	}
 
+	@Override
+	public List<Review> findAllTrueIndex() {
+		String hql = "FROM Review r where r.status = true ORDER BY r.id DESC ";
+		Session session = factory.getCurrentSession();
+		TypedQuery<Review> query = session.createQuery(hql, Review.class);
+		query.setFirstResult(0);
+		query.setMaxResults(3);
+		return query.getResultList();
+	}
+
 
 
 	

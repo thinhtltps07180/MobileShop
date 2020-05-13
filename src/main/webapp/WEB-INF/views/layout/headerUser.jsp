@@ -6,13 +6,18 @@ span.nav-shop__circle {
     margin: -10px;
     width: 44px;
 }
+
+img.logo-new {
+    height: 94px;
+    width: 100px;
+}
 </style>
 <header class="header_area">
 	<div class="main_menu">
 		<nav class="navbar navbar-expand-lg navbar-light">
 			<div class="container">
-				<a class="navbar-brand logo_h" href="/user/index"><img
-					src="/static/user/img/logo.png" alt=""></a>
+				<a class="navbar-brand logo_h" href="/user/index"><img class="logo-new"
+					src="/static/user/new-logo.jpg" alt=""></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"

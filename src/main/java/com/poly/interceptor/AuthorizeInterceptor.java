@@ -23,7 +23,7 @@ public class AuthorizeInterceptor extends HandlerInterceptorAdapter {
 
 		if (user == null) {
 			session.setAttribute("back-url", request.getRequestURI());
-			session.setAttribute("alert", "Vui long dang nhap");
+			session.setAttribute("alert", "Vui lòng đăng nhập để tiếp tục");
 			response.sendRedirect("/user/login");
 			return false;
 		} else {

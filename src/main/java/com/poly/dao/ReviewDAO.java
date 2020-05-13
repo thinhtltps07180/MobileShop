@@ -16,4 +16,5 @@ public interface ReviewDAO {
 	Review create(Review entity);
 	void update(Review entity);
 	Review delete(Integer id);
+	List<Review> findAllTrueIndex();
 }

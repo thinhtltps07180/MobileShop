@@ -25,21 +25,6 @@ span[id*=errors] {
 </script>
 
 <!-- ================ start banner area ================= -->
-<section class="blog-banner-area" id="category">
-	<div class="container h-100">
-		<div class="blog-banner">
-			<div class="text-center">
-				<h1>Register</h1>
-				<nav aria-label="breadcrumb" class="banner-breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item active" aria-current="page">Register</li>
-					</ol>
-				</nav>
-			</div>
-		</div>
-	</div>
-</section>
 <!-- ================ end banner area ================= -->
 
 <!--================Login Box Area =================-->
@@ -58,7 +43,7 @@ span[id*=errors] {
 			</div>
 			<div class="col-lg-6">
 				<div class="login_form_inner register_form_inner">
-					<h3>Create an account</h3>
+					<h3>Update an account</h3>
 					<h3>${message }</h3>
 						<form:form enctype="multipart/form-data" action="/user/updateUser"
 							modelAttribute="userEdit" class="forms-sample">
@@ -113,7 +98,7 @@ span[id*=errors] {
 
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
-								class="button button-register w-100">Register</button>
+								class="button button-register w-100">Update</button>
 						</div>
 					</form:form>
 				</div>
